@@ -1,14 +1,13 @@
 [
 {
   "modid": "${modid}",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "name": "Satchel",
+  "description": "Satchels and stuff",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["makamys"],
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
