@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
 
 public class GuiSatchelInventory extends GuiInventory {
 
@@ -31,6 +32,8 @@ public class GuiSatchelInventory extends GuiInventory {
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		ContainerSatchel satchelSlots = (ContainerSatchel)this.inventorySlots;
+		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_147001_a);
         int k = this.guiLeft + 16;
@@ -47,17 +50,26 @@ public class GuiSatchelInventory extends GuiInventory {
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
-        this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*0-6, 0, 0, 25, 6);
-        for(int i = 0; i < 3; i++) {
-            this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*i, 0, 141, 25, 18);
+        for(int side = 0; side < 2; side++) {
+        	List<Slot> pouchSlots = side == 0 ? satchelSlots.leftPouchSlots : satchelSlots.rightPouchSlots;
+	        if(!pouchSlots.isEmpty()) {
+	        	Slot first = pouchSlots.get(0);
+	        	int no = pouchSlots.size();
+	        	
+	        	int xOff = side == 0 ? -24 : -17;
+	        	
+	        	int firstX = k+first.xDisplayPosition+xOff;
+	        	int firstY = l+first.yDisplayPosition-1;
+	        	
+	        	int u = side == 0 ? 0 : 151;
+	        	
+	        	this.drawTexturedModalRect(firstX, firstY-18*no+12, u, 0, 25, 6);
+	            for(int i = 0; i < no; i++) {
+	                this.drawTexturedModalRect(firstX, firstY-18*i, u, 141, 25, 18);
+	            }
+	            this.drawTexturedModalRect(firstX, firstY+18, u, 141+18, 25, 6);
+	        }
         }
-        this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*2+18, 0, 141+18, 25, 6);
-        
-        this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*0-6, 151, 0, 25, 6);
-        for(int i = 0; i < 3; i++) {
-            this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*i, 151, 141, 25, 18);
-        }
-        this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*2+18, 151, 141+18, 25, 6);
         
         GL11.glPopAttrib();
         
