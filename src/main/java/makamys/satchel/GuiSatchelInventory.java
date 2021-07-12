@@ -79,7 +79,7 @@ public class GuiSatchelInventory extends GuiInventory {
 	            for(int i = 0; i < no; i++) {
 	                this.drawTexturedModalRect(firstX, firstY-18*i, u, 141, 25, 18);
 	            }
-	            this.drawTexturedModalRect(firstX, firstY+18, u, 141+18, 25, 6);
+	            this.drawTexturedModalRect(firstX, firstY+18, u, 141+18, 25, 7);
 	        }
         }
         
