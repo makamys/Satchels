@@ -8,7 +8,11 @@ public class ContainerSatchel extends ContainerPlayer {
 
 	public ContainerSatchel(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
-		addSlotToContainer(new Slot(player.getInventoryEnderChest(), 0, 100, 10));
+		addSlotToContainer(new Slot(player.getInventoryEnderChest(), 0, -16, 10));
+		
+		for(Object slot : this.inventorySlots) {
+			((Slot)slot).xDisplayPosition += 16;
+		}
 	}
 
 }
