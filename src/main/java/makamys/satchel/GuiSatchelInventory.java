@@ -36,12 +36,25 @@ public class GuiSatchelInventory extends GuiInventory {
         int k = this.guiLeft + 16;
         int l = this.guiTop;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 80);
+        
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
         this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 18+3);
         GL11.glPopAttrib();
+        
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawTexturedModalRect(k, l+80+18+3, 0, 80+3, this.xSize, this.ySize - 80 - 16 -3);
+        
+        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
+        GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
+        this.drawTexturedModalRect(k-24-0, l+10+18-1+18*0-6, 0, 0, 25, 6);
+        for(int i = 0; i < 3; i++) {
+            this.drawTexturedModalRect(k-24-0, l+10+18-1+18*i, 0, 141, 25, 18);
+        }
+        this.drawTexturedModalRect(k-24-0, l+10+18-1+18*2+18, 0, 141+18, 25, 6);
+        
+        GL11.glPopAttrib();
+        
         func_147046_a(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
         
         if(!movedButtons) {
