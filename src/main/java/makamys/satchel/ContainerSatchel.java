@@ -12,7 +12,10 @@ public class ContainerSatchel extends ContainerPlayer {
 		int slotIdx = 0;
 		
 		for(int row = 0; row < 3; row++) {
-			addSlotToContainer(new Slot(player.getInventoryEnderChest(), slotIdx++, -16, 10 + row * 18));
+			addSlotToContainer(new Slot(player.getInventoryEnderChest(), slotIdx++, -16+2, 10 + row * 18));
+		}
+		for(int row = 0; row < 3; row++) {
+			addSlotToContainer(new Slot(player.getInventoryEnderChest(), slotIdx++, 8 + 9 * 18 + 6-2, 10 + row * 18));
 		}
 		
 		for(int i = 0; i < 9; i++) {

@@ -47,11 +47,17 @@ public class GuiSatchelInventory extends GuiInventory {
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
-        this.drawTexturedModalRect(k-24-0, l+10+18-1+18*0-6, 0, 0, 25, 6);
+        this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*0-6, 0, 0, 25, 6);
         for(int i = 0; i < 3; i++) {
-            this.drawTexturedModalRect(k-24-0, l+10+18-1+18*i, 0, 141, 25, 18);
+            this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*i, 0, 141, 25, 18);
         }
-        this.drawTexturedModalRect(k-24-0, l+10+18-1+18*2+18, 0, 141+18, 25, 6);
+        this.drawTexturedModalRect(k-24-0+2, l+10+18-1+18*2+18, 0, 141+18, 25, 6);
+        
+        this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*0-6, 151, 0, 25, 6);
+        for(int i = 0; i < 3; i++) {
+            this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*i, 151, 141, 25, 18);
+        }
+        this.drawTexturedModalRect(k + 8 + 9 * 18 + 3, l+10+18-1+18*2+18, 151, 141+18, 25, 6);
         
         GL11.glPopAttrib();
         
