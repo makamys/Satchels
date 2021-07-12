@@ -2,7 +2,7 @@
 {
   "modid": "${modid}",
   "name": "Satchel",
-  "description": "Satchels and stuff",
+  "description": "Upgrade your inventory!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
