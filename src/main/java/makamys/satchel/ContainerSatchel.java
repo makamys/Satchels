@@ -18,7 +18,7 @@ public class ContainerSatchel extends ContainerPlayer {
 		
 		int slotIdx = 0;
 		
-		int bottomY = 136;
+		int bottomY = 138;
 		
 		for(int row = 0; row < 3; row++) {
 			Slot slot = new Slot(player.getInventoryEnderChest(), slotIdx++, -16+2, bottomY - row * 18);
@@ -40,7 +40,7 @@ public class ContainerSatchel extends ContainerPlayer {
 		for(int i = 0; i < this.inventorySlots.size(); i++) {
 			Slot slot = (Slot)this.inventorySlots.get(i);
 			slot.xDisplayPosition += 16;
-			if(i >= 9) {
+			if(!satchelSlots.isEmpty() && i >= 9) {
 				slot.yDisplayPosition += 18;
 			}
 		}

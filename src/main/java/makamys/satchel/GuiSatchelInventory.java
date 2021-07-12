@@ -14,10 +14,15 @@ public class GuiSatchelInventory extends GuiInventory {
 
 	boolean movedButtons = false;
 	
+	ContainerSatchel satchelSlots;
+	
 	public GuiSatchelInventory(EntityPlayer p_i1094_1_) {
 		super(p_i1094_1_);
+		this.satchelSlots = (ContainerSatchel)p_i1094_1_.inventoryContainer;
 		this.xSize += 2*16;
-		this.ySize += 16;
+		if(!satchelSlots.satchelSlots.isEmpty()) {
+			this.ySize += 16;
+		}
 	}
 	
 	@Override
@@ -32,7 +37,7 @@ public class GuiSatchelInventory extends GuiInventory {
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-		ContainerSatchel satchelSlots = (ContainerSatchel)this.inventorySlots;
+		boolean hasSatchel = !satchelSlots.satchelSlots.isEmpty();
 		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_147001_a);
@@ -40,13 +45,15 @@ public class GuiSatchelInventory extends GuiInventory {
         int l = this.guiTop;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 80);
         
-        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
-        GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
-        this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 18+3);
-        GL11.glPopAttrib();
+        if(hasSatchel) {
+	        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
+	        GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
+	        this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 18+3);
+	        GL11.glPopAttrib();
+        }
         
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.drawTexturedModalRect(k, l+80+18+3, 0, 80+3, this.xSize, this.ySize - 80 - 16 -3);
+        this.drawTexturedModalRect(k, l + 80 + (hasSatchel ? 18 + 3 : 0), 0, 80 + (hasSatchel ? 3 : 0), this.xSize, this.ySize - 80 - (hasSatchel ? 16 + 3 : 0));
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         GL11.glColor4f(1.0F, 0.7F, 0.4F, 1.0F);
@@ -75,7 +82,7 @@ public class GuiSatchelInventory extends GuiInventory {
         
         func_147046_a(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
         
-        if(!movedButtons) {
+        if(hasSatchel && !movedButtons) {
         	movedButtons = true;
     		for(GuiButton button : (List<GuiButton>)this.buttonList) {
     			// TODO buttons below the extra row should be pushed downwards, not upwards
