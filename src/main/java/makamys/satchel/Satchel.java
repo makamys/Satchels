@@ -1,9 +1,14 @@
 package makamys.satchel;
 
-import net.minecraft.init.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Satchel.MODID, version = Satchel.VERSION)
 public class Satchel
@@ -14,7 +19,15 @@ public class Satchel
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        // some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.dirt.getUnlocalizedName());
+    	
+    }
+    
+    @SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onGuiOpen(GuiOpenEvent event) {
+    	System.out.println(event.gui);
+    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelInventory)){
+			event.gui = new GuiSatchelInventory(Minecraft.getMinecraft().thePlayer);
+    	}
     }
 }
