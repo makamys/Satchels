@@ -1,13 +1,18 @@
 package makamys.satchel;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSatchelInventory extends GuiInventory {
 
+	boolean movedButtons = false;
+	
 	public GuiSatchelInventory(EntityPlayer p_i1094_1_) {
 		super(p_i1094_1_);
 		this.xSize += 2*16;
@@ -38,6 +43,15 @@ public class GuiSatchelInventory extends GuiInventory {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawTexturedModalRect(k, l+80+18+3, 0, 80+3, this.xSize, this.ySize - 80 - 16 -3);
         func_147046_a(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
+        
+        if(!movedButtons) {
+        	movedButtons = true;
+    		for(GuiButton button : (List<GuiButton>)this.buttonList) {
+    			// TODO buttons below the extra row should be pushed downwards, not upwards
+    			button.yPosition -= 8;
+    		}
+        }
+        	
 	}
 
 }
