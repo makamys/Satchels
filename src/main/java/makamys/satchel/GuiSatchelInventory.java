@@ -50,9 +50,10 @@ public class GuiSatchelInventory extends GuiInventory {
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 80);
         
         if(hasSatchel) {
+        	this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 3);
 	        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
 	        GL11.glColor4f(r, g, b, 1.0F);
-	        this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 18+3);
+	        this.drawTexturedModalRect(k, l+80+1, 0, 80+1, this.xSize, 18+2);
 	        GL11.glPopAttrib();
         }
         
