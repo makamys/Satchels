@@ -5,8 +5,13 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 
 import org.lwjgl.input.Keyboard;
@@ -19,6 +24,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -52,7 +58,8 @@ public class Satchels
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     	
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-		networkWrapper.registerMessage(HandlerOpenEquipmentInventory.class, MessageOpenEquipmentInventory.class, 0, Side.SERVER);   
+		networkWrapper.registerMessage(HandlerOpenEquipmentInventory.class, MessageOpenEquipmentInventory.class, 0, Side.SERVER);
+		networkWrapper.registerMessage(HandlerSyncEquipment.class, MessageSyncEquipment.class, 1, Side.CLIENT);
     }
     
     public static class HandlerOpenEquipmentInventory implements IMessageHandler<MessageOpenEquipmentInventory, IMessage> {
@@ -76,11 +83,47 @@ public class Satchels
     	
     }
     
+    public static class HandlerSyncEquipment implements IMessageHandler<MessageSyncEquipment, IMessage> {
+
+		@Override
+		public IMessage onMessage(MessageSyncEquipment message, MessageContext ctx) {
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPropertiesSatchels satchelsProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+			satchelsProps.loadNBTData(message.tag);
+			return null;
+		}
+    	
+    }
+    
+    public static class MessageSyncEquipment implements IMessage {
+
+    	public NBTTagCompound tag;
+    	
+    	public MessageSyncEquipment() {}
+    	
+    	public MessageSyncEquipment(NBTTagCompound tag) {
+    		this.tag = tag;
+    	}
+    	
+		@Override
+		public void fromBytes(ByteBuf buf) {
+			tag = ByteBufUtils.readTag(buf);
+		}
+
+		@Override
+		public void toBytes(ByteBuf buf) {
+			ByteBufUtils.writeTag(buf, tag);
+		}
+    	
+    }
+    
     @SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
     	System.out.println(event.gui);
     	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory)){
+    		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+    		hookInventory(player);
 			event.gui = new GuiSatchelsInventory(Minecraft.getMinecraft().thePlayer);
     	}
     }
@@ -100,9 +143,27 @@ public class Satchels
     	}
     }
 	
+	// Adapted from tconstruct.armor.TinkerArmorEvents#joinWorld
+    @SubscribeEvent
+    public void onJoinWorld(EntityJoinWorldEvent event)
+    {
+        if (event.entity instanceof EntityPlayerMP)
+        {
+            EntityPlayerMP player = (EntityPlayerMP)event.entity;
+            EntityPropertiesSatchels satchelsProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+            NBTTagCompound tag = new NBTTagCompound();
+            satchelsProps.saveNBTData(tag);
+            
+            networkWrapper.sendTo(new MessageSyncEquipment(tag), player);
+        }
+        
+    }
+	
 	public static void postPlayerConstructor(EntityPlayer player) {
-		player.inventoryContainer = player.openContainer = new ContainerSatchels(player);
+		hookInventory(player);
 	}
 	
-	
+	public static void hookInventory(EntityPlayer player) {
+		player.inventoryContainer = player.openContainer = new ContainerSatchels(player);
+	}
 }

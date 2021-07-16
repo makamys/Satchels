@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 public class ContainerSatchels extends ContainerPlayer {
@@ -15,6 +16,8 @@ public class ContainerSatchels extends ContainerPlayer {
 	
 	public ContainerSatchels(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
+		
+		EntityPropertiesSatchels satchelProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
 		
 		int slotIdx = 0;
 		
@@ -31,10 +34,13 @@ public class ContainerSatchels extends ContainerPlayer {
 			addSlotToContainer(slot);
 		}
 		
-		for(int i = 0; i < 9; i++) {
-			Slot slot = new Slot(player.getInventoryEnderChest(), slotIdx++, 8 + i * 18, 66);
-			satchelSlots.add(slot);
-			addSlotToContainer(slot);
+		IInventory satchelInv = satchelProps.satchel;
+		if(satchelInv != null) {
+			for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
+				Slot slot = new Slot(satchelInv, i, 8 + i * 18, 66);
+				satchelSlots.add(slot);
+				addSlotToContainer(slot);
+			}
 		}
 		
 		for(int i = 0; i < this.inventorySlots.size(); i++) {
