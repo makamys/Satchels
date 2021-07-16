@@ -2,8 +2,11 @@ package makamys.satchels;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -29,6 +32,14 @@ public class Satchels
     	System.out.println(event.gui);
     	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory)){
 			event.gui = new GuiSatchelsInventory(Minecraft.getMinecraft().thePlayer);
+    	}
+    }
+    
+	@SubscribeEvent
+	public void onEntityConstructing(EntityConstructing event) {
+    	Entity entity = event.entity;
+    	if(entity instanceof EntityPlayer) {
+    		entity.registerExtendedProperties("satchels", new EntityPropertiesSatchels());
     	}
     }
 }
