@@ -11,9 +11,12 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiEquipment extends InventoryEffectRenderer
 {
+	protected static final ResourceLocation equipmentTexture = new ResourceLocation("satchels", "textures/gui/container/equipment.png");
+	
 	/** x size of the inventory window in pixels. Defined as  float, passed as int */
     private float xSizeFloat;
     /** y size of the inventory window in pixels. Defined as  float, passed as int. */
@@ -58,7 +61,8 @@ public class GuiEquipment extends InventoryEffectRenderer
      */
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
     {
-        this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.equipment.satchel", new Object[0]), 104, 12, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.equipment.pouches", new Object[0]), 104, 48, 4210752);
     }
 
     /**
@@ -74,7 +78,7 @@ public class GuiEquipment extends InventoryEffectRenderer
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(field_147001_a);
+        this.mc.getTextureManager().bindTexture(equipmentTexture);
         int k = this.guiLeft;
         int l = this.guiTop;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

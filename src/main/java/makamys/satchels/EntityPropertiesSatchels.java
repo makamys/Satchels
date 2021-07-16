@@ -12,11 +12,11 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	public static final int SATCHEL_MAX_SLOTS = 9;
 	public static final int POUCH_MAX_SLOTS = 8;
 	
-	private InventorySimple equipment = new InventorySimple(3);
+	public InventorySimple equipment = new InventorySimple(3);
 	
-	private InventorySimple satchel;
-	private InventorySimple leftPouch;
-	private InventorySimple rightPouch;
+	public InventorySimple satchel;
+	public InventorySimple leftPouch;
+	public InventorySimple rightPouch;
 	
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
