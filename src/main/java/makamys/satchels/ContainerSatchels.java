@@ -1,4 +1,4 @@
-package makamys.satchel;
+package makamys.satchels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ContainerSatchel extends ContainerPlayer {
+public class ContainerSatchels extends ContainerPlayer {
 
 	public List<Slot> leftPouchSlots = new ArrayList<>();
 	public List<Slot> rightPouchSlots = new ArrayList<>();
 	public List<Slot> satchelSlots = new ArrayList<>();
 	
-	public ContainerSatchel(EntityPlayer player) {
+	public ContainerSatchels(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
 		
 		int slotIdx = 0;

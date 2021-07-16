@@ -1,4 +1,4 @@
-package makamys.satchel;
+package makamys.satchels;
 
 import java.util.List;
 
@@ -10,17 +10,17 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class GuiSatchelInventory extends GuiInventory {
+public class GuiSatchelsInventory extends GuiInventory {
 
 	boolean movedButtons = false;
 	
-	ContainerSatchel satchelSlots;
+	ContainerSatchels satchelsSlots;
 	
-	public GuiSatchelInventory(EntityPlayer p_i1094_1_) {
+	public GuiSatchelsInventory(EntityPlayer p_i1094_1_) {
 		super(p_i1094_1_);
-		this.satchelSlots = (ContainerSatchel)p_i1094_1_.inventoryContainer;
+		this.satchelsSlots = (ContainerSatchels)p_i1094_1_.inventoryContainer;
 		this.xSize += 2*16;
-		if(!satchelSlots.satchelSlots.isEmpty()) {
+		if(!satchelsSlots.satchelSlots.isEmpty()) {
 			this.ySize += 16;
 		}
 	}
@@ -41,7 +41,7 @@ public class GuiSatchelInventory extends GuiInventory {
 		float g = 0.7F;
 		float b = 0.4F;
 		
-		boolean hasSatchel = !satchelSlots.satchelSlots.isEmpty();
+		boolean hasSatchel = !satchelsSlots.satchelSlots.isEmpty();
 		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_147001_a);
@@ -63,7 +63,7 @@ public class GuiSatchelInventory extends GuiInventory {
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         GL11.glColor4f(r, g, b, 1.0F);
         for(int side = 0; side < 2; side++) {
-        	List<Slot> pouchSlots = side == 0 ? satchelSlots.leftPouchSlots : satchelSlots.rightPouchSlots;
+        	List<Slot> pouchSlots = side == 0 ? satchelsSlots.leftPouchSlots : satchelsSlots.rightPouchSlots;
 	        if(!pouchSlots.isEmpty()) {
 	        	Slot first = pouchSlots.get(0);
 	        	int no = pouchSlots.size();

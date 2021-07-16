@@ -1,11 +1,11 @@
-package makamys.satchel.mixin;
+package makamys.satchels.mixin;
 
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import makamys.satchel.ContainerSatchel;
+import makamys.satchels.ContainerSatchels;
 import net.minecraft.entity.player.EntityPlayer;
 
 @Mixin(EntityPlayer.class)
@@ -15,7 +15,7 @@ public class MixinEntityPlayer {
 	public void postPlayerConstructor(CallbackInfo ci) {
 		EntityPlayer dis = (EntityPlayer)(Object)this;
 		
-		dis.inventoryContainer = dis.openContainer = new ContainerSatchel(dis);
+		dis.inventoryContainer = dis.openContainer = new ContainerSatchels(dis);
 	}
 	
 }

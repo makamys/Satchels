@@ -1,4 +1,4 @@
-package makamys.satchel;
+package makamys.satchels;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -11,10 +11,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = Satchel.MODID, version = Satchel.VERSION)
-public class Satchel
+@Mod(modid = Satchels.MODID, version = Satchels.VERSION)
+public class Satchels
 {
-    public static final String MODID = "satchel";
+    public static final String MODID = "satchels";
     public static final String VERSION = "0.0";
 
     @EventHandler
@@ -27,8 +27,8 @@ public class Satchel
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
     	System.out.println(event.gui);
-    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelInventory)){
-			event.gui = new GuiSatchelInventory(Minecraft.getMinecraft().thePlayer);
+    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory)){
+			event.gui = new GuiSatchelsInventory(Minecraft.getMinecraft().thePlayer);
     	}
     }
 }

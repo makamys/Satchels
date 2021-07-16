@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.6",
-    "package": "makamys.satchel.mixin",
+    "package": "makamys.satchels.mixin",
     "refmap": "satchel.mixin.refmap.json",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
