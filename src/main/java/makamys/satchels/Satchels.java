@@ -65,5 +65,9 @@ public class Satchels
     	}
     }
 	
+	public static void postPlayerConstructor(EntityPlayer player) {
+		player.inventoryContainer = player.openContainer = new ContainerSatchels(player);
+	}
+	
 	
 }
