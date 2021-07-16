@@ -15,28 +15,65 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 
 @Mod(modid = Satchels.MODID, version = Satchels.VERSION)
 public class Satchels
-{
+{	
     public static final String MODID = "satchels";
     public static final String VERSION = "0.0";
 
+    @Instance(MODID)
+	public static Satchels instance;
+    
     KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
+    
+    public static SimpleNetworkWrapper networkWrapper;
     
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	instance = this;
+    	
     	MinecraftForge.EVENT_BUS.register(this);
     	FMLCommonHandler.instance().bus().register(this);
     	ClientRegistry.registerKeyBinding(openEquipment);
-    	//NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+    	
+		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+		networkWrapper.registerMessage(HandlerOpenEquipmentInventory.class, MessageOpenEquipmentInventory.class, 0, Side.SERVER);   
+    }
+    
+    public static class HandlerOpenEquipmentInventory implements IMessageHandler<MessageOpenEquipmentInventory, IMessage> {
+
+		@Override
+		public IMessage onMessage(MessageOpenEquipmentInventory message, MessageContext ctx) {
+			EntityPlayer player = ctx.getServerHandler().playerEntity;
+			player.openGui(Satchels.instance, 0, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			return null;
+		}
+    	
+    }
+    
+    public static class MessageOpenEquipmentInventory implements IMessage {
+
+		@Override
+		public void fromBytes(ByteBuf buf) {}
+
+		@Override
+		public void toBytes(ByteBuf buf) {}
+    	
     }
     
     @SideOnly(Side.CLIENT)
@@ -59,9 +96,7 @@ public class Satchels
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
     	if(openEquipment.isPressed()) {
-    		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-    		//Minecraft.getMinecraft().thePlayer.openGui(this, 0, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
-    		Minecraft.getMinecraft().displayGuiScreen(new GuiEquipment(player));
+    		networkWrapper.sendToServer(new MessageOpenEquipmentInventory());
     	}
     }
 	
