@@ -66,7 +66,7 @@ public class ContainerSatchels extends ContainerPlayer {
 			setEnabled(rightPouchSlots, i, i < satchelProps.getRightPouchSlotCount());	
 		}
 		
-		for(int i = 0; i < this.inventorySlots.size(); i++) {
+		for(int i = 0; i < originalSlotPositions.size(); i++) {
 			Slot slot = (Slot)this.inventorySlots.get(i);
 			if(!(slot instanceof SlotDisabled)) {
 				Pair<Integer, Integer> originalPosition = originalSlotPositions.get(i);
