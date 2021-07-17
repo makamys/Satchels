@@ -2,10 +2,10 @@ package makamys.satchels;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import codechicken.lib.vec.Vector3;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
@@ -81,6 +81,13 @@ public class ContainerSatchels extends ContainerPlayer {
 		
 		Slot newSlot = null;
 		if(!(slot instanceof SlotDisabled) && !enabled) {
+			if(slot.getHasStack()) {
+				if(!satchelProps.player.worldObj.isRemote) {
+					SatchelsUtils.dropItemStack(slot.getStack(), satchelProps.player.worldObj, Vector3.fromEntityCenter(satchelProps.player));
+				}
+				slot.putStack(null);
+			}
+			
 			newSlot = new SlotDisabled(slot);
 		} else if((slot instanceof SlotDisabled) && enabled) {
 			newSlot = ((SlotDisabled)slot).original;

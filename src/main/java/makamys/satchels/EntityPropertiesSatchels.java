@@ -78,13 +78,6 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	}
 	
 	public void updateInventories() {
-		/*ItemStack satchelItem = equipment.getStackInSlot(SLOT_SATCHEL);
-		if(satchelItem == null) {
-			satchel = null;
-			// TODO drop items
-		} else {
-			satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
-		}*/
 		((ContainerSatchels)player.inventoryContainer).redoSlots();
 	}
 	
