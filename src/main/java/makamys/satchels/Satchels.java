@@ -120,11 +120,10 @@ public class Satchels
     @SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
-    	System.out.println(event.gui);
-    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory)){
-    		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-    		hookInventory(player);
-			event.gui = new GuiSatchelsInventory(Minecraft.getMinecraft().thePlayer);
+    	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
+    			&& !(event.gui instanceof GuiSatchelsInventory)){
+			event.gui = new GuiSatchelsInventory(player);
     	}
     }
     
@@ -148,8 +147,9 @@ public class Satchels
     public void onJoinWorld(EntityJoinWorldEvent event)
     {
         if (event.entity instanceof EntityPlayerMP)
-        {
+        {	
             EntityPlayerMP player = (EntityPlayerMP)event.entity;
+            
             EntityPropertiesSatchels satchelsProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
             NBTTagCompound tag = new NBTTagCompound();
             satchelsProps.saveNBTData(tag);
@@ -160,10 +160,6 @@ public class Satchels
     }
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
-		hookInventory(player);
-	}
-	
-	public static void hookInventory(EntityPlayer player) {
-		player.inventoryContainer = player.openContainer = new ContainerSatchels(player);
+		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
 	}
 }

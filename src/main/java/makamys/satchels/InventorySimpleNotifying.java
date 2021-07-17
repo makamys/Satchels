@@ -7,8 +7,9 @@ public class InventorySimpleNotifying extends InventorySimple {
 
 	public Runnable callback;
 	
-	public InventorySimpleNotifying(int size) {
+	public InventorySimpleNotifying(int size, Runnable callback) {
 		super(size);
+		this.callback = callback;
 	}
 	
 	@Override

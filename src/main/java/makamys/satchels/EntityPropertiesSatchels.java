@@ -18,11 +18,11 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	private static final int SLOT_LEFT_POUCH = 1;
 	private static final int SLOT_RIGHT_POUCH = 2;
 	
-	public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3);
+	public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories());
 	
-	public InventorySimple satchel;
-	public InventorySimple leftPouch;
-	public InventorySimple rightPouch;
+	public InventorySimple satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
+	public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS);
+	public InventorySimple rightPouch = new InventorySimple(POUCH_MAX_SLOTS);
 	
 	EntityPlayer player;
 	
@@ -30,16 +30,16 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound satchelsTag = new NBTTagCompound();
 		
-		if(equipment != null) {
+		if(!SatchelsUtils.isInventoryEmpty(equipment)) {
 			satchelsTag.setTag("Equipment", InventoryUtils.writeItemStacksToTag(equipment.items));
 		}
-		if(satchel != null) {
+		if(!SatchelsUtils.isInventoryEmpty(satchel)) {
 			satchelsTag.setTag("Satchel", InventoryUtils.writeItemStacksToTag(satchel.items));
 		}
-		if(leftPouch != null) {
+		if(!SatchelsUtils.isInventoryEmpty(leftPouch)) {
 			satchelsTag.setTag("LeftPouch", InventoryUtils.writeItemStacksToTag(leftPouch.items));
 		}
-		if(rightPouch != null) {
+		if(!SatchelsUtils.isInventoryEmpty(rightPouch)) {
 			satchelsTag.setTag("RightPouch", InventoryUtils.writeItemStacksToTag(rightPouch.items));
 		}
 		
@@ -53,28 +53,21 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 		if(compound.hasKey("Satchels")) {
 			NBTTagCompound satchelsTag = compound.getCompoundTag("Satchels");
 			if(satchelsTag.hasKey("Equipment")) {
-				equipment = new InventorySimpleNotifying(3);
+				SatchelsUtils.clearInventory(equipment);
 				InventoryUtils.readItemStacksFromTag(equipment.items, satchelsTag.getTagList("Equipment", 10));
 			}	
 			if(satchelsTag.hasKey("Satchel")) {
-				satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
-				InventoryUtils.readItemStacksFromTag(equipment.items, satchelsTag.getTagList("Satchel", 10));
+				SatchelsUtils.clearInventory(satchel);
+				InventoryUtils.readItemStacksFromTag(satchel.items, satchelsTag.getTagList("Satchel", 10));
 			}
 			if(satchelsTag.hasKey("LeftPouch")) {
-				leftPouch = new InventorySimple(POUCH_MAX_SLOTS);
-				InventoryUtils.readItemStacksFromTag(equipment.items, satchelsTag.getTagList("LeftPouch", 10));
+				SatchelsUtils.clearInventory(leftPouch);
+				InventoryUtils.readItemStacksFromTag(leftPouch.items, satchelsTag.getTagList("LeftPouch", 10));
 			}
 			if(satchelsTag.hasKey("RightPouch")) {
-				rightPouch = new InventorySimple(POUCH_MAX_SLOTS);
-				InventoryUtils.readItemStacksFromTag(equipment.items, satchelsTag.getTagList("RightPouch", 10));
+				SatchelsUtils.clearInventory(rightPouch);
+				InventoryUtils.readItemStacksFromTag(rightPouch.items, satchelsTag.getTagList("RightPouch", 10));
 			}
-			equipment.callback = new Runnable() {
-				
-				@Override
-				public void run() {
-					updateInventories();
-				}
-			};
 			updateInventories();
 		}
 	}
@@ -85,13 +78,40 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	}
 	
 	public void updateInventories() {
-		ItemStack satchelItem = equipment.getStackInSlot(SLOT_SATCHEL);
+		/*ItemStack satchelItem = equipment.getStackInSlot(SLOT_SATCHEL);
 		if(satchelItem == null) {
 			satchel = null;
 			// TODO drop items
 		} else {
 			satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
-		}
+		}*/
+		((ContainerSatchels)player.inventoryContainer).redoSlots();
+	}
+	
+	public int getLeftPouchSlotCount() {
+		// TODO
+		return equipment.getStackInSlot(SLOT_LEFT_POUCH) != null ? 3 : 0;
+	}
+	
+	public int getRightPouchSlotCount() {
+		// TODO
+		return equipment.getStackInSlot(SLOT_RIGHT_POUCH) != null ? 8 : 0;
+	}
+	
+	public boolean hasSatchel() {
+		return getSatchelSlotCount() > 0;
+	}
+	
+	public boolean hasLeftPouch() {
+		return getLeftPouchSlotCount() > 0;
+	}
+	
+	public boolean hasRightPouch() {
+		return getRightPouchSlotCount() > 0;
+	}
+	
+	public int getSatchelSlotCount() {
+		return equipment.getStackInSlot(SLOT_SATCHEL) != null ? SATCHEL_MAX_SLOTS : 0;
 	}
 
 }
