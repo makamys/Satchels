@@ -31,12 +31,12 @@ public class ContainerSatchels extends ContainerPlayer {
 		int bottomY = 138-18;
 		
 		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-			Slot slot = new Slot(satchelProps.leftPouch, row, -16+2+2, bottomY - row * 18);
+			Slot slot = new Slot(satchelProps.leftPouch, row, -16+2, bottomY - row * 18);
 			leftPouchSlots.add(slot);
 			addSlotToContainer(slot);
 		}
 		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-			Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-2, bottomY - row * 18);
+			Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2, bottomY - row * 18);
 			rightPouchSlots.add(slot);
 			addSlotToContainer(slot);
 		}
