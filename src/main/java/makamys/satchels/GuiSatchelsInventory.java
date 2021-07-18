@@ -47,9 +47,13 @@ public class GuiSatchelsInventory extends GuiInventory {
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-		float r = 1.0F;
-		float g = 0.7F;
-		float b = 0.4F;
+		float r1 = 1.0F;
+		float g1 = 0.75F;
+		float b1 = 0.6F;
+		
+		float r2 = 1.0F;
+		float g2 = 0.7F;
+		float b2 = 0.4F;
 		
 		boolean hasSatchel = satchelsSlots.satchelProps.hasSatchel();
 		
@@ -62,7 +66,7 @@ public class GuiSatchelsInventory extends GuiInventory {
         if(hasSatchel) {
         	this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 3);
 	        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
-	        GL11.glColor4f(r, g, b, 1.0F);
+	        GL11.glColor4f(r1, g1, b1, 1.0F);
 	        this.drawTexturedModalRect(k, l+80+1, 0, 80+1, this.xSize, 18+2);
 	        GL11.glPopAttrib();
         }
@@ -71,7 +75,7 @@ public class GuiSatchelsInventory extends GuiInventory {
         this.drawTexturedModalRect(k, l + 80 + (hasSatchel ? 18 + 3 : 0), 0, 80 + (hasSatchel ? 3 : 0), this.xSize, this.ySize - 80 - (hasSatchel ? 16 + 3 : 0));
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
-        GL11.glColor4f(r, g, b, 1.0F);
+        GL11.glColor4f(r2, g2, b2, 1.0F);
         for(int side = 0; side < 2; side++) {
         	List<Slot> pouchSlots = side == 0 ? satchelsSlots.getEnabledLeftPouchSlots() : satchelsSlots.getEnabledRightPouchSlots();
 	        if(!pouchSlots.isEmpty()) {
