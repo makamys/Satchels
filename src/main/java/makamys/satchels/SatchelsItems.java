@@ -23,7 +23,7 @@ public class SatchelsItems {
 	
 	private static Item initItem(Item item) {
     	String name = item.getUnlocalizedName();
-    	int firstDot = name.indexOf('.');
+    	int firstDot = name.lastIndexOf('.');
     	GameRegistry.registerItem(item, name.substring(firstDot + 1));
     	return item;
     }
