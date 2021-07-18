@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 public class ItemPouch extends Item {
 	
 	public ItemPouch() {
-		setMaxStackSize(2);
+		setMaxStackSize(1);
 		setUnlocalizedName(Satchels.MODID + "." + "pouch");
 		setCreativeTab(CreativeTabs.tabTools);
 		setTextureName("pouch");
