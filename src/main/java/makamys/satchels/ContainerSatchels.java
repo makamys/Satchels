@@ -71,7 +71,7 @@ public class ContainerSatchels extends ContainerPlayer {
 			if(!(slot instanceof SlotDisabled)) {
 				Pair<Integer, Integer> originalPosition = originalSlotPositions.get(i);
 				slot.xDisplayPosition = originalPosition.getLeft() + 16;
-				slot.yDisplayPosition = originalPosition.getRight() + (i > 9 && satchelProps.hasSatchel() ? 18 : 0);
+				slot.yDisplayPosition = originalPosition.getRight() + (i >= 9 && satchelProps.hasSatchel() ? 18 : 0);
 			}
 		}
 	}
