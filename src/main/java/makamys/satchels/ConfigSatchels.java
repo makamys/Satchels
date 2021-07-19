@@ -31,6 +31,8 @@ public class ConfigSatchels {
 	public static Colour satchelBgColor;
     
     public static boolean hotSwap;
+    
+    public static int pouchUpgradeWeight;
 	
     public static void init() {
     	configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
@@ -72,6 +74,8 @@ public class ConfigSatchels {
 		pouchBgColor = getColor(config, "pouchBgColor", "interfaceColors", "FFB266", "");
 		satchelSlotColor = getColor(config, "satchelSlotColor", "interfaceColors", "FFBF99", "");
 		satchelBgColor = getColor(config, "satchelBgColor", "interfaceColors", "FFBF99", "");
+		
+		pouchUpgradeWeight = config.getInt("pouchUpgradeWeight", "worldgen", 4, 0, Integer.MAX_VALUE, "The weight of the pouch upgrade in the dungeon loot table.\nIncrease this to make them more common, or decrease to make them rarer.\nFor reference, saddles have a weight of 10 while golden apples have a weight of 1.\nBased on my testing, a weight of 10 with no other mods present roughly corresponds to an average of 1 item per dungeon, and it scales linearly from there.\nYou might want to bump this up if you have many other mods adding loot, or if this is a multiplayer server.");
 		
 		config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
 		

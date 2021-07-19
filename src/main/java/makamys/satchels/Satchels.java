@@ -66,7 +66,7 @@ public class Satchels
     {
     	instance = this;
     	
-    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(SatchelsItems.pouch_upgrade), 1, 1, 4));
+    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(SatchelsItems.pouch_upgrade), 1, 1, ConfigSatchels.pouchUpgradeWeight));
     	
     	MinecraftForge.EVENT_BUS.register(this);
     	FMLCommonHandler.instance().bus().register(this);
