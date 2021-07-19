@@ -150,6 +150,9 @@ public class Satchels
     @SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
+    	if(event.gui != null && event.gui.doesGuiPauseGame()) {
+    		ConfigSatchels.reloadIfChanged();
+    	}
     	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
     	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
     			&& !(event.gui instanceof GuiSatchelsInventory)){
@@ -167,7 +170,9 @@ public class Satchels
 	
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
-		ConfigSatchels.reloadIfChanged();
+		if(ConfigSatchels.hotSwap) {
+			ConfigSatchels.reloadIfChanged();
+		}
     	if(openEquipment.isPressed()) {
     		networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
     	}

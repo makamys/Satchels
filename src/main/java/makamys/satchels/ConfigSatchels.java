@@ -21,13 +21,16 @@ public class ConfigSatchels {
 	
 	public static Configuration config;
 	
+	private static File configFile;
+    private static WatchService watcher;
+    
+	
 	public static Colour pouchSlotColor; // TODO
 	public static Colour pouchBgColor;
 	public static Colour satchelSlotColor; // TODO
 	public static Colour satchelBgColor;
-	
-    private static File configFile;
-    private static WatchService watcher;
+    
+    public static boolean hotSwap;
 	
     public static void init() {
     	configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
@@ -67,6 +70,9 @@ public class ConfigSatchels {
 		pouchBgColor = getColor(config, "Pouch background color", "Interface - Colors", "FFB266", "");
 		satchelSlotColor = getColor(config, "Satchel slot color", "Interface - Colors", "FFBF99", "");
 		satchelBgColor = getColor(config, "Satchel background color", "Interface - Colors", "FFBF99", "");
+		hotSwap = config.getBoolean("Hot swap", "_General", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
+		
+		config.getCategory("_General").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
 		
 		if (config.hasChanged()) 
         {
