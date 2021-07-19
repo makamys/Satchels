@@ -65,28 +65,40 @@ public class Satchels
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     	
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-		networkWrapper.registerMessage(HandlerOpenEquipmentInventory.class, MessageOpenEquipmentInventory.class, 0, Side.SERVER);
+		networkWrapper.registerMessage(HandlerOpenContainer.class, MessageOpenContainer.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(HandlerSyncEquipment.class, MessageSyncEquipment.class, 1, Side.CLIENT);
     }
     
-    public static class HandlerOpenEquipmentInventory implements IMessageHandler<MessageOpenEquipmentInventory, IMessage> {
+    public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {
 
 		@Override
-		public IMessage onMessage(MessageOpenEquipmentInventory message, MessageContext ctx) {
+		public IMessage onMessage(MessageOpenContainer message, MessageContext ctx) {
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
-			player.openGui(Satchels.instance, 0, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(Satchels.instance, message.id, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 			return null;
 		}
     	
     }
     
-    public static class MessageOpenEquipmentInventory implements IMessage {
+    public static class MessageOpenContainer implements IMessage {
+
+    	public int id;
+    	
+    	public MessageOpenContainer() {}
+    	
+    	public MessageOpenContainer(int id) {
+			this.id = id;
+		}
+    	
+		@Override
+		public void fromBytes(ByteBuf buf) {
+			id = buf.readInt();
+		}
 
 		@Override
-		public void fromBytes(ByteBuf buf) {}
-
-		@Override
-		public void toBytes(ByteBuf buf) {}
+		public void toBytes(ByteBuf buf) {
+			buf.writeInt(id);
+		}
     	
     }
     
@@ -145,7 +157,7 @@ public class Satchels
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
     	if(openEquipment.isPressed()) {
-    		networkWrapper.sendToServer(new MessageOpenEquipmentInventory());
+    		networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
     	}
     }
 	
