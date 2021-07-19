@@ -1,5 +1,7 @@
 package makamys.satchels;
 
+import java.util.function.Predicate;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -10,9 +12,10 @@ public class ContainerChestGeneric extends Container
 {
     private IInventory chestInventory;
 
-    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_)
+    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate)
     {
         this.chestInventory = p_i1806_2_;
+        
         int numRows = (int)Math.ceil(p_i1806_2_.getSizeInventory() / 9.0);
         p_i1806_2_.openInventory();
         int i = (numRows - 4) * 18;
@@ -24,7 +27,7 @@ public class ContainerChestGeneric extends Container
             for (k = 0; k < 9; ++k)
             {
             	if(k + j * 9 < chestInventory.getSizeInventory()) {
-            		this.addSlotToContainer(new Slot(p_i1806_2_, k + j * 9, 8 + k * 18, 18 + j * 18));
+            		this.addSlotToContainer(new CustomSlot(p_i1806_2_, k + j * 9, 8 + k * 18, 18 + j * 18, acceptPredicate, 64));
             	}
             }
         }

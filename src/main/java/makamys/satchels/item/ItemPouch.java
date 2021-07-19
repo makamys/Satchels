@@ -1,5 +1,7 @@
 package makamys.satchels.item;
 
+import java.util.function.Predicate;
+
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -18,6 +20,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 public class ItemPouch extends Item {
+	
+	public static final Predicate<ItemStack> acceptedContentsPredicate = (stack) -> stack != null && stack.getItem() instanceof ItemPouchUpgrade;
 	
 	public ItemPouch() {
 		setMaxStackSize(1);

@@ -5,7 +5,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.function.Predicate;
+
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -17,9 +21,9 @@ public class GuiChestGeneric extends GuiContainer
     /** window height is calculated with these values; the more rows, the heigher */
     private int inventoryRows;
 
-    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_)
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_));
+        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate));
         this.upperChestInventory = p_i1083_1_;
         this.lowerChestInventory = p_i1083_2_;
         this.allowUserInput = false;

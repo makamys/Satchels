@@ -16,7 +16,7 @@ public class GuiHandler implements IGuiHandler {
 		case ID_EQUIPMENT:
 			return new ContainerEquipment(player.inventory, !player.worldObj.isRemote, player);
 		case ID_POUCH:
-			return new ContainerChestGeneric(player.inventory, ItemPouch.getInventory(player.getHeldItem(), world));
+			return new ContainerChestGeneric(player.inventory, ItemPouch.getInventory(player.getHeldItem(), world), ItemPouch.acceptedContentsPredicate);
 		default:
 			throw new IllegalArgumentException("Unknown container ID: " + ID);
 		}
@@ -29,7 +29,7 @@ public class GuiHandler implements IGuiHandler {
 		case ID_EQUIPMENT:
 			return new GuiEquipment(player);
 		case ID_POUCH:
-			return new GuiChestGeneric(player.inventory, ItemPouch.getInventory(player.getHeldItem(), world));
+			return new GuiChestGeneric(player.inventory, ItemPouch.getInventory(player.getHeldItem(), world), ItemPouch.acceptedContentsPredicate);
 		default:
 			throw new IllegalArgumentException("Unknown container ID: " + ID);
 		}
