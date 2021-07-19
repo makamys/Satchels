@@ -68,7 +68,7 @@ public class ItemPouch extends Item {
 	   private World world;
 	   
 	   public InventoryPouch(ItemStack stack, World world) {
-		   super(/*EntityPropertiesSatchels.POUCH_MAX_SLOTS*/9, stack.getDisplayName());
+		   super(EntityPropertiesSatchels.POUCH_MAX_SLOTS, stack.getDisplayName());
 		   this.stack = stack;
 		   this.world = world;
 		   
