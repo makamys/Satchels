@@ -2,6 +2,7 @@ package makamys.satchels;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import makamys.satchels.item.ItemPouch;
+import makamys.satchels.item.ItemPouchUpgrade;
 import makamys.satchels.item.ItemSatchel;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -11,6 +12,7 @@ public class SatchelsItems {
 	
 	public static final Item satchel = initItem(new ItemSatchel());
 	public static final Item pouch = initItem(new ItemPouch());
+	public static final Item pouch_upgrade = initItem(new ItemPouchUpgrade());
 	
 	public static void init() {
     	registerRecipes();

@@ -2,6 +2,7 @@ package makamys.satchels;
 
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
+import makamys.satchels.item.ItemPouch;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	
 	public static final int SATCHEL_MAX_SLOTS = 9;
 	public static final int POUCH_MAX_SLOTS = 8;
+	public static final int POUCH_INITIAL_SLOTS = 3;
 	
 	private static final int SLOT_SATCHEL = 0;
 	private static final int SLOT_LEFT_POUCH = 1;
@@ -82,13 +84,11 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	}
 	
 	public int getLeftPouchSlotCount() {
-		// TODO
-		return equipment.getStackInSlot(SLOT_LEFT_POUCH) != null ? 3 : 0;
+		return ItemPouch.getSlotCount(equipment.getStackInSlot(SLOT_LEFT_POUCH));
 	}
 	
 	public int getRightPouchSlotCount() {
-		// TODO
-		return equipment.getStackInSlot(SLOT_RIGHT_POUCH) != null ? 8 : 0;
+		return ItemPouch.getSlotCount(equipment.getStackInSlot(SLOT_RIGHT_POUCH));
 	}
 	
 	public boolean hasSatchel() {
