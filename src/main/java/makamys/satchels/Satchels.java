@@ -18,6 +18,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import tconstruct.client.tabs.TabRegistry;
 
 import org.lwjgl.input.Keyboard;
 
@@ -82,6 +83,7 @@ public class Satchels
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     	TConstructTabsShim.postInit();
+    	TabRegistry.registerTab(new InventoryTabSatchels());
     }
     
     public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {

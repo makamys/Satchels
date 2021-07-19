@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import tconstruct.client.tabs.TabRegistry;
 
 public class GuiEquipment extends InventoryEffectRenderer
 {
@@ -54,6 +55,9 @@ public class GuiEquipment extends InventoryEffectRenderer
         {
             super.initGui();
         }
+        
+        TabRegistry.updateTabValues(guiLeft, guiTop, InventoryTabSatchels.class);
+        TabRegistry.addTabsToList(this.buttonList);
     }
 
     /**
