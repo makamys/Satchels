@@ -60,7 +60,7 @@ public class Satchels
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	SatchelsItems.init();
-    	ConfigSatchels.reload();
+    	ConfigSatchels.init();
     }
     
     @EventHandler
@@ -167,6 +167,7 @@ public class Satchels
 	
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
+		ConfigSatchels.reloadIfChanged();
     	if(openEquipment.isPressed()) {
     		networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
     	}

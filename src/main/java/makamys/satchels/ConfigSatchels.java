@@ -1,6 +1,15 @@
 package makamys.satchels;
 
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.regex.Pattern;
 
 import codechicken.lib.colour.Colour;
@@ -17,11 +26,40 @@ public class ConfigSatchels {
 	public static Colour satchelSlotColor; // TODO
 	public static Colour satchelBgColor;
 	
+    private static File configFile;
+    private static WatchService watcher;
+	
+    public static void init() {
+    	configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
+    	reload();
+    	
+        try {
+            registerWatchService();
+        } catch(IOException e) {
+            System.out.println("Failed to register watch service: " + e + " (" + e.getMessage() + "). Changes to the config file will not be reflected");
+        }
+    }
+    
 	public static void reload() {
-		config = new Configuration(new File(Launch.minecraftHome, "config/satchels.cfg"));
+		config = new Configuration(configFile);
         
         config.load();
         reparse();
+	}
+	
+	public static void reloadIfChanged() {
+		if(watcher != null) {
+            WatchKey key = watcher.poll();
+            
+            if(key != null) {
+                for(WatchEvent<?> event: key.pollEvents()) {
+                    if(event.context().toString().equals(configFile.getName())) {
+                        reload();
+                    }
+                }
+                key.reset();
+            }
+        }
 	}
 	
 	public static void reparse() {
@@ -43,4 +81,9 @@ public class ConfigSatchels {
 		int rgb = Integer.valueOf(str, 16);
 		return new ColourRGBA((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, 0xFF);
 	}
+	
+	private static void registerWatchService() throws IOException {
+        watcher = FileSystems.getDefault().newWatchService();
+        configFile.toPath().getParent().register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
+    }
 }
