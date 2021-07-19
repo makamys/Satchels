@@ -3,7 +3,6 @@ package makamys.satchels;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -34,10 +33,7 @@ public class GuiEquipment extends InventoryEffectRenderer
      */
     public void updateScreen()
     {
-        if (this.mc.playerController.isInCreativeMode())
-        {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
-        }
+        
     }
 
     /**
@@ -47,14 +43,7 @@ public class GuiEquipment extends InventoryEffectRenderer
     {
         this.buttonList.clear();
 
-        if (this.mc.playerController.isInCreativeMode())
-        {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
-        }
-        else
-        {
-            super.initGui();
-        }
+        super.initGui();
         
         TabRegistry.updateTabValues(guiLeft, guiTop, InventoryTabSatchels.class);
         TabRegistry.addTabsToList(this.buttonList);
