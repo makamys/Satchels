@@ -10,10 +10,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import org.lwjgl.input.Keyboard;
 
@@ -35,6 +37,8 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import makamys.satchels.item.ItemPouch;
+import makamys.satchels.item.ItemPouchUpgrade;
 
 @Mod(modid = Satchels.MODID, version = Satchels.VERSION)
 public class Satchels
@@ -176,6 +180,16 @@ public class Satchels
             networkWrapper.sendTo(new MessageSyncEquipment(tag), player);
         }
         
+    }
+    
+    @SubscribeEvent
+    public void onItemTooltip(ItemTooltipEvent event) {
+    	if(event.itemStack.getItem() instanceof ItemPouch) {
+    		int slots = ItemPouch.getSlotCount(event.itemStack);
+    		event.toolTip.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
+    	} else if(event.itemStack.getItem() instanceof ItemPouchUpgrade) {
+			event.toolTip.add("Adds 1 slot to a pouch");
+    	}
     }
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
