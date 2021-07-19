@@ -21,9 +21,9 @@ public class GuiChestGeneric extends GuiContainer
     /** window height is calculated with these values; the more rows, the heigher */
     private int inventoryRows;
 
-    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate)
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate));
+        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize));
         this.upperChestInventory = p_i1083_1_;
         this.lowerChestInventory = p_i1083_2_;
         this.allowUserInput = false;
