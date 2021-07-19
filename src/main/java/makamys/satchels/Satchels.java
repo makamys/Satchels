@@ -20,6 +20,8 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import tconstruct.client.tabs.TabRegistry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -41,6 +43,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import makamys.satchels.compat.techguns.TechGunsCompat;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 
@@ -56,6 +59,8 @@ public class Satchels
     KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
     
     public static SimpleNetworkWrapper networkWrapper;
+    
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -84,6 +89,7 @@ public class Satchels
     public void postInit(FMLPostInitializationEvent event) {
     	TConstructTabsShim.postInit();
     	TabRegistry.registerTab(new InventoryTabSatchels());
+    	TechGunsCompat.postInit(event);
     }
     
     public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {
