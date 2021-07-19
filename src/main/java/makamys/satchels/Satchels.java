@@ -11,7 +11,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -62,6 +64,8 @@ public class Satchels
     public void init(FMLInitializationEvent event)
     {
     	instance = this;
+    	
+    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(SatchelsItems.pouch_upgrade), 1, 1, 4));
     	
     	MinecraftForge.EVENT_BUS.register(this);
     	FMLCommonHandler.instance().bus().register(this);
