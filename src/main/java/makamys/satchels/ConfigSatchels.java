@@ -66,13 +66,14 @@ public class ConfigSatchels {
 	}
 	
 	public static void reparse() {
-		pouchSlotColor = getColor(config, "Pouch slot color", "Interface - Colors", "FFB266", "");
-		pouchBgColor = getColor(config, "Pouch background color", "Interface - Colors", "FFB266", "");
-		satchelSlotColor = getColor(config, "Satchel slot color", "Interface - Colors", "FFBF99", "");
-		satchelBgColor = getColor(config, "Satchel background color", "Interface - Colors", "FFBF99", "");
-		hotSwap = config.getBoolean("Hot swap", "_General", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
+		hotSwap = config.getBoolean("hotSwap", "_general", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
 		
-		config.getCategory("_General").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
+		pouchSlotColor = getColor(config, "pouchSlotColor", "interfaceColors", "FFB266", "");
+		pouchBgColor = getColor(config, "pouchBgColor", "interfaceColors", "FFB266", "");
+		satchelSlotColor = getColor(config, "satchelSlotColor", "interfaceColors", "FFBF99", "");
+		satchelBgColor = getColor(config, "satchelBgColor", "interfaceColors", "FFBF99", "");
+		
+		config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
 		
 		if (config.hasChanged()) 
         {
