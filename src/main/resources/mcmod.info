@@ -1,6 +1,6 @@
 [
 {
-  "modid": "satchels",
+  "modid": "${modid}",
   "name": "Satchels",
   "description": "Upgrade your inventory!",
   "version": "${version}",

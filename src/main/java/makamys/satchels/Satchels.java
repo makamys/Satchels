@@ -21,8 +21,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -44,7 +42,7 @@ import io.netty.buffer.ByteBuf;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 
-@Mod(modid = Satchels.MODID, version = Satchels.VERSION, guiFactory = "makamys.satchels.SatchelsGuiFactory")
+@Mod(modid = Satchels.MODID, version = Satchels.VERSION)
 public class Satchels
 {	
     public static final String MODID = "satchels";
@@ -202,13 +200,6 @@ public class Satchels
     		event.toolTip.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
     	} else if(event.itemStack.getItem() instanceof ItemPouchUpgrade) {
 			event.toolTip.add("Adds 1 slot to a pouch");
-    	}
-    }
-    
-    @SubscribeEvent
-    public void onConfigChanged(ConfigChangedEvent event) {
-    	if(event.modID.equals(MODID)) {
-    		ConfigSatchels.reparse();
     	}
     }
 	
