@@ -33,6 +33,8 @@ public class ConfigSatchels {
     public static boolean hotSwap;
     
     public static int pouchUpgradeWeight;
+    
+    public static boolean compatTechguns;
 	
     public static void init() {
     	configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
@@ -76,6 +78,8 @@ public class ConfigSatchels {
 		satchelBgColor = getColor(config, "satchelBgColor", "interface colors", "FFBF99", "");
 		
 		pouchUpgradeWeight = config.getInt("pouchUpgradeWeight", "world generation", 4, 0, Integer.MAX_VALUE, "The weight of the pouch upgrade in the dungeon loot table.\nIncrease this to make them more common, or decrease to make them rarer.\nFor reference, saddles have a weight of 10 while golden apples have a weight of 1.\nBased on my testing, a weight of 10 with no other mods present roughly corresponds to an average of 1 item per dungeon, and it scales linearly from there.\nYou might want to bump this up if you have many other mods adding loot, or if this is a multiplayer server.");
+		
+		compatTechguns = config.getBoolean("compatTechguns", "compatibility", true, "Hack Techguns to use vertical tabs (using TConstruct's API) even if TConstruct is not present.");
 		
 		config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
 		
