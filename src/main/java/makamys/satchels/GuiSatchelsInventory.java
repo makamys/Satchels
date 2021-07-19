@@ -75,7 +75,7 @@ public class GuiSatchelsInventory extends GuiInventory {
         this.drawTexturedModalRect(k, l + 80 + (hasSatchel ? 18 + 3 : 0), 0, 80 + (hasSatchel ? 3 : 0), this.xSize, this.ySize - 80 - (hasSatchel ? 16 + 3 : 0));
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
-        GL11.glColor4f(r2, g2, b2, 1.0F);
+        ConfigSatchels.pouchSlotColor.glColour();
         for(int side = 0; side < 2; side++) {
         	List<Slot> pouchSlots = side == 0 ? satchelsSlots.getEnabledLeftPouchSlots() : satchelsSlots.getEnabledRightPouchSlots();
 	        if(!pouchSlots.isEmpty()) {
