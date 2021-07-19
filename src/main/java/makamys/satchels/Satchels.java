@@ -26,6 +26,7 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -87,9 +88,13 @@ public class Satchels
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	TConstructTabsShim.postInit();
-    	TabRegistry.registerTab(new InventoryTabSatchels());
-    	TechGunsCompat.postInit(event);
+    	if(ConfigSatchels.satchelsTab || Loader.isModLoaded("Techguns")) {
+	    	TConstructTabsShim.postInit();
+	    	if(ConfigSatchels.satchelsTab) {
+	    		TabRegistry.registerTab(new InventoryTabSatchels());
+	    	}
+	    	TechGunsCompat.postInit(event);
+    	}
     }
     
     public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {
