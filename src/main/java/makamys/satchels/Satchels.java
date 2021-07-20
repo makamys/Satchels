@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -48,7 +49,7 @@ import makamys.satchels.compat.techguns.TechGunsCompat;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 
-@Mod(modid = Satchels.MODID, version = Satchels.VERSION)
+@Mod(modid = Satchels.MODID, version = Satchels.VERSION, dependencies = "after:Techguns")
 public class Satchels
 {	
     public static final String MODID = "satchels";
@@ -95,6 +96,11 @@ public class Satchels
 	    	}
 	    	TechGunsCompat.postInit(event);
     	}
+    }
+    
+    @SubscribeEvent
+    public void postInitGui(InitGuiEvent.Post event) {
+    	TechGunsCompat.postInitGui(event);
     }
     
     public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {
