@@ -1,4 +1,4 @@
-package makamys.satchels;
+package makamys.satchels.compat;
 
 import cpw.mods.fml.common.Loader;
 import net.minecraft.launchwrapper.Launch;

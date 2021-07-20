@@ -45,7 +45,8 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
-import makamys.satchels.compat.techguns.TechGunsCompat;
+import makamys.satchels.compat.TConstructTabsShim;
+import makamys.satchels.compat.TechgunsCompat;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 
@@ -94,13 +95,13 @@ public class Satchels
 	    	if(ConfigSatchels.satchelsTab) {
 	    		TabRegistry.registerTab(new InventoryTabSatchels());
 	    	}
-	    	TechGunsCompat.postInit(event);
+	    	TechgunsCompat.postInit(event);
     	}
     }
     
     @SubscribeEvent
     public void postInitGui(InitGuiEvent.Post event) {
-    	TechGunsCompat.postInitGui(event);
+    	TechgunsCompat.postInitGui(event);
     }
     
     public static class HandlerOpenContainer implements IMessageHandler<MessageOpenContainer, IMessage> {

@@ -1,4 +1,4 @@
-package makamys.satchels.compat.techguns;
+package makamys.satchels.compat;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -10,7 +10,7 @@ import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import tconstruct.client.tabs.AbstractTab;
 import tconstruct.client.tabs.TabRegistry;
 
-public class TechGunsCompat {
+public class TechgunsCompat {
 	
 	private static Class<?> tgInventoryTabClass;
 	private static Class<?> tgGuiInventoryClass;
