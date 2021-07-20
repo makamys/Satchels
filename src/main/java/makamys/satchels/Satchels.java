@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +46,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import makamys.satchels.client.model.ModelSatchel;
 import makamys.satchels.compat.TConstructTabsShim;
 import makamys.satchels.compat.TechgunsCompat;
 import makamys.satchels.item.ItemPouch;
@@ -228,6 +230,15 @@ public class Satchels
 			event.toolTip.add("Adds 1 slot to a pouch");
     	}
     }
+    
+    // Adapted from mcft.copy.betterstorage.proxy.ClientProxy#onRenderPlayerSpecialsPre by copygirl
+	@SubscribeEvent
+	public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
+		ModelSatchel.instance = new ModelSatchel(); // XXX TEMP for hotswapping
+		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelSatchel.texture);
+		ModelSatchel.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
+		ModelSatchel.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
+	}
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
 		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
