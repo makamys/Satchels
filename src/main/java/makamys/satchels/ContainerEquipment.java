@@ -25,7 +25,7 @@ public class ContainerEquipment extends ContainerPlayer {
 			slot.xDisplayPosition = -1000;
 		}
 		
-		EntityPropertiesSatchels satchelProps = (EntityPropertiesSatchels)p_i1819_3_.getExtendedProperties("satchels");
+		EntityPropertiesSatchels satchelProps = EntityPropertiesSatchels.fromPlayer(p_i1819_3_);
 		
 		Predicate<ItemStack> satchelPredicate = (stack) -> stack.getItem() instanceof ItemSatchel;
 		Predicate<ItemStack> pouchPredicate = (stack) -> stack.getItem() instanceof ItemPouch;

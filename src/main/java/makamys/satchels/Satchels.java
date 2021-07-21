@@ -145,7 +145,7 @@ public class Satchels
 		@Override
 		public IMessage onMessage(MessageSyncEquipment message, MessageContext ctx) {
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			EntityPropertiesSatchels satchelsProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+			EntityPropertiesSatchels satchelsProps = EntityPropertiesSatchels.fromPlayer(player);
 			satchelsProps.loadNBTData(message.tag);
 			return null;
 		}
@@ -213,7 +213,7 @@ public class Satchels
         {	
             EntityPlayerMP player = (EntityPlayerMP)event.entity;
             
-            EntityPropertiesSatchels satchelsProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+            EntityPropertiesSatchels satchelsProps = EntityPropertiesSatchels.fromPlayer(player);
             NBTTagCompound tag = new NBTTagCompound();
             satchelsProps.saveNBTData(tag);
             

@@ -26,7 +26,7 @@ public class ContainerSatchels extends ContainerPlayer {
 	public ContainerSatchels(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
 		
-		satchelProps = (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+		satchelProps = EntityPropertiesSatchels.fromPlayer(player);
 		
 		int bottomY = 138-18;
 		
