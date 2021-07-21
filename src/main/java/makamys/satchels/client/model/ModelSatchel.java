@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelSatchel extends ModelBiped {
@@ -47,10 +48,15 @@ public class ModelSatchel extends ModelBiped {
 	@Override
 	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
 			float p_78088_6_, float scale) {
+		EntityPlayer player = (EntityPlayer)p_78088_1_;
+		
 		this.isSneak = p_78088_1_.isSneaking();
 		this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, p_78088_1_);
 		
-		this.bipedBody.render(1/24f);
+		boolean chestplate = player.getCurrentArmor(2) != null;
+		
+		this.bipedBody.offsetY = chestplate ? -0.08f : 0f;
+		this.bipedBody.render(chestplate ? 1/20f : 1/24f);
 	}
 	
 }
