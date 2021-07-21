@@ -238,7 +238,7 @@ public class Satchels
 		ModelSatchel.instance = new ModelSatchel(); // XXX TEMP for hotswapping
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelSatchel.texture);
 		ModelSatchel.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
-		ModelSatchel.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
+		//ModelSatchel.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
 		
 		ModelPouch.instance = new ModelPouch(); // XXX TEMP for hotswapping
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelPouch.texture);

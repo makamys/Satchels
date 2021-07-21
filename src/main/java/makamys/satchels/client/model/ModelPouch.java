@@ -18,11 +18,25 @@ public class ModelPouch extends ModelBiped {
 		{
 			ModelRenderer pouch = new ModelRenderer(this);
 			float x0 = 6f;
-			float y0 = 16;
+			float y0 = 15;
 			float z0 = -3;
 			int dx = 2;
-			int dy = 5;
-			int dz = 6;
+			int dy = 4;
+			int dz = 5;
+			
+			pouch.addBox(0, 0, 0, dx, dy, dz);
+			pouch.setRotationPoint(x0, y0, z0);
+			bipedBody.addChild(pouch);
+			pouch.rotateAngleZ = 0.05f;
+		}
+		{
+			ModelRenderer pouch = new ModelRenderer(this);
+			float x0 = -6.5f;
+			float y0 = 15;
+			float z0 = 5f;
+			int dx = 5;
+			int dy = 4;
+			int dz = -2;
 			
 			pouch.addBox(0, 0, 0, dx, dy, dz);
 			pouch.setRotationPoint(x0, y0, z0);
@@ -39,7 +53,7 @@ public class ModelPouch extends ModelBiped {
 		this.isSneak = p_78088_1_.isSneaking();
 		this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, p_78088_1_);
 		
-		boolean chestplate = player.getCurrentArmor(2) != null;
+		boolean chestplate = false;//player.getCurrentArmor(2) != null;
 		this.bipedBody.offsetY = chestplate ? -0.08f : 0f;
 		this.bipedBody.render(chestplate ? 1/20f : 1/24f);
 	}
