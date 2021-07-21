@@ -17,30 +17,33 @@ public class ModelPouch extends ModelWearable {
 		bipedBody = new ModelRenderer(this);
 		{
 			pouchLeft = new ModelRenderer(this);
-			float x0 = 6f;
+			pouchLeft.textureWidth = pouchLeft.textureHeight = 32;
+			float x0 = 8f;
 			float y0 = 15;
 			float z0 = -3;
-			int dx = 2;
-			int dy = 4;
-			int dz = 5;
+			int dx = 5;
+			int dy = 5;
+			int dz = 2;
 			
 			pouchLeft.addBox(0, 0, 0, dx, dy, dz);
 			pouchLeft.setRotationPoint(x0, y0, z0);
 			bipedBody.addChild(pouchLeft);
-			pouchLeft.rotateAngleZ = 0.05f;
+			pouchLeft.rotateAngleY = -(float)(Math.PI / 2f);
 		}
 		{
 			pouchRight = new ModelRenderer(this);
-			float x0 = -6.5f;
+			pouchRight.textureWidth = pouchLeft.textureHeight = 32;
+			float x0 = -1.5f;
 			float y0 = 15;
 			float z0 = 5f;
 			int dx = 5;
-			int dy = 4;
-			int dz = -2;
+			int dy = 5;
+			int dz = 2;
 			
 			pouchRight.addBox(0, 0, 0, dx, dy, dz);
 			pouchRight.setRotationPoint(x0, y0, z0);
 			bipedBody.addChild(pouchRight);
+			pouchRight.rotateAngleY = (float)(Math.PI);
 		}
 	}
 
