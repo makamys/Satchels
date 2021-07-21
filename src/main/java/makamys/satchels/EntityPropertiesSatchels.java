@@ -26,7 +26,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS);
 	public InventorySimple rightPouch = new InventorySimple(POUCH_MAX_SLOTS);
 	
-	EntityPlayer player;
+	public EntityPlayer player;
 	
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
@@ -105,6 +105,10 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	
 	public int getSatchelSlotCount() {
 		return equipment.getStackInSlot(SLOT_SATCHEL) != null ? SATCHEL_MAX_SLOTS : 0;
+	}
+	
+	public static EntityPropertiesSatchels fromPlayer(EntityPlayer player) {
+		return (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
 	}
 
 }
