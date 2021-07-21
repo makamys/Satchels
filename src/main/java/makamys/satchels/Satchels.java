@@ -235,15 +235,11 @@ public class Satchels
     // Adapted from mcft.copy.betterstorage.proxy.ClientProxy#onRenderPlayerSpecialsPre by copygirl
 	@SubscribeEvent
 	public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
-		ModelSatchel.instance = new ModelSatchel(); // XXX TEMP for hotswapping
-		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelSatchel.texture);
-		ModelSatchel.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
-		//ModelSatchel.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
+		(ModelSatchel.instance = new ModelSatchel()) // XXX TEMP for hotswapping
+		.renderPlayer(event);
 		
-		ModelPouch.instance = new ModelPouch(); // XXX TEMP for hotswapping
-		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelPouch.texture);
-		ModelPouch.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
-		ModelPouch.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
+		(ModelPouch.instance = new ModelPouch()) // XXX TEMP for hotswapping
+		.renderPlayer(event);
 	}
 	
 	public static void postPlayerConstructor(EntityPlayer player) {

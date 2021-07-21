@@ -1,17 +1,14 @@
 package makamys.satchels.client.model;
 
+import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelSatchel extends ModelBiped {
+public class ModelSatchel extends ModelWearable {
 	
-	public static ModelBase instance = new ModelSatchel();
-	public static ResourceLocation texture = new ResourceLocation(Satchels.MODID, "textures/models/satchel.png");
+	public static ModelWearable instance = new ModelSatchel();
 	
 	public ModelSatchel(){
 		bipedBody = new ModelRenderer(this);
@@ -46,17 +43,19 @@ public class ModelSatchel extends ModelBiped {
 	}
 	
 	@Override
-	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
-			float p_78088_6_, float scale) {
-		EntityPlayer player = (EntityPlayer)p_78088_1_;
-		
-		this.isSneak = p_78088_1_.isSneaking();
-		this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, p_78088_1_);
-		
-		boolean chestplate = player.getCurrentArmor(2) != null;
-		
-		this.bipedBody.offsetY = chestplate ? -0.08f : 0f;
-		this.bipedBody.render(chestplate ? 1/20f : 1/24f);
+	protected float preRender(Entity entity, boolean hasChestplate, EntityPropertiesSatchels props) {
+		this.bipedBody.offsetY = hasChestplate ? -0.08f : 0f;
+		return hasChestplate ? 1/20f : 1/24f;
+	}
+
+	@Override
+	protected ResourceLocation getTexture() {
+		return new ResourceLocation(Satchels.MODID, "textures/models/satchel.png");
+	}
+
+	@Override
+	protected boolean shouldRender(EntityPropertiesSatchels props) {
+		return props.hasSatchel();
 	}
 	
 }
