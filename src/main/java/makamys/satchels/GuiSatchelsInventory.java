@@ -102,8 +102,6 @@ public class GuiSatchelsInventory extends GuiInventory {
         
 		for(int i = 0; i < this.buttonList.size(); i++) {
 			GuiButton button = (GuiButton)this.buttonList.get(i);
-			// TODO buttons below the extra row should be pushed downwards, not upwards
-			button.yPosition = originalButtonPositions.get(i).getRight() + (hasSatchel ? -8 : 0);
 		}
         	
 	}
