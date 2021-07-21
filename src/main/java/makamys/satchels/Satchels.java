@@ -46,6 +46,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import makamys.satchels.client.model.ModelPouch;
 import makamys.satchels.client.model.ModelSatchel;
 import makamys.satchels.compat.TConstructTabsShim;
 import makamys.satchels.compat.TechgunsCompat;
@@ -238,6 +239,11 @@ public class Satchels
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelSatchel.texture);
 		ModelSatchel.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
 		ModelSatchel.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
+		
+		ModelPouch.instance = new ModelPouch(); // XXX TEMP for hotswapping
+		Minecraft.getMinecraft().getTextureManager().bindTexture(ModelPouch.texture);
+		ModelPouch.instance.setLivingAnimations(event.entityPlayer, 0, 0, 0);
+		ModelPouch.instance.render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
 	}
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
