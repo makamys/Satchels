@@ -11,6 +11,8 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
+import static makamys.satchels.GuiSatchelsInventory.*;
+
 public class ContainerSatchels extends ContainerPlayer {
 
 	public List<Slot> leftPouchSlots = new ArrayList<>();
@@ -22,6 +24,8 @@ public class ContainerSatchels extends ContainerPlayer {
 	public EntityPropertiesSatchels satchelProps;
 	
 	List<Pair<Integer, Integer>> originalSlotPositions;
+	
+	private boolean shiftArmorSlots;
 	
 	public ContainerSatchels(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
@@ -66,12 +70,18 @@ public class ContainerSatchels extends ContainerPlayer {
 			setEnabled(rightPouchSlots, i, i < satchelProps.getRightPouchSlotCount());	
 		}
 		
+        shiftArmorSlots = leftPouchSlots.stream().anyMatch(s -> SatchelsUtils.isPointInRange(s.yDisplayPosition, playerY, playerY + playerH));
+        
 		for(int i = 0; i < originalSlotPositions.size(); i++) {
 			Slot slot = (Slot)this.inventorySlots.get(i);
 			if(!(slot instanceof SlotDisabled)) {
 				Pair<Integer, Integer> originalPosition = originalSlotPositions.get(i);
 				slot.xDisplayPosition = originalPosition.getLeft() + 16;
 				slot.yDisplayPosition = originalPosition.getRight() + (i >= 9 && satchelProps.hasSatchel() ? 18 : 0);
+				
+				if(slot.slotNumber >= 5 && slot.slotNumber < 9){
+					slot.xDisplayPosition += getArmorXOffset();
+				}
 			}
 		}
 	}
@@ -106,6 +116,10 @@ public class ContainerSatchels extends ContainerPlayer {
 	
 	public List<Slot> getEnabledRightPouchSlots() {
 		return rightPouchSlots.subList(0, satchelProps.getRightPouchSlotCount());
+	}
+	
+	public int getArmorXOffset() {
+		return shiftArmorSlots ? 2 : 0;
 	}
 
 }
