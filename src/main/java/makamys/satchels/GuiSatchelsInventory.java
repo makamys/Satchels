@@ -53,10 +53,24 @@ public class GuiSatchelsInventory extends GuiInventory {
         this.mc.getTextureManager().bindTexture(field_147001_a);
         int k = this.guiLeft + 16;
         int l = this.guiTop;
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 80);
+        
+        int playerX = 25;
+        int playerY = 7;
+        int playerXOff = 2;
+        int playerW = 54;
+        int playerH = 72;
+        
+        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, playerY);
+        
+        this.drawTexturedModalRect(k, l + playerY, 0, playerY, 7, playerH);
+        this.drawTexturedModalRect(k + 7, l + playerY, 3, playerY, playerXOff, playerH);
+        this.drawTexturedModalRect(k + 7 + playerXOff, l + playerY, 7, playerY, 18, playerH);
+        this.drawTexturedModalRect(k + playerX + playerXOff, l + playerY, playerX, playerY, playerW, playerH);
+        this.drawTexturedModalRect(k + playerX + playerXOff + playerW, l + playerY, playerX + playerXOff + playerW, playerY, this.xSize - (playerX + playerXOff + playerW), playerH);
+        
+        this.drawTexturedModalRect(k, l + playerY + playerH, 0, playerY + playerH, this.xSize, 2);
         
         if(hasSatchel) {
-        	this.drawTexturedModalRect(k, l+80, 0, 80, this.xSize, 3);
 	        GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
 	        ConfigSatchels.satchelBgColor.glColour();
 	        this.drawTexturedModalRect(k, l+80+1, 0, 80+1, this.xSize, 18+2);
@@ -91,7 +105,7 @@ public class GuiSatchelsInventory extends GuiInventory {
         
         GL11.glPopAttrib();
         
-        func_147046_a(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
+        func_147046_a(k + playerX + playerXOff + 26, l + playerY + 68, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
         
         if(originalButtonPositions == null) {
         	originalButtonPositions = new ArrayList<>();
@@ -102,6 +116,10 @@ public class GuiSatchelsInventory extends GuiInventory {
         
 		for(int i = 0; i < this.buttonList.size(); i++) {
 			GuiButton button = (GuiButton)this.buttonList.get(i);
+			if(button.xPosition >= k + playerX && button.xPosition < k + playerX + playerW
+					&& button.yPosition >= l + playerY && button.yPosition < l + playerY + playerH) {
+				button.xPosition = originalButtonPositions.get(i).getLeft() + playerXOff;
+			}
 		}
         	
 	}
