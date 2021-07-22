@@ -1,7 +1,8 @@
-package makamys.satchels;
+package makamys.satchels.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import makamys.satchels.inventory.ContainerChestGeneric;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;

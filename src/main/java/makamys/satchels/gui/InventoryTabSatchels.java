@@ -1,7 +1,11 @@
-package makamys.satchels;
+package makamys.satchels.gui;
 
 import net.minecraft.item.ItemStack;
 import tconstruct.client.tabs.AbstractTab;
+import makamys.satchels.GuiHandler;
+import makamys.satchels.Packets;
+import makamys.satchels.Satchels;
+import makamys.satchels.SatchelsItems;
 import makamys.satchels.Packets.MessageOpenContainer;
 
 public class InventoryTabSatchels extends AbstractTab

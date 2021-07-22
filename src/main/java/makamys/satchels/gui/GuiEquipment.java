@@ -1,8 +1,9 @@
-package makamys.satchels;
+package makamys.satchels.gui;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import makamys.satchels.inventory.ContainerEquipment;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;

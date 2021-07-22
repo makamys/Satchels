@@ -1,4 +1,6 @@
-package makamys.satchels;
+package makamys.satchels.inventory;
+
+import static makamys.satchels.gui.GuiSatchelsInventory.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +8,12 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 import codechicken.lib.vec.Vector3;
+import makamys.satchels.EntityPropertiesSatchels;
+import makamys.satchels.SatchelsUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
-import static makamys.satchels.GuiSatchelsInventory.*;
 
 public class ContainerSatchels extends ContainerPlayer {
 

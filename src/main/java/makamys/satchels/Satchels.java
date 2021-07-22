@@ -22,6 +22,7 @@ import makamys.satchels.Packets.HandlerOpenContainer;
 import makamys.satchels.Packets.HandlerSyncEquipment;
 import makamys.satchels.Packets.MessageOpenContainer;
 import makamys.satchels.Packets.MessageSyncEquipment;
+import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.proxy.SatchelsProxyCommon;
 
 @Mod(modid = Satchels.MODID, version = Satchels.VERSION, dependencies = "after:Techguns")

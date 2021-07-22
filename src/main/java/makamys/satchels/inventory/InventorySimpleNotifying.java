@@ -1,4 +1,4 @@
-package makamys.satchels;
+package makamys.satchels.inventory;
 
 import codechicken.lib.inventory.InventorySimple;
 import net.minecraft.item.ItemStack;

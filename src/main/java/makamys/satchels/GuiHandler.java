@@ -1,6 +1,10 @@
 package makamys.satchels;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import makamys.satchels.gui.GuiChestGeneric;
+import makamys.satchels.gui.GuiEquipment;
+import makamys.satchels.inventory.ContainerChestGeneric;
+import makamys.satchels.inventory.ContainerEquipment;
 import makamys.satchels.item.ItemPouch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

@@ -1,4 +1,4 @@
-package makamys.satchels;
+package makamys.satchels.gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
 
+import makamys.satchels.ConfigSatchels;
+import makamys.satchels.Satchels;
+import makamys.satchels.inventory.ContainerSatchels;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;

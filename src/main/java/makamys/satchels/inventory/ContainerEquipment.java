@@ -1,7 +1,8 @@
-package makamys.satchels;
+package makamys.satchels.inventory;
 
 import java.util.function.Predicate;
 
+import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemSatchel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,8 +31,8 @@ public class ContainerEquipment extends ContainerPlayer {
 		Predicate<ItemStack> satchelPredicate = (stack) -> stack.getItem() instanceof ItemSatchel;
 		Predicate<ItemStack> pouchPredicate = (stack) -> stack.getItem() instanceof ItemPouch;
 		
-		addSlotToContainer(satchelSlot = new CustomSlot(satchelProps.equipment, 0, 115, 22, satchelPredicate, 1));
-		addSlotToContainer(leftPouchSlot = new CustomSlot(satchelProps.equipment, 1, 101, 58, pouchPredicate, 1));
-		addSlotToContainer(rightPouchSlot = new CustomSlot(satchelProps.equipment, 2, 131, 58, pouchPredicate, 1));
+		addSlotToContainer(satchelSlot = new SlotCustom(satchelProps.equipment, 0, 115, 22, satchelPredicate, 1));
+		addSlotToContainer(leftPouchSlot = new SlotCustom(satchelProps.equipment, 1, 101, 58, pouchPredicate, 1));
+		addSlotToContainer(rightPouchSlot = new SlotCustom(satchelProps.equipment, 2, 131, 58, pouchPredicate, 1));
 	}
 }

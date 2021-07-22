@@ -5,8 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import makamys.satchels.ContainerSatchels;
 import makamys.satchels.Satchels;
+import makamys.satchels.inventory.ContainerSatchels;
 import net.minecraft.entity.player.EntityPlayer;
 
 @Mixin(EntityPlayer.class)

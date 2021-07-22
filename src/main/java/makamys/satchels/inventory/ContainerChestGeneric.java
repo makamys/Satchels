@@ -1,4 +1,4 @@
-package makamys.satchels;
+package makamys.satchels.inventory;
 
 import java.util.function.Predicate;
 
@@ -27,7 +27,7 @@ public class ContainerChestGeneric extends Container
             for (k = 0; k < 9; ++k)
             {
             	if(k + j * 9 < chestInventory.getSizeInventory()) {
-            		this.addSlotToContainer(new CustomSlot(p_i1806_2_, k + j * 9, 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
+            		this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * 9, 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
             	}
             }
         }

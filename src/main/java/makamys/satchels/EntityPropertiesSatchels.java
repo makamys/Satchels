@@ -2,6 +2,8 @@ package makamys.satchels;
 
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
+import makamys.satchels.inventory.ContainerSatchels;
+import makamys.satchels.inventory.InventorySimpleNotifying;
 import makamys.satchels.item.ItemPouch;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
