@@ -20,7 +20,7 @@ public class SatchelsItems {
 	
 	private static void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(satchel), new Object[] {"L L", "LDL", "LLL", 'L', Items.leather, 'D', Items.diamond});
-		GameRegistry.addShapedRecipe(new ItemStack(pouch), new Object[] {" L ", "LSL", " L ", 'L', Items.leather, 'S', Items.string});
+		GameRegistry.addShapedRecipe(new ItemStack(pouch), new Object[] {"SLS", "L L", "SLS", 'L', Items.leather, 'S', Items.string});
 	}
 	
 	private static Item initItem(Item item) {
