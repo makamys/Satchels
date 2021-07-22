@@ -2,6 +2,7 @@ package makamys.satchels.client.model;
 
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -53,10 +54,10 @@ public class ModelPouch extends ModelWearable {
 	}
 	
 	@Override
-	protected float preRender(Entity entity, boolean hasChestplate, EntityPropertiesSatchels props) {
+	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		pouchLeft.isHidden = !props.hasLeftPouch();
 		pouchRight.isHidden = !props.hasRightPouch();
-		return super.preRender(entity, hasChestplate, props);
+		return DEFAULT_SCALE;
 	}
 
 	@Override

@@ -1,7 +1,11 @@
 package makamys.satchels.client.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -9,11 +13,15 @@ import net.minecraft.util.ResourceLocation;
 public class ModelSatchel extends ModelWearable {
 	
 	public static ModelWearable instance = new ModelSatchel();
-	
+	ModelBiped satchelBiped;
+	ModelRenderer satchel;
+	ModelBiped strapBiped;
+	ModelRenderer strap;
 	public ModelSatchel(){
 		bipedBody = new ModelRenderer(this, 0, 0);
 		{
-			ModelRenderer satchel = new ModelRenderer(this, 0, 0);
+			satchelBiped = new ModelBiped();
+			satchel = new ModelRenderer(satchelBiped);
 			satchel.textureWidth = satchel.textureHeight = 32;
 			float x0 = -5.5f;
 			float y0 = 13;
@@ -24,12 +32,13 @@ public class ModelSatchel extends ModelWearable {
 			
 			satchel.addBox(0, 0, 0, dx, dy, dz);
 			satchel.setRotationPoint(x0, y0, z0);
-			bipedBody.addChild(satchel);
+			satchelBiped.bipedBody.addChild(satchel);
 			satchel.rotateAngleZ = 0.05f;
 			satchel.rotateAngleY = -(float)(Math.PI / 2f);
 		}
 		{
-			ModelRenderer strap = new ModelRenderer(this, 0, 9);
+			strapBiped = new ModelBiped();
+			strap = new ModelRenderer(strapBiped, 0, 9);
 			strap.textureWidth = strap.textureHeight = 32;
 			float x0 = 7.5f;
 			float y0 = -0.1f;
@@ -40,16 +49,24 @@ public class ModelSatchel extends ModelWearable {
 			
 			strap.addBox(0, 0, 0, dx, dy, dz);
 			strap.setRotationPoint(x0-0.2f, y0+0.4f, z0);
-			bipedBody.addChild(strap);
+			strapBiped.bipedBody.addChild(strap);
 			strap.rotateAngleY = -(float)(Math.PI / 2f);
 			strap.rotateAngleZ = 0.75f;
 		}
 	}
 	
 	@Override
-	protected float preRender(Entity entity, boolean hasChestplate, EntityPropertiesSatchels props) {
-		this.bipedBody.offsetY = hasChestplate ? -0.08f : 0f;
-		return hasChestplate ? 1/20f : 1/24f;
+	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
+		ModelRenderer model = biped == satchelBiped ? satchel : strap;
+		model.offsetY = hasChestplate ? -0.08f : 0f;
+		float scale = hasChestplate ? 1/20f : 1/24f;
+		
+		return scale * (biped == satchelBiped ? 1f : 1.01f);
+	}
+	
+	@Override
+	protected List<ModelBiped> getBipeds() {
+		return Arrays.asList(satchelBiped, strapBiped);
 	}
 
 	@Override

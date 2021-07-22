@@ -1,5 +1,8 @@
 package makamys.satchels.client.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import makamys.satchels.EntityPropertiesSatchels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -16,15 +19,16 @@ public abstract class ModelWearable extends ModelBiped {
 	public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
 			float p_78088_6_, float scale) {
 		EntityPlayer player = (EntityPlayer)entity;
-		
-		this.isSneak = entity.isSneaking();
-		this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entity);
-		
 		boolean hasChestplate = player.getCurrentArmor(2) != null;
-		this.bipedBody.render(preRender(entity, hasChestplate, EntityPropertiesSatchels.fromPlayer((EntityPlayer)entity)));
+		
+		for(ModelBiped biped : getBipeds()) {
+			biped.isSneak = entity.isSneaking();
+			biped.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entity);
+			biped.bipedBody.render(preRender(entity, biped, hasChestplate, EntityPropertiesSatchels.fromPlayer((EntityPlayer)entity)));
+		}
 	}
 	
-	protected float preRender(Entity entity, boolean hasChestplate, EntityPropertiesSatchels props) {
+	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		return DEFAULT_SCALE;
 	}
 	
@@ -35,6 +39,10 @@ public abstract class ModelWearable extends ModelBiped {
 			setLivingAnimations(event.entityPlayer, 0, 0, 0);
 			render(event.entityPlayer, 0, 0, 0, 0, 0, 0);
 		}
+	}
+	
+	protected List<ModelBiped> getBipeds(){
+		return Arrays.asList(this);
 	}
 	
 	protected abstract ResourceLocation getTexture();
