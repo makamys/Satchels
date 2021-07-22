@@ -1,10 +1,8 @@
 package makamys.satchels;
 
-import makamys.satchels.Satchels.MessageOpenContainer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import tconstruct.client.tabs.AbstractTab;
-import tconstruct.client.tabs.TabRegistry;
+import makamys.satchels.Packets.MessageOpenContainer;
 
 public class InventoryTabSatchels extends AbstractTab
 {

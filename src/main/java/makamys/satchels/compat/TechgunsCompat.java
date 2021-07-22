@@ -17,7 +17,7 @@ public class TechgunsCompat {
 	private static Class<?> tgGuiTabButtonClass;
 	private static boolean doCompat;
 	
-	public static void postInit(FMLPostInitializationEvent event) {
+	public static void postInit() {
 		doCompat = ConfigSatchels.compatTechguns && Loader.isModLoaded("Techguns") && !Loader.isModLoaded("TConstruct");
 		if(doCompat) {
 			try {

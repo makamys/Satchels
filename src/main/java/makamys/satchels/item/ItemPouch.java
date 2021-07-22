@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
 import makamys.satchels.Satchels;
-import makamys.satchels.Satchels.MessageOpenContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import makamys.satchels.Packets.MessageOpenContainer;
 
 public class ItemPouch extends Item {
 	
