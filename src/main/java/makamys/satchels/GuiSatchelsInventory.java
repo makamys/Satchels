@@ -11,6 +11,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiSatchelsInventory extends GuiInventory {
 
@@ -25,6 +26,8 @@ public class GuiSatchelsInventory extends GuiInventory {
 							playerY = 7,
 							playerW = 54,
 							playerH = 72;
+	
+	protected static final ResourceLocation sidebar_corners = new ResourceLocation(Satchels.MODID, "textures/gui/container/sidebar_corners.png"); 
 	
 	
 	public GuiSatchelsInventory(EntityPlayer p_i1094_1_) {
@@ -91,18 +94,33 @@ public class GuiSatchelsInventory extends GuiInventory {
 	        	Slot first = pouchSlots.get(0);
 	        	int no = pouchSlots.size();
 	        	
-	        	int xOff = side == 0 ? -24 : -17;
+	        	boolean left = side == 0;
+	        	
+	        	int xOff = left ? -24 : -17;
 	        	
 	        	int firstX = k+first.xDisplayPosition+xOff;
 	        	int firstY = l+first.yDisplayPosition-1;
 	        	
-	        	int u = side == 0 ? 0 : 151;
+	        	int u = left ? 0 : 151;
+	        	int uOff = left ? 0 : 7;
+	        	int edgeXOff = left ? 18 : 0;
 	        	
-	        	this.drawTexturedModalRect(firstX, firstY-18*no+12, u, 0, 25, 6);
+	        	int bottomCornerU = left ? 0 : 7;
+	        	int bottomCornerV = 0;
+	        	int topCornerU = left ? 0 : 7;
+	        	int topCornerV = no == 3 ? 7 : 14;
+	        	
+	        	this.drawTexturedModalRect(firstX+uOff, firstY-18*no+11, u + uOff, 0, 18, 7);
+	        	
 	            for(int i = 0; i < no; i++) {
 	                this.drawTexturedModalRect(firstX, firstY-18*i, u, 141, 25, 18);
 	            }
-	            this.drawTexturedModalRect(firstX, firstY+18, u, 141+18, 25, 7);
+	            this.drawTexturedModalRect(firstX+uOff, firstY+18, u + uOff, 141+18, 18, 7);
+	            GL11.glPushAttrib(GL11.GL_TEXTURE_BIT);
+	            this.mc.getTextureManager().bindTexture(sidebar_corners);
+	            this.drawTexturedModalRect(firstX+edgeXOff, firstY-18*no+11, topCornerU, topCornerV, 7, 7);
+	            this.drawTexturedModalRect(firstX+edgeXOff, firstY+18, bottomCornerU, bottomCornerV, 7, 7);
+	            GL11.glPopAttrib();
 	        }
         }
         
