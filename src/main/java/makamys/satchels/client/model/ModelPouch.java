@@ -1,5 +1,6 @@
 package makamys.satchels.client.model;
 
+import makamys.satchels.ConfigSatchels;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
 import net.minecraft.client.model.ModelBiped;
@@ -55,8 +56,8 @@ public class ModelPouch extends ModelWearable {
 	
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
-		pouchLeft.isHidden = !props.hasLeftPouch();
-		pouchRight.isHidden = !props.hasRightPouch();
+		pouchLeft.isHidden = !props.hasLeftPouch() || !ConfigSatchels.drawLeftPouch;
+		pouchRight.isHidden = !props.hasRightPouch() || !ConfigSatchels.drawRightPouch;
 		return DEFAULT_SCALE;
 	}
 

@@ -35,6 +35,11 @@ public class ConfigSatchels {
     
     public static int pouchUpgradeWeight;
     
+    public static boolean drawSatchel;
+    public static boolean drawSatchelStrap;
+    public static boolean drawLeftPouch;
+    public static boolean drawRightPouch;
+    
     public static boolean compatTechguns;
 	
     public static void init() {
@@ -81,10 +86,15 @@ public class ConfigSatchels {
 		
 		pouchUpgradeWeight = config.getInt("pouchUpgradeWeight", "world generation", 4, 0, Integer.MAX_VALUE, "The weight of the pouch upgrade in the dungeon loot table.\nIncrease this to make them more common, or decrease to make them rarer.\nFor reference, saddles have a weight of 10 while golden apples have a weight of 1.\nBased on my testing, a weight of 10 with no other mods present roughly corresponds to an average of 1 item per dungeon, and it scales linearly from there.\nYou might want to bump this up if you have many other mods adding loot, or if this is a multiplayer server.");
 		
+		drawSatchel = config.getBoolean("drawSatchel", "player model", true, "");
+		drawSatchelStrap = config.getBoolean("drawSatchelStrap", "player model", true, "");
+		drawLeftPouch = config.getBoolean("drawLeftPouch", "player model", true, "");
+		drawRightPouch = config.getBoolean("drawRightPouch", "player model", true, "");
+		
 		compatTechguns = config.getBoolean("compatTechguns", "compatibility", true, "Force Techguns to use vertical tabs (using TConstruct's API) even if TConstruct is not present.");
 		
 		config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
-		
+
 		if (config.hasChanged()) 
         {
             config.save();

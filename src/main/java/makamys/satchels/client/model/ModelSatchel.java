@@ -3,6 +3,7 @@ package makamys.satchels.client.model;
 import java.util.Arrays;
 import java.util.List;
 
+import makamys.satchels.ConfigSatchels;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
 import net.minecraft.client.model.ModelBiped;
@@ -58,6 +59,7 @@ public class ModelSatchel extends ModelWearable {
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		ModelRenderer model = biped == satchelBiped ? satchel : strap;
+		model.isHidden = (model == satchel ? !ConfigSatchels.drawSatchel : (!ConfigSatchels.drawSatchel || !ConfigSatchels.drawSatchelStrap));
 		model.offsetY = hasChestplate ? -0.08f : 0f;
 		float scale = hasChestplate ? 1/20f : 1/24f;
 		
