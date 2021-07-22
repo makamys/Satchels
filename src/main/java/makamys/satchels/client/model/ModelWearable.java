@@ -24,11 +24,11 @@ public abstract class ModelWearable extends ModelBiped {
 		for(ModelBiped biped : getBipeds()) {
 			biped.isSneak = entity.isSneaking();
 			biped.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entity);
-			biped.bipedBody.render(preRender(entity, biped, hasChestplate, EntityPropertiesSatchels.fromPlayer((EntityPlayer)entity)));
+			biped.bipedBody.render(getScalePreRender(entity, biped, hasChestplate, EntityPropertiesSatchels.fromPlayer((EntityPlayer)entity)));
 		}
 	}
 	
-	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
+	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		return DEFAULT_SCALE;
 	}
 	

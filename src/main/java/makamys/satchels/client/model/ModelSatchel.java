@@ -56,7 +56,7 @@ public class ModelSatchel extends ModelWearable {
 	}
 	
 	@Override
-	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
+	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		ModelRenderer model = biped == satchelBiped ? satchel : strap;
 		model.offsetY = hasChestplate ? -0.08f : 0f;
 		float scale = hasChestplate ? 1/20f : 1/24f;

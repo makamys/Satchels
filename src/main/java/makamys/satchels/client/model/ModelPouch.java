@@ -54,7 +54,7 @@ public class ModelPouch extends ModelWearable {
 	}
 	
 	@Override
-	protected float preRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
+	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		pouchLeft.isHidden = !props.hasLeftPouch();
 		pouchRight.isHidden = !props.hasRightPouch();
 		return DEFAULT_SCALE;
