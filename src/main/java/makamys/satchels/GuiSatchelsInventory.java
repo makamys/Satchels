@@ -139,6 +139,13 @@ public class GuiSatchelsInventory extends GuiInventory {
         		originalButtonPositions.add(Pair.of(button.xPosition, button.yPosition));
         	}
         }
+        
+        for(int i = 0; i < this.buttonList.size(); i++) {
+            GuiButton button = (GuiButton)this.buttonList.get(i);
+            int supposedTop = (this.height - this.originalYSize) / 2;
+            button.yPosition = originalButtonPositions.get(i).getRight() + (guiTop - supposedTop);
+        }
+
 	}
 
 }
