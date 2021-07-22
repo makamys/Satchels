@@ -23,9 +23,9 @@ public class ModelSatchel extends ModelWearable {
 			satchelBiped = new ModelBiped();
 			satchel = new ModelRenderer(satchelBiped);
 			satchel.textureWidth = satchel.textureHeight = 32;
-			float x0 = -5.5f;
+			float x0 = -7.5f;
 			float y0 = 13;
-			float z0 = -4;
+			float z0 = 4;
 			int dx = 8;
 			int dy = 7;
 			int dz = 2;
@@ -34,7 +34,7 @@ public class ModelSatchel extends ModelWearable {
 			satchel.setRotationPoint(x0, y0, z0);
 			satchelBiped.bipedBody.addChild(satchel);
 			satchel.rotateAngleZ = 0.05f;
-			satchel.rotateAngleY = -(float)(Math.PI / 2f);
+			satchel.rotateAngleY = (float)(Math.PI / 2f);
 		}
 		{
 			strapBiped = new ModelBiped();

@@ -18,7 +18,7 @@ public class ModelPouch extends ModelWearable {
 		bipedBody = new ModelRenderer(this);
 		{
 			pouchLeft = new ModelRenderer(this);
-			pouchLeft.textureWidth = pouchLeft.textureHeight = 32;
+			pouchLeft.textureWidth = pouchLeft.textureHeight = 16;
 			float x0 = 8f;
 			float y0 = 15;
 			float z0 = -3;
@@ -33,7 +33,7 @@ public class ModelPouch extends ModelWearable {
 		}
 		{
 			pouchRight = new ModelRenderer(this);
-			pouchRight.textureWidth = pouchLeft.textureHeight = 32;
+			pouchRight.textureWidth = pouchRight.textureHeight = 16;
 			float x0 = -1.5f;
 			float y0 = 15;
 			float z0 = 5f;
