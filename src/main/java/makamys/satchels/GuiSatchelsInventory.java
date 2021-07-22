@@ -116,6 +116,11 @@ public class GuiSatchelsInventory extends GuiInventory {
 	                this.drawTexturedModalRect(firstX, firstY-18*i, u, 141, 25, 18);
 	            }
 	            this.drawTexturedModalRect(firstX+uOff, firstY+18, u + uOff, 141+18, 18, 7);
+	            
+	            if(no == 8 && !hasSatchel) {
+	            	this.drawTexturedModalRect(firstX+edgeXOff, firstY-18*no+11, left ? 169 : 0, 0, 7, 7);
+	            }
+	            
 	            GL11.glPushAttrib(GL11.GL_TEXTURE_BIT);
 	            this.mc.getTextureManager().bindTexture(sidebar_corners);
 	            this.drawTexturedModalRect(firstX+edgeXOff, firstY-18*no+11, topCornerU, topCornerV, 7, 7);
