@@ -7,6 +7,7 @@ import makamys.satchels.inventory.InventorySimpleNotifying;
 import makamys.satchels.item.ItemPouch;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -73,6 +74,18 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 				InventoryUtils.readItemStacksFromTag(rightPouch.items, satchelsTag.getTagList("RightPouch", 10));
 			}
 			updateInventories();
+		}
+	}
+	
+	public void dropItems() {
+		dropItems(equipment);
+	}
+	
+	public void dropItems(IInventory inv) {
+		for(int i = 0; i < inv.getSizeInventory(); i++) {
+			ItemStack stack = inv.getStackInSlot(i);
+			player.func_146097_a(stack, true, false);
+			inv.setInventorySlotContents(i, null);
 		}
 	}
 

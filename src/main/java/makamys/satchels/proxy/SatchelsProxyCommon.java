@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
 public class SatchelsProxyCommon {
 	
@@ -41,6 +42,16 @@ public class SatchelsProxyCommon {
             
             Satchels.networkWrapper.sendTo(new MessageSyncEquipment(tag), player);
         }
+    }
+    
+    // Adapted from tconstruct.armor.player.TPlayerHandler#playerDrops
+    @SubscribeEvent
+    public void onPlayerDrops(PlayerDropsEvent event) {
+    	EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
+    	
+        event.entityPlayer.captureDrops = true;
+        props.dropItems();
+        event.entityPlayer.captureDrops = false;
     }
 	
 }
