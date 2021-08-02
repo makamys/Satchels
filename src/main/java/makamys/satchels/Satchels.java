@@ -29,7 +29,7 @@ import makamys.satchels.proxy.SatchelsProxyCommon;
 public class Satchels
 {	
     public static final String MODID = "satchels";
-    public static final String VERSION = "0.0";
+    public static final String VERSION = "@VERSION@";
 
     @Instance(MODID)
 	public static Satchels instance;
