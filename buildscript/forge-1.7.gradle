@@ -58,13 +58,12 @@ jar {
 
 processResources {
     // This will ensure that this task is redone when the versions change.
+	// TODO make it run if any custom project property changes
     inputs.property "version", version
     inputs.property "mcversion", project.minecraft.version
 
-    // Replace values in only mcmod.info.
-    filesMatching('mcmod.info') {
-        // Replace version and mcversion.
-        expand 'modid':project.modid, 'version':version, 'mcversion':project.minecraft.version
+    filesMatching('*.info') {
+        expand project.properties
     }
 }
 

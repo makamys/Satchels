@@ -4,7 +4,7 @@
   "name": "Satchels",
   "description": "Upgrade your inventory!",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": "${minecraft_version}",
   "url": "",
   "updateUrl": "",
   "authorList": ["makamys"],
