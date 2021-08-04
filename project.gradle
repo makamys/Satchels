@@ -1,3 +1,5 @@
 jar.manifest.attributes (
 	'FMLAT': "tconstruct_tabs_at.cfg",
 )
+
+apply from: "makalibs.gradle"
