@@ -9,7 +9,7 @@ minecraft {
 }
 
 dependencies {
-	shade 'com.github.makamys:MCLib:0.1.2'
+	shade 'com.github.makamys:MCLib:master-SNAPSHOT'
 	compile 'com.github.makamys:UpdateCheckLib:1.0'
 }
 
