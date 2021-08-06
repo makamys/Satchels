@@ -46,6 +46,18 @@ public class InventoryAggregate implements IInventory {
         }
         return Pair.of(null, -1);
     }
+    
+    public int toGlobalIdx(IInventory targetInv, int localIdx) {
+        int invStartGlobal = 0;
+        for(int i = 0; i < inventories.size(); i++) {
+            IInventory inv = inventories.get(i);
+            if(targetInv == inv) {
+                return invStartGlobal + localIdx;
+            }
+            invStartGlobal += inv.getSizeInventory();
+        }
+        return -1;
+    }
 
     @Override
     public ItemStack decrStackSize(int globalIdx, int arg) {

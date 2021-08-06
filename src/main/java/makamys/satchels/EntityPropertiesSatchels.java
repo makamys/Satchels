@@ -1,5 +1,10 @@
 package makamys.satchels;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.primitives.Ints;
+
 import codechicken.lib.inventory.InventoryRange;
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
@@ -142,9 +147,31 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	    if(stack == null || stack.stackSize == 0 || stack.getItem() == null) return false;
         
         int originalSize = stack.stackSize;
-        int left = InventoryUtils2.insertItem(new InventoryRange(aggregate), stack, false, pass);
+        int left = InventoryUtils2.insertItem(getEnabledInventoryRange(), stack, false, pass);
         stack.stackSize = left; 
         return stack.stackSize != originalSize;
+	}
+	
+	private InventoryRange getEnabledInventoryRange() {
+	    InventoryRange range = new InventoryRange(aggregate);
+	    List<Integer> slots = new ArrayList<>();
+	    if(hasSatchel()) {
+	        for(int i = 0; i < satchel.getSizeInventory(); i++) {
+	            slots.add(aggregate.toGlobalIdx(satchel, i));
+	        }
+	    }
+	    if(hasLeftPouch()) {
+            for(int i = 0; i < getLeftPouchSlotCount(); i++) {
+                slots.add(aggregate.toGlobalIdx(leftPouch, i));
+            }
+        }
+	    if(hasRightPouch()) {
+            for(int i = 0; i < getRightPouchSlotCount(); i++) {
+                slots.add(aggregate.toGlobalIdx(rightPouch, i));
+            }
+        }
+	    range.slots = Ints.toArray(slots);
+	    return range;
 	}
 
 }
