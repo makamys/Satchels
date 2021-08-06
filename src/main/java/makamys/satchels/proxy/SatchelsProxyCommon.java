@@ -57,11 +57,5 @@ public class SatchelsProxyCommon {
         props.dropItems();
         event.entityPlayer.captureDrops = false;
     }
-    
-    @SubscribeEvent
-    public void onEntityItemPickup(EntityItemPickupEvent event) {
-        EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
-        InventoryUtils.insertItem(props.aggregate, new ItemStack(Blocks.dirt), false);
-    }
 	
 }
