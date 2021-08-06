@@ -3,6 +3,7 @@ package makamys.satchels;
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
 import makamys.satchels.inventory.ContainerSatchels;
+import makamys.satchels.inventory.InventoryAggregate;
 import makamys.satchels.inventory.InventorySimpleNotifying;
 import makamys.satchels.item.ItemPouch;
 import net.minecraft.entity.Entity;
@@ -28,6 +29,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	public InventorySimple satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
 	public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS);
 	public InventorySimple rightPouch = new InventorySimple(POUCH_MAX_SLOTS);
+	public InventoryAggregate aggregate = new InventoryAggregate(satchel, leftPouch, rightPouch);
 	
 	public EntityPlayer player;
 	
