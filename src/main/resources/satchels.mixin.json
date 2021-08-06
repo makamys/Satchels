@@ -5,6 +5,7 @@
     "refmap": "satchels.mixin.refmap.json",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-    	"MixinEntityPlayer"
+    	"MixinEntityPlayer",
+    	"MixinInventoryPlayer"
     ]
 }

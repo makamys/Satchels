@@ -1,7 +1,9 @@
 package makamys.satchels;
 
+import codechicken.lib.inventory.InventoryRange;
 import codechicken.lib.inventory.InventorySimple;
 import codechicken.lib.inventory.InventoryUtils;
+import makamys.mclib.ccl.inventory.InventoryUtils2;
 import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.inventory.InventoryAggregate;
 import makamys.satchels.inventory.InventorySimpleNotifying;
@@ -126,6 +128,23 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	
 	public static EntityPropertiesSatchels fromPlayer(EntityPlayer player) {
 		return (EntityPropertiesSatchels)player.getExtendedProperties("satchels");
+	}
+	
+	public boolean preAddItemStackToInventory(final ItemStack stack) {
+	    return addItemStackToInventory(stack, 0);
+	}
+	
+	public boolean postAddItemStackToInventory(final ItemStack stack) {
+	    return addItemStackToInventory(stack, 1);
+    }
+	
+	private boolean addItemStackToInventory(final ItemStack stack, int pass) {
+	    if(stack == null || stack.stackSize == 0 || stack.getItem() == null) return false;
+        
+        int originalSize = stack.stackSize;
+        int left = InventoryUtils2.insertItem(new InventoryRange(aggregate), stack, false, pass);
+        stack.stackSize = left; 
+        return stack.stackSize != originalSize;
 	}
 
 }
