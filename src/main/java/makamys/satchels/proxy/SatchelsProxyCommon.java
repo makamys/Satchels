@@ -53,9 +53,17 @@ public class SatchelsProxyCommon {
     public void onPlayerDrops(PlayerDropsEvent event) {
     	EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
     	
+        if (event.entityPlayer.capturedDrops != event.drops) {
+            event.entityPlayer.capturedDrops.clear();
+        }
+    	
         event.entityPlayer.captureDrops = true;
         props.dropItems();
         event.entityPlayer.captureDrops = false;
+        
+        if (event.entityPlayer.capturedDrops != event.drops) {
+            event.drops.addAll(event.entityPlayer.capturedDrops);
+        }
     }
 	
 }
