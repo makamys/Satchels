@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 import makamys.satchels.item.ItemSatchel;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class SatchelsItems {
 	}
 	
 	private static void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(satchel), new Object[] {"S S", "LDL", "LLL", 'L', Items.leather, 'S', Items.string, 'D', Items.diamond});
+		GameRegistry.addShapedRecipe(new ItemStack(satchel), new Object[] {"S S", "LDL", "LLL", 'L', Items.leather, 'S', Items.string, 'D', Blocks.diamond_block});
 		GameRegistry.addShapedRecipe(new ItemStack(pouch), new Object[] {"SLS", "L L", "SLS", 'L', Items.leather, 'S', Items.string});
 	}
 	
