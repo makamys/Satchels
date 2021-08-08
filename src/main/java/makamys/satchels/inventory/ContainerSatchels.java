@@ -95,7 +95,7 @@ public class ContainerSatchels extends ContainerPlayer {
 		if(!(slot instanceof SlotDisabled) && !enabled) {
 			if(slot.getHasStack()) {
 				if(!satchelProps.player.worldObj.isRemote) {
-					SatchelsUtils.dropItemStack(slot.getStack(), satchelProps.player.worldObj, Vector3.fromEntityCenter(satchelProps.player));
+				    satchelProps.player.func_146097_a(slot.getStack(), true, false);
 				}
 				slot.putStack(null);
 			}
