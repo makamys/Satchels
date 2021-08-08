@@ -84,7 +84,7 @@ public class ConfigSatchels {
 		satchelSlotColor = getColor(config, "satchelSlotColor", "interface colors", "FFBF99", "Not implemented yet!");
 		satchelBgColor = getColor(config, "satchelBgColor", "interface colors", "FFBF99", "");
 		
-		pouchUpgradeWeight = config.getInt("pouchUpgradeWeight", "world generation", 4, 0, Integer.MAX_VALUE, "The weight of the pouch upgrade in the dungeon loot table.\nIncrease this to make them more common, or decrease to make them rarer.\nFor reference, saddles have a weight of 10 while golden apples have a weight of 1.\nBased on my testing, a weight of 10 with no other mods present roughly corresponds to an average of 1 item per dungeon, and it scales linearly from there.\nYou might want to bump this up if you have many other mods adding loot, or if this is a multiplayer server.");
+		pouchUpgradeWeight = config.getInt("pouchUpgradeWeight", "world generation", 7, 0, Integer.MAX_VALUE, "The weight of the pouch upgrade in the dungeon loot table.\nIncrease this to make them more common, or decrease to make them rarer.\nFor reference, saddles have a weight of 10 while golden apples have a weight of 1.\nBased on my testing, a weight of 10 with no other mods present roughly corresponds to an average of 1 item per dungeon, and it scales linearly from there.\nYou might want to bump this up if you have many other mods adding loot, or if this is a multiplayer server.");
 		
 		drawSatchel = config.getBoolean("drawSatchel", "player model", true, "");
 		drawSatchelStrap = config.getBoolean("drawSatchelStrap", "player model", true, "");
