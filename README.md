@@ -20,6 +20,10 @@ The items you wear will show up as 3D models on the player. This can be disabled
 
 <img height=400 src="docs/satchels_model.png">
 
+# Dependencies
+
+This mod requires CodeChickenLib (installed by [CodeChickenCore](https://www.curseforge.com/minecraft/mc-mods/codechickencore)).
+
 # License
 
 This mod is licensed under the [MIT License](LICENSE).
