@@ -8,7 +8,11 @@ This mod adds **pouches** and **satchels**, which act as wearable inventory upgr
 
 ## Pouches
 
-A pouch adds 3 slots to your inventory, and can be worn on the left or the right side. You only need some leather and some string to craft it. Its capacity can be increased with **pouch upgrades**, which can only be found inside dungeon chests. Each upgrade will add an additional slot to the pouch's capacity, with the maximum being 8 slots. You can wear up to 2 pouches at the same time.
+A pouch adds 3 slots to your inventory, and can be worn on the left or the right side. You only need some leather and some string to craft it.
+
+Its capacity can be increased with **pouch upgrades**, which can only be found inside dungeon chests. Each upgrade will add an additional slot to the pouch's capacity, with the maximum being 8 slots. To apply a pouch upgrade, right click the ground with a pouch to open its upgrade inventory where you can insert it.
+
+You can wear up to 2 pouches at the same time.
 
 ## Satchel
 
