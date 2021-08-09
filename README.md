@@ -24,6 +24,10 @@ The items you wear will show up as 3D models on the player. This can be disabled
 
 This mod requires CodeChickenLib (installed by [CodeChickenCore](https://www.curseforge.com/minecraft/mc-mods/codechickencore)).
 
+## Suggested mods
+
+If you want more inventory expansion options in your earlygame, check out [D-Mod](https://github.com/makamys/DMod)'s bundle backport!
+
 # License
 
 This mod is licensed under the [MIT License](https://github.com/makamys/Satchels/blob/master/LICENSE).
