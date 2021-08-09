@@ -26,7 +26,7 @@ import makamys.satchels.Packets.MessageSyncEquipment;
 import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.proxy.SatchelsProxyCommon;
 
-@Mod(modid = Satchels.MODID, version = Satchels.VERSION, dependencies = "after:Techguns; required-after:CodeChickenLib")
+@Mod(modid = Satchels.MODID, version = Satchels.VERSION, dependencies = "after:Techguns; required-after:CodeChickenCore")
 public class Satchels
 {	
     public static final String MODID = "satchels";
