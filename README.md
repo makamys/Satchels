@@ -2,7 +2,7 @@
 
 This mod adds **pouches** and **satchels**, which act as wearable inventory upgrades. Unlike your typical backpack mod, it's seamlessly integrated into the inventory screen instead of being on a separate screen.
 
-<img height=400 src="docs/satchels_gui.png">
+![](https://raw.githubusercontent.com/makamys/Satchels/master/docs/satchels_gui.png)
 
 *Pictured: an unupgraded pouch (the colored column on the left), a fully upgraded pouch (the colored column on the right) and a satchel (the colored row)*
 
@@ -18,7 +18,7 @@ A satchel adds an entire row (9 slots) of storage to your inventory. But its uti
 
 The items you wear will show up as 3D models on the player. This can be disabled in the config.
 
-<img height=400 src="docs/satchels_model.png">
+![](https://raw.githubusercontent.com/makamys/Satchels/master/docs/satchels_model.png)
 
 # Dependencies
 
@@ -26,4 +26,4 @@ This mod requires CodeChickenLib (installed by [CodeChickenCore](https://www.cur
 
 # License
 
-This mod is licensed under the [MIT License](LICENSE).
+This mod is licensed under the [MIT License](https://github.com/makamys/Satchels/blob/master/LICENSE).
