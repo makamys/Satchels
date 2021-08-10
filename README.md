@@ -1,3 +1,6 @@
+[![downloads](https://img.shields.io/badge/-⬇%20releases-brightgreen)](https://github.com/makamys/Satchels/releases)
+[![CurseForge](https://shields.io/badge/CurseForge-555555?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/satchels)
+
 # Satchels
 
 This mod adds **pouches** and **satchels**, which act as wearable inventory upgrades. Unlike your typical backpack mod, it's seamlessly integrated into the inventory screen instead of being on a separate screen.
