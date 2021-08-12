@@ -1,7 +1,9 @@
 package makamys.satchels.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
@@ -23,7 +25,7 @@ public class GuiSatchelsInventory extends GuiInventory {
 	ContainerSatchels satchelsSlots;
 	
 	private int originalYSize;
-	List<Pair<Integer, Integer>> originalButtonPositions;
+	Map<GuiButton, Pair<Integer, Integer>> originalButtonPositions = new HashMap<>();
 	
 	public static final int playerX = 25,
 							playerY = 7,
@@ -136,19 +138,19 @@ public class GuiSatchelsInventory extends GuiInventory {
         
         func_147046_a(k + playerX + 26, l + playerY + 68, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
         
-        if(originalButtonPositions == null) {
-        	originalButtonPositions = new ArrayList<>();
-        	for(GuiButton button : (List<GuiButton>)this.buttonList) {
-        		originalButtonPositions.add(Pair.of(button.xPosition, button.yPosition));
-        	}
-        }
-        
         for(int i = 0; i < this.buttonList.size(); i++) {
             GuiButton button = (GuiButton)this.buttonList.get(i);
             int supposedTop = (this.height - this.originalYSize) / 2;
-            button.yPosition = originalButtonPositions.get(i).getRight() + (guiTop - supposedTop);
+            button.yPosition = getOriginalButtonPosition(button).getRight() + (guiTop - supposedTop);
         }
-
+	}
+	
+	private Pair<Integer, Integer> getOriginalButtonPosition(GuiButton button) {
+	    Pair<Integer, Integer> originalPos = originalButtonPositions.get(button);
+	    if(originalPos == null) {
+	        originalButtonPositions.put(button, (originalPos = Pair.of(button.xPosition, button.yPosition)));
+	    }
+	    return originalPos;
 	}
 
 }
