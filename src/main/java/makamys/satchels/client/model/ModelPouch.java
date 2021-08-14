@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
-public class ModelPouch extends ModelWearable {
+public class ModelPouch extends ModelAccessory {
 	
-	public static ModelWearable instance;
+	public static ModelAccessory instance;
 	
 	private AccessoryModelRenderer pouchLeft;
 	private AccessoryModelRenderer pouchRight;
@@ -19,7 +19,7 @@ public class ModelPouch extends ModelWearable {
 	public ModelPouch(RenderPlayer rp){
 	    super(rp);
 		{
-			pouchLeft = new AccessoryModelRenderer(rp.modelBipedMain).setTexture(TEXTURE).setScaleMod(16f / 24f);
+			pouchLeft = new AccessoryModelRenderer(rp.modelBipedMain).setTexture(TEXTURE).setScaleMod(DEFAULT_SCALE_MOD);
 			pouchLeft.textureWidth = pouchLeft.textureHeight = 16;
 			float x0 = 8f;
 			float y0 = 15;
@@ -34,7 +34,7 @@ public class ModelPouch extends ModelWearable {
 			pouchLeft.rotateAngleY = -(float)(Math.PI / 2f);
 		}
 		{
-			pouchRight = new AccessoryModelRenderer(rp.modelBipedMain).setTexture(TEXTURE).setScaleMod(16f / 24f);
+			pouchRight = new AccessoryModelRenderer(rp.modelBipedMain).setTexture(TEXTURE).setScaleMod(DEFAULT_SCALE_MOD);
 			pouchRight.textureWidth = pouchRight.textureHeight = 16;
 			float x0 = -1.5f;
 			float y0 = 15;

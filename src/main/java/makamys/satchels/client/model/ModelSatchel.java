@@ -10,9 +10,9 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
-public class ModelSatchel extends ModelWearable {
+public class ModelSatchel extends ModelAccessory {
 	
-	public static ModelWearable instance;
+	public static ModelAccessory instance;
 	AccessoryModelRenderer satchel;
 	AccessoryModelRenderer strap;
 	AccessoryModelRenderer satchelBig;
@@ -23,14 +23,12 @@ public class ModelSatchel extends ModelWearable {
 	public ModelSatchel(RenderPlayer rp){
 	    super(rp);
 	    
-	    float baseScale = 16f / 24f;
-	    
 	    for(AccessoryModelRenderer amr : Arrays.asList(
 	            satchel = new AccessoryModelRenderer(rp.modelBipedMain),
 	            satchelBig = new AccessoryModelRenderer(rp.modelBipedMain)))
 		{
 			amr.setTexture(TEXTURE)
-			        .setScaleMod(baseScale * (amr == satchelBig ? 1.2f : 1f));
+			        .setScaleMod(DEFAULT_SCALE_MOD * (amr == satchelBig ? 1.2f : 1f));
 			amr.textureWidth = amr.textureHeight = 32;
 			float x0 = -7.5f;
 			float y0 = 13;
@@ -50,7 +48,7 @@ public class ModelSatchel extends ModelWearable {
                 strapBig = new AccessoryModelRenderer(rp.modelBipedMain, 0, 9)))
         {
 	        amr.setTexture(TEXTURE)
-	                .setScaleMod(baseScale * (amr == strapBig ? 1.2f : 1f) * 1.001f);
+	                .setScaleMod(DEFAULT_SCALE_MOD * (amr == strapBig ? 1.2f : 1f) * 1.001f);
 	        amr.textureWidth = amr.textureHeight = 32;
 			float x0 = 7.5f;
 			float y0 = -0.1f;
