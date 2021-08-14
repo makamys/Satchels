@@ -96,8 +96,14 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     // Adapted from mcft.copy.betterstorage.proxy.ClientProxy#onRenderPlayerSpecialsPre by copygirl
 	@SubscribeEvent
 	public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
-		ModelSatchel.instance.renderPlayer(event);
-		ModelPouch.instance.renderPlayer(event);
+	    /*if(ModelPouch.instance == null) {
+	        ModelPouch.instance = new ModelPouch(event.renderer);
+	    }*/
+	    if(ModelSatchel.instance == null) {
+            ModelSatchel.instance = new ModelSatchel(event.renderer);
+        }
+		//ModelSatchel.instance.renderPlayer(event);
+		//ModelPouch.instance.renderPlayer(event);
 	}
 	
 }

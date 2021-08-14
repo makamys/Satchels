@@ -5,19 +5,20 @@ import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelPouch extends ModelWearable {
 	
-	public static ModelWearable instance = new ModelPouch();
+	public static ModelWearable instance;
 	
 	private ModelRenderer pouchLeft;
 	private ModelRenderer pouchRight;
 	
-	public ModelPouch(){
-		bipedBody = new ModelRenderer(this);
-		{
+	public ModelPouch(RenderPlayer rp){
+	    super(rp);
+		/*{
 			pouchLeft = new ModelRenderer(this);
 			pouchLeft.textureWidth = pouchLeft.textureHeight = 16;
 			float x0 = 8f;
@@ -46,20 +47,20 @@ public class ModelPouch extends ModelWearable {
 			pouchRight.setRotationPoint(x0, y0, z0);
 			bipedBody.addChild(pouchRight);
 			pouchRight.rotateAngleY = (float)(Math.PI);
-		}
+		}*/
 	}
 
 	@Override
 	protected ResourceLocation getTexture() {
 		return new ResourceLocation(Satchels.MODID, "textures/models/pouch.png");
 	}
-	
+	/*
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		pouchLeft.isHidden = !props.hasLeftPouch() || !ConfigSatchels.drawLeftPouch;
 		pouchRight.isHidden = !props.hasRightPouch() || !ConfigSatchels.drawRightPouch;
 		return DEFAULT_SCALE;
-	}
+	}*/
 
 	@Override
 	protected boolean shouldRender(EntityPropertiesSatchels props) {

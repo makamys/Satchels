@@ -8,21 +8,22 @@ import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelSatchel extends ModelWearable {
 	
-	public static ModelWearable instance = new ModelSatchel();
-	ModelBiped satchelBiped;
+	public static ModelWearable instance;
 	ModelRenderer satchel;
-	ModelBiped strapBiped;
 	ModelRenderer strap;
-	public ModelSatchel(){
-		bipedBody = new ModelRenderer(this, 0, 0);
+	
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Satchels.MODID, "textures/models/satchel.png");
+	
+	public ModelSatchel(RenderPlayer rp){
+	    super(rp);
 		{
-			satchelBiped = new ModelBiped();
-			satchel = new ModelRenderer(satchelBiped);
+			satchel = new AccessoryModelRenderer(rp.modelBipedMain).setTexture(TEXTURE).setScaleMod(16f / 24f);
 			satchel.textureWidth = satchel.textureHeight = 32;
 			float x0 = -7.5f;
 			float y0 = 13;
@@ -33,13 +34,12 @@ public class ModelSatchel extends ModelWearable {
 			
 			satchel.addBox(0, 0, 0, dx, dy, dz);
 			satchel.setRotationPoint(x0, y0, z0);
-			satchelBiped.bipedBody.addChild(satchel);
+			rp.modelBipedMain.bipedBody.addChild(satchel);
 			satchel.rotateAngleZ = 0.05f;
 			satchel.rotateAngleY = (float)(Math.PI / 2f);
 		}
 		{
-			strapBiped = new ModelBiped();
-			strap = new ModelRenderer(strapBiped, 0, 9);
+			strap = new AccessoryModelRenderer(rp.modelBipedMain, 0, 9).setTexture(TEXTURE).setScaleMod((16f / 24f) * 1.001f);
 			strap.textureWidth = strap.textureHeight = 32;
 			float x0 = 7.5f;
 			float y0 = -0.1f;
@@ -50,12 +50,12 @@ public class ModelSatchel extends ModelWearable {
 			
 			strap.addBox(0, 0, 0, dx, dy, dz);
 			strap.setRotationPoint(x0-0.2f, y0+0.4f, z0);
-			strapBiped.bipedBody.addChild(strap);
+			rp.modelBipedMain.bipedBody.addChild(strap);
 			strap.rotateAngleY = -(float)(Math.PI / 2f);
 			strap.rotateAngleZ = 0.75f;
 		}
 	}
-	
+	/*
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
 		ModelRenderer model = biped == satchelBiped ? satchel : strap;
@@ -69,11 +69,11 @@ public class ModelSatchel extends ModelWearable {
 	@Override
 	protected List<ModelBiped> getBipeds() {
 		return Arrays.asList(satchelBiped, strapBiped);
-	}
+	}*/
 
 	@Override
 	protected ResourceLocation getTexture() {
-		return new ResourceLocation(Satchels.MODID, "textures/models/satchel.png");
+		return TEXTURE;
 	}
 
 	@Override

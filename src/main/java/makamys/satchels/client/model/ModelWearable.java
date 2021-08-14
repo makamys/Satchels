@@ -6,16 +6,22 @@ import java.util.List;
 import makamys.satchels.EntityPropertiesSatchels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
-public abstract class ModelWearable extends ModelBiped {
+public abstract class ModelWearable {
 	
 	protected final float DEFAULT_SCALE = 1/24f;
 	
-	@Override
+	protected final RenderPlayer rp;
+	
+	public ModelWearable(RenderPlayer rp){
+	    this.rp = rp;
+	}
+	/*
 	public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_,
 			float p_78088_6_, float scale) {
 		EntityPlayer player = (EntityPlayer)entity;
@@ -43,7 +49,7 @@ public abstract class ModelWearable extends ModelBiped {
 	
 	protected List<ModelBiped> getBipeds(){
 		return Arrays.asList(this);
-	}
+	}*/
 	
 	protected abstract ResourceLocation getTexture();
 	protected abstract boolean shouldRender(EntityPropertiesSatchels props);
