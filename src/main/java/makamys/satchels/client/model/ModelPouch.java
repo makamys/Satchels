@@ -51,7 +51,7 @@ public class ModelPouch extends ModelAccessory {
 	}
 	
 	@Override
-    public void renderPlayer(RenderPlayerEvent.Specials.Pre event) {
+    public void preRender(RenderPlayerEvent.Specials.Pre event) {
 	    EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
 	    pouchLeft.isHidden = !props.hasLeftPouch() || !ConfigSatchels.drawLeftPouch;
         pouchRight.isHidden = !props.hasRightPouch() || !ConfigSatchels.drawRightPouch;

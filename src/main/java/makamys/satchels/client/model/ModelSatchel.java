@@ -66,7 +66,7 @@ public class ModelSatchel extends ModelAccessory {
 	}
 
 	@Override
-	public void renderPlayer(RenderPlayerEvent.Specials.Pre event) {
+	public void preRender(RenderPlayerEvent.Specials.Pre event) {
         boolean hasChestplate = event.entityPlayer.getCurrentArmor(2) != null;
         
         boolean draw = EntityPropertiesSatchels.fromPlayer(event.entityPlayer).hasSatchel();

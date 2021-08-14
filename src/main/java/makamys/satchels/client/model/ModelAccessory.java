@@ -13,7 +13,7 @@ public abstract class ModelAccessory {
 	    this.rp = rp;
 	}
 	
-	public void renderPlayer(RenderPlayerEvent.Specials.Pre event) {
+	public void preRender(RenderPlayerEvent.Specials.Pre event) {
 		
 	}
 	
