@@ -49,11 +49,11 @@ public class ModelPouch extends ModelWearable {
 			pouchRight.rotateAngleY = (float)(Math.PI);
 		}*/
 	}
-
+/*
 	@Override
 	protected ResourceLocation getTexture() {
 		return new ResourceLocation(Satchels.MODID, "textures/models/pouch.png");
-	}
+	}*/
 	/*
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
@@ -61,10 +61,10 @@ public class ModelPouch extends ModelWearable {
 		pouchRight.isHidden = !props.hasRightPouch() || !ConfigSatchels.drawRightPouch;
 		return DEFAULT_SCALE;
 	}*/
-
+/*
 	@Override
 	protected boolean shouldRender(EntityPropertiesSatchels props) {
 		return props.hasLeftPouch() || props.hasRightPouch();
-	}
+	}*/
 	
 }

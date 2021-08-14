@@ -102,7 +102,7 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
 	    if(ModelSatchel.instance == null) {
             ModelSatchel.instance = new ModelSatchel(event.renderer);
         }
-		//ModelSatchel.instance.renderPlayer(event);
+	    ModelSatchel.instance.renderPlayer(event);
 		//ModelPouch.instance.renderPlayer(event);
 	}
 	

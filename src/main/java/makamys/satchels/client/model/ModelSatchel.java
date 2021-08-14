@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class ModelSatchel extends ModelWearable {
 	
@@ -58,12 +59,7 @@ public class ModelSatchel extends ModelWearable {
 	/*
 	@Override
 	protected float getScalePreRender(Entity entity, ModelBiped biped, boolean hasChestplate, EntityPropertiesSatchels props) {
-		ModelRenderer model = biped == satchelBiped ? satchel : strap;
-		model.isHidden = (model == satchel ? !ConfigSatchels.drawSatchel : (!ConfigSatchels.drawSatchel || !ConfigSatchels.drawSatchelStrap));
-		model.offsetY = hasChestplate ? -0.08f : 0f;
-		float scale = hasChestplate ? 1/20f : 1/24f;
 		
-		return scale * (biped == satchelBiped ? 1f : 1.01f);
 	}
 	
 	@Override
@@ -72,13 +68,18 @@ public class ModelSatchel extends ModelWearable {
 	}*/
 
 	@Override
-	protected ResourceLocation getTexture() {
-		return TEXTURE;
-	}
-
-	@Override
-	protected boolean shouldRender(EntityPropertiesSatchels props) {
-		return props.hasSatchel();
-	}
+	public void renderPlayer(RenderPlayerEvent.Specials.Pre event) {
+        boolean hasChestplate = false;//event.entityPlayer.getCurrentArmor(2) != null;
+        
+        boolean draw = EntityPropertiesSatchels.fromPlayer(event.entityPlayer).hasSatchel();
+        for(ModelRenderer amr : Arrays.asList(satchel, strap)) {
+            amr.isHidden = draw && (amr == satchel ? !ConfigSatchels.drawSatchel : (!ConfigSatchels.drawSatchel || !ConfigSatchels.drawSatchelStrap));
+            amr.offsetY = hasChestplate ? -0.08f : 0f;
+            
+            //float scale = hasChestplate ? 1/20f : 1/24f;
+            
+            //return scale * (biped == satchelBiped ? 1f : 1.01f);
+        }
+    }
 	
 }
