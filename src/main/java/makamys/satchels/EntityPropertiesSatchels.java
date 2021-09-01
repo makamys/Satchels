@@ -33,9 +33,9 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	
 	public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories());
 	
-	public InventorySimple satchel = new InventorySimple(SATCHEL_MAX_SLOTS);
-	public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS);
-	public InventorySimple rightPouch = new InventorySimple(POUCH_MAX_SLOTS);
+	public InventorySimple satchel = new InventorySimple(SATCHEL_MAX_SLOTS, "container.satchel");
+	public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS, "container.leftPouch");
+	public InventorySimple rightPouch = new InventorySimple(POUCH_MAX_SLOTS, "container.rightPouch");
 	public InventoryAggregate aggregate = new InventoryAggregate(satchel, leftPouch, rightPouch);
 	
 	public EntityPlayer player;

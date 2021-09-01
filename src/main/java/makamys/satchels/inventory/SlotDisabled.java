@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class SlotDisabled extends Slot {
 
-	private static final IInventory EMPTY_INVENTORY = new InventorySimple(1);
+	private static final IInventory EMPTY_INVENTORY = new InventorySimple(1, "container.emptyInventory");
 	
 	public Slot original;
 	
