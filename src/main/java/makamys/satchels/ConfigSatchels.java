@@ -78,7 +78,7 @@ public class ConfigSatchels {
 	
 	public static void reparse() {
 		hotSwap = config.getBoolean("hotSwap", "_general", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
-		satchelsTab = config.getBoolean("satchelsTab", "_general", true, "Add Satchels tab to inventory GUI");
+		satchelsTab = config.getBoolean("satchelsTab", "_general", true, "Add Satchels equipment tab to inventory GUI");
 		overrideInventory = config.getBoolean("overrideInventory", "_general", true, "Use the Satchels-expanded inventory GUI in place of the vanilla one");
 		
 		pouchSlotColor = getColor(config, "pouchSlotColor", "interface colors", "FFB266", "Not implemented yet!");
