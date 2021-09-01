@@ -104,7 +104,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	}
 	
 	public void updateInventories() {
-		((ContainerSatchels)player.inventoryContainer).redoSlots();
+		
 	}
 	
 	public int getLeftPouchSlotCount() {

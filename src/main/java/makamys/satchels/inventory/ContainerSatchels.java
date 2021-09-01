@@ -34,26 +34,6 @@ public class ContainerSatchels extends ContainerPlayer {
 		
 		satchelProps = EntityPropertiesSatchels.fromPlayer(player);
 		
-		int bottomY = 138-18;
-		
-		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-			Slot slot = new Slot(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18);
-			leftPouchSlots.add(slot);
-			addSlotToContainer(slot);
-		}
-		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-			Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18);
-			rightPouchSlots.add(slot);
-			addSlotToContainer(slot);
-		}
-		
-		IInventory satchelInv = satchelProps.satchel;
-		for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
-			Slot slot = new Slot(satchelInv, i, 8 + i * 18, 66);
-			satchelSlots.add(slot);
-			addSlotToContainer(slot);
-		}
-		
 		originalSlotPositions = new ArrayList<>();
 		for(int i = 0; i < this.inventorySlots.size(); i++) {
 			Slot slot = (Slot)this.inventorySlots.get(i);
@@ -63,16 +43,40 @@ public class ContainerSatchels extends ContainerPlayer {
 	}
 	
 	public void redoSlots() {
-		for(int i = 0; i < satchelSlots.size(); i++) {
-			setEnabled(satchelSlots, i, satchelProps.hasSatchel());
+		int originalSlotCount = this.inventorySlots.size();
+		
+		int bottomY = 138-18;
+		
+		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
+			if(row < satchelProps.getLeftPouchSlotCount()) {
+				Slot slot = new Slot(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18);
+				leftPouchSlots.add(slot);
+				addSlotToContainer(slot);
+			}
+		}
+		for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
+			if(row < satchelProps.getRightPouchSlotCount()) {
+				Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18);
+				rightPouchSlots.add(slot);
+				addSlotToContainer(slot);
+			}
 		}
 		
-		for(int i = 0; i < leftPouchSlots.size(); i++) {
-			setEnabled(leftPouchSlots, i, i < satchelProps.getLeftPouchSlotCount());
-			setEnabled(rightPouchSlots, i, i < satchelProps.getRightPouchSlotCount());	
+		if(satchelProps.hasSatchel()) {
+			IInventory satchelInv = satchelProps.satchel;
+			for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
+				Slot slot = new Slot(satchelInv, i, 8 + i * 18, 66);
+				satchelSlots.add(slot);
+				addSlotToContainer(slot);
+			}
 		}
 		
         shiftArmorSlots = leftPouchSlots.stream().anyMatch(s -> SatchelsUtils.isPointInRange(s.yDisplayPosition, playerY, playerY + playerH));
+        
+        for(int i = originalSlotCount; i < this.inventorySlots.size(); i++) {
+			Slot slot = (Slot)this.inventorySlots.get(i);
+			originalSlotPositions.add(Pair.of(slot.xDisplayPosition, slot.yDisplayPosition));
+		}
         
 		for(int i = 0; i < originalSlotPositions.size(); i++) {
 			Slot slot = (Slot)this.inventorySlots.get(i);
@@ -88,36 +92,13 @@ public class ContainerSatchels extends ContainerPlayer {
 		}
 	}
 	
-	public void setEnabled(List<Slot> list, int index, boolean enabled) {
-		Slot slot = list.get(index);
-		
-		Slot newSlot = null;
-		if(!(slot instanceof SlotDisabled) && !enabled) {
-			if(slot.getHasStack()) {
-				if(!satchelProps.player.worldObj.isRemote) {
-				    satchelProps.player.func_146097_a(slot.getStack(), true, false);
-				}
-				slot.putStack(null);
-			}
-			
-			newSlot = new SlotDisabled(slot);
-		} else if((slot instanceof SlotDisabled) && enabled) {
-			newSlot = ((SlotDisabled)slot).original;
-		}
-		
-		if(newSlot != null) {
-			list.set(index, newSlot);
-			inventorySlots.set(slot.slotNumber, newSlot);
-		}
-	}
-	
 	public List<Slot> getEnabledLeftPouchSlots() {
-		return leftPouchSlots.subList(0, satchelProps.getLeftPouchSlotCount());
+		return leftPouchSlots;
 	}
 	
 	
 	public List<Slot> getEnabledRightPouchSlots() {
-		return rightPouchSlots.subList(0, satchelProps.getRightPouchSlotCount());
+		return rightPouchSlots;
 	}
 	
 	public int getArmorXOffset() {

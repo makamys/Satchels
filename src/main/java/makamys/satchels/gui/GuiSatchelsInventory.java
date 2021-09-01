@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import makamys.satchels.ConfigSatchels;
 import makamys.satchels.Satchels;
 import makamys.satchels.inventory.ContainerSatchels;
+import makamys.satchels.util.DummyPlayer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -35,11 +36,18 @@ public class GuiSatchelsInventory extends GuiInventory {
 	protected static final ResourceLocation sidebar_corners = new ResourceLocation(Satchels.MODID, "textures/gui/container/sidebar_corners.png"); 
 	
 	
-	public GuiSatchelsInventory(EntityPlayer p_i1094_1_) {
-		super(p_i1094_1_);
-		this.satchelsSlots = (ContainerSatchels)p_i1094_1_.inventoryContainer;
+	public GuiSatchelsInventory(EntityPlayer player) {
+		super(getPlayer(player));
+		this.satchelsSlots = (ContainerSatchels)inventorySlots;
 		this.xSize += 2*16;
 		originalYSize = this.ySize;
+	}
+	
+	private static EntityPlayer getPlayer(EntityPlayer real) {
+		// GuiInventory only accepts a player in the constructor, but I don't want to change the player's inventoryContainer. This is the workaround.
+		EntityPlayer fake = new DummyPlayer(real);
+		fake.inventoryContainer = new ContainerSatchels(real);
+		return fake;
 	}
 	
 	@Override

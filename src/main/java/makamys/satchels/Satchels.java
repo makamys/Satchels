@@ -72,8 +72,4 @@ public class Satchels
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
     }
-	
-	public static void postPlayerConstructor(EntityPlayer player) {
-		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
-	}
 }
