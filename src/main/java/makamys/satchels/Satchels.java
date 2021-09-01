@@ -1,7 +1,9 @@
 package makamys.satchels;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -72,4 +74,8 @@ public class Satchels
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
     }
+
+	public static void preProcessClientStatus(C16PacketClientStatus status, EntityPlayerMP player) {
+		player.openGui(instance, GuiHandler.ID_SATCHELS_INVENTORY, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+	}
 }

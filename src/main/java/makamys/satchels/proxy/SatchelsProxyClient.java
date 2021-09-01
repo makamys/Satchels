@@ -69,9 +69,11 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     		ConfigSatchels.reloadIfChanged();
     	}
     	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-    	/*if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory)){
-			event.gui = new GuiSatchelsInventory(player);
-    	}*/
+    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory) && !Minecraft.getMinecraft().playerController.isInCreativeMode()){
+    		event.setCanceled(true);
+    		// It takes 3 frames for the GUI to appear when Satchels.networkWrapper.sendToServer() is used, so we call openGui directly 
+    		player.openGui(Satchels.instance, GuiHandler.ID_SATCHELS_INVENTORY, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+    	}
     }
 	
 	@SubscribeEvent
