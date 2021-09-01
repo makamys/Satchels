@@ -92,9 +92,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	
 	public void dropItems(IInventory inv) {
 		for(int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			player.func_146097_a(stack, true, false);
-			inv.setInventorySlotContents(i, null);
+			dropStack(inv, i);
 		}
 	}
 
@@ -104,7 +102,22 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
 	}
 	
 	public void updateInventories() {
-		//((ContainerSatchels)player.inventoryContainer).redoSlots();
+		for(int i = getLeftPouchSlotCount(); i < leftPouch.getSizeInventory(); i++) {
+			dropStack(leftPouch, i);
+		}
+		for(int i = getRightPouchSlotCount(); i < rightPouch.getSizeInventory(); i++) {
+			dropStack(rightPouch, i);
+		}
+		for(int i = getSatchelSlotCount(); i < satchel.getSizeInventory(); i++) {
+			dropStack(satchel, i);
+		}
+	}
+	
+	private void dropStack(IInventory inv, int i) {
+		if(inv.getStackInSlot(i) != null) {
+			player.func_146097_a(inv.getStackInSlot(i), true, false);
+			inv.setInventorySlotContents(i, null);
+		}
 	}
 	
 	public int getLeftPouchSlotCount() {
