@@ -46,6 +46,7 @@ public class GuiSatchelsInventory extends GuiInventory {
 	public void initGui() {
 		super.initGui();
 		//if(satchelsSlots.dirty) {
+		satchelsSlots.redoSlots(true);
 		redoGui();
 		//}
 	}

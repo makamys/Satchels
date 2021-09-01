@@ -1,12 +1,16 @@
 package makamys.satchels;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -75,5 +79,11 @@ public class Satchels
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
 		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
+	}
+	
+	public static void preProcessClientStatus(C16PacketClientStatus status, EntityPlayerMP player) {
+		if(status.func_149435_c() == C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT) {
+			((ContainerSatchels)player.inventoryContainer).redoSlots(true);
+		}
 	}
 }

@@ -28,5 +28,10 @@ public class SlotDisabled extends Slot {
 	public boolean isItemValid(ItemStack stack) {
         return false;
     }
+	
+	@Override
+	public boolean func_111238_b() { // canBeHovered
+		return false;
+	}
 
 }
