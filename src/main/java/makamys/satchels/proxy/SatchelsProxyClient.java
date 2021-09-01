@@ -37,13 +37,11 @@ import tconstruct.client.tabs.TabRegistry;
 public class SatchelsProxyClient extends SatchelsProxyCommon {
 	
 	KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
-	KeyBinding openSatchelsInventory = new KeyBinding("Open Satchels Inventory", Keyboard.KEY_I, "Satchels");
 	
 	@Override
 	public void init() {
 		super.init();
 		ClientRegistry.registerKeyBinding(openEquipment);
-		ClientRegistry.registerKeyBinding(openSatchelsInventory);
 	}
 	
 	@Override
@@ -69,11 +67,9 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     		ConfigSatchels.reloadIfChanged();
     	}
     	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && !(event.gui instanceof GuiSatchelsInventory) &&
-    			Satchels.shouldOverrideInventory(player)){
-    		event.setCanceled(true);
-    		// It takes 3 frames for the GUI to appear when Satchels.networkWrapper.sendToServer() is used, so we call openGui directly 
-    		player.openGui(Satchels.instance, GuiHandler.ID_SATCHELS_INVENTORY, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
+    			&& !(event.gui instanceof GuiSatchelsInventory)){
+			event.gui = new GuiSatchelsInventory(player);
     	}
     }
 	
@@ -84,9 +80,6 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
 		}
     	if(openEquipment.isPressed()) {
     		Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
-    	}
-    	if(openSatchelsInventory.isPressed() && !Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-    		Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_SATCHELS_INVENTORY));
     	}
     }
 	

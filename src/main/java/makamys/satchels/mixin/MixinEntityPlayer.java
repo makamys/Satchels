@@ -14,7 +14,7 @@ public class MixinEntityPlayer {
 	
 	@Inject(method = "<init>*", at=@At("RETURN"))
 	public void postPlayerConstructor(CallbackInfo ci) {
-		
+		Satchels.postPlayerConstructor((EntityPlayer)(Object)this);
 	}
 	
 }
