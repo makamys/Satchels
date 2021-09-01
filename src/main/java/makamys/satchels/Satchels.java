@@ -24,8 +24,10 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import makamys.mclib.updatechecklibhelper.UpdateCheckLibHelper;
 import makamys.satchels.Packets.HandlerOpenContainer;
+import makamys.satchels.Packets.HandlerInventoryOpened;
 import makamys.satchels.Packets.HandlerSyncEquipment;
 import makamys.satchels.Packets.MessageOpenContainer;
+import makamys.satchels.Packets.MessageInventoryOpened;
 import makamys.satchels.Packets.MessageSyncEquipment;
 import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.proxy.SatchelsProxyCommon;
@@ -70,6 +72,7 @@ public class Satchels
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		networkWrapper.registerMessage(HandlerOpenContainer.class, MessageOpenContainer.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(HandlerSyncEquipment.class, MessageSyncEquipment.class, 1, Side.CLIENT);
+		networkWrapper.registerMessage(HandlerInventoryOpened.class, MessageInventoryOpened.class, 2, Side.SERVER);
     }
     
     @EventHandler
@@ -79,11 +82,5 @@ public class Satchels
 	
 	public static void postPlayerConstructor(EntityPlayer player) {
 		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
-	}
-	
-	public static void preProcessClientStatus(C16PacketClientStatus status, EntityPlayerMP player) {
-		if(status.func_149435_c() == C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT && !player.capabilities.isCreativeMode) {
-			((ContainerSatchels)player.inventoryContainer).redoSlots(true);
-		}
 	}
 }

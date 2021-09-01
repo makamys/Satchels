@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import makamys.satchels.inventory.ContainerSatchels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -82,6 +83,28 @@ public class Packets {
 		public void toBytes(ByteBuf buf) {
 			ByteBufUtils.writeTag(buf, tag);
 		}
+    	
+    }
+    
+    public static class HandlerInventoryOpened implements IMessageHandler<MessageInventoryOpened, IMessage> {
+
+		@Override
+		public IMessage onMessage(MessageInventoryOpened message, MessageContext ctx) {
+			((ContainerSatchels)ctx.getServerHandler().playerEntity.inventoryContainer).redoSlots(true);
+			return null;
+		}
+    	
+    }
+    
+    public static class MessageInventoryOpened implements IMessage {
+    	
+    	public MessageInventoryOpened() {}
+    	
+		@Override
+		public void fromBytes(ByteBuf buf) {}
+
+		@Override
+		public void toBytes(ByteBuf buf) {}
     	
     }
 	

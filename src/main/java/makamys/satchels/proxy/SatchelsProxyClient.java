@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.ConfigSatchels;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
+import makamys.satchels.Packets.MessageInventoryOpened;
 import makamys.satchels.Packets.MessageOpenContainer;
 import makamys.satchels.client.model.ModelPouch;
 import makamys.satchels.client.model.ModelSatchel;
@@ -70,6 +71,7 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
     			&& !(event.gui instanceof GuiSatchelsInventory) && !player.capabilities.isCreativeMode){
 			event.gui = new GuiSatchelsInventory(player);
+			Satchels.networkWrapper.sendToServer(new MessageInventoryOpened());
     	}
     }
 	
