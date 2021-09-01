@@ -76,6 +76,12 @@ public class Satchels
     }
 
 	public static void preProcessClientStatus(C16PacketClientStatus status, EntityPlayerMP player) {
-		player.openGui(instance, GuiHandler.ID_SATCHELS_INVENTORY, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+		if(shouldOverrideInventory(player)) {
+			player.openGui(instance, GuiHandler.ID_SATCHELS_INVENTORY, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+	}
+	
+	public static boolean shouldOverrideInventory(EntityPlayer player) {
+		return !player.capabilities.isCreativeMode && ConfigSatchels.overrideInventory;
 	}
 }
