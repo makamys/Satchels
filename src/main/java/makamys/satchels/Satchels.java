@@ -82,7 +82,7 @@ public class Satchels
 	}
 	
 	public static void preProcessClientStatus(C16PacketClientStatus status, EntityPlayerMP player) {
-		if(status.func_149435_c() == C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT) {
+		if(status.func_149435_c() == C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT && !player.capabilities.isCreativeMode) {
 			((ContainerSatchels)player.inventoryContainer).redoSlots(true);
 		}
 	}

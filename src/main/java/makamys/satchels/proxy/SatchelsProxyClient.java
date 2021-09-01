@@ -68,7 +68,7 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     	}
     	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
     	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
-    			&& !(event.gui instanceof GuiSatchelsInventory)){
+    			&& !(event.gui instanceof GuiSatchelsInventory) && !player.capabilities.isCreativeMode){
 			event.gui = new GuiSatchelsInventory(player);
     	}
     }
