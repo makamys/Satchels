@@ -36,6 +36,8 @@ public class ContainerSatchels extends ContainerPlayer {
 	
 	private boolean shiftArmorSlots;
 	
+	private boolean enableExtra;
+	
 	public ContainerSatchels(EntityPlayer player) {
 		super(player.inventory, !player.worldObj.isRemote, player);
 		
@@ -45,11 +47,11 @@ public class ContainerSatchels extends ContainerPlayer {
 		redoSlots(false);
 	}
 	
-	public void redoSlots(boolean enable) {
-		System.out.println("redoSlots " + enable);
+	public void redoSlots() {
+		System.out.println("redoSlots " + enableExtra);
 		removeAllExtraSlots();
 		
-		if(enable) {
+		if(enableExtra) {
 			int bottomY = 138-18;
 			
 			for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
@@ -97,6 +99,11 @@ public class ContainerSatchels extends ContainerPlayer {
 		}
 	}
 	
+	public void redoSlots(boolean enableExtra) {
+		this.enableExtra = enableExtra;
+		redoSlots();
+	}
+	
 	private void removeAllExtraSlots() {
 		Set<Slot> extraSlots = Sets.newHashSet(Iterables.concat(leftPouchSlots, rightPouchSlots, satchelSlots));
 		for(int i = 0; i < inventorySlots.size(); i++) {
@@ -126,12 +133,6 @@ public class ContainerSatchels extends ContainerPlayer {
 	
 	public int getArmorXOffset() {
 		return shiftArmorSlots ? 2 : 0;
-	}
-	
-	@Override
-	public void onContainerClosed(EntityPlayer p_75134_1_) {
-		super.onContainerClosed(p_75134_1_);
-		redoSlots(false);
 	}
 
 }

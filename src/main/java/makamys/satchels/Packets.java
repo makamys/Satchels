@@ -85,27 +85,5 @@ public class Packets {
 		}
     	
     }
-    
-    public static class HandlerInventoryOpened implements IMessageHandler<MessageInventoryOpened, IMessage> {
-
-		@Override
-		public IMessage onMessage(MessageInventoryOpened message, MessageContext ctx) {
-			((ContainerSatchels)ctx.getServerHandler().playerEntity.inventoryContainer).redoSlots(true);
-			return null;
-		}
-    	
-    }
-    
-    public static class MessageInventoryOpened implements IMessage {
-    	
-    	public MessageInventoryOpened() {}
-    	
-		@Override
-		public void fromBytes(ByteBuf buf) {}
-
-		@Override
-		public void toBytes(ByteBuf buf) {}
-    	
-    }
 	
 }
