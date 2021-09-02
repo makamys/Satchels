@@ -77,6 +77,7 @@ public class Satchels
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    	SatchelsItems.postInit();
     	proxy.postInit();
     }
 	

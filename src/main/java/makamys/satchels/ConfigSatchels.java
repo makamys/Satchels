@@ -41,6 +41,9 @@ public class ConfigSatchels {
     public static boolean drawRightPouch;
     
     public static boolean compatTechguns;
+
+	public static String satchelIngredient1;
+	public static String satchelIngredient2;
 	
     public static void init() {
     	configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
@@ -90,6 +93,9 @@ public class ConfigSatchels {
 		drawSatchelStrap = config.getBoolean("drawSatchelStrap", "player model", true, "");
 		drawLeftPouch = config.getBoolean("drawLeftPouch", "player model", true, "");
 		drawRightPouch = config.getBoolean("drawRightPouch", "player model", true, "");
+		
+		satchelIngredient1 = config.getString("satchelIngredient1", "recipes", "diamond_block", "The ingredient in the center of the bottom row of the satchel crafting recipe");
+		satchelIngredient2 = config.getString("satchelIngredient2", "recipes", "slime_ball", "The ingredient in the left and right of the center row of the satchel crafting recipe");
 		
 		compatTechguns = config.getBoolean("compatTechguns", "compatibility", true, "Force Techguns to use vertical tabs (using TConstruct's API) even if TConstruct is not present.");
 		
