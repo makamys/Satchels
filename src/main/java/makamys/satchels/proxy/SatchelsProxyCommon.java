@@ -5,6 +5,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Packets.MessageSyncEquipment;
 import makamys.satchels.Satchels;
+import makamys.satchels.inventory.ContainerSatchels;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -43,6 +44,7 @@ public class SatchelsProxyCommon {
             EntityPropertiesSatchels satchelsProps = EntityPropertiesSatchels.fromPlayer(player);
             NBTTagCompound tag = new NBTTagCompound();
             satchelsProps.saveNBTData(tag);
+            ((ContainerSatchels)player.inventoryContainer).redoSlots(!player.capabilities.isCreativeMode);
             
             Satchels.networkWrapper.sendTo(new MessageSyncEquipment(tag), player);
         }
