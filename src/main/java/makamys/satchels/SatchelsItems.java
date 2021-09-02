@@ -17,7 +17,7 @@ public class SatchelsItems {
 	public static final Item pouch_upgrade = initItem(new ItemPouchUpgrade());
 	
 	public static void init() {
-    	
+    	// this is called just so the fields get initialized
 	}
 	
 	public static void postInit() {
