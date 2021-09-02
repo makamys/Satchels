@@ -52,31 +52,34 @@ public class ContainerSatchels extends ContainerPlayer {
 		removeAllExtraSlots();
 		
 		if(enableExtra) {
+			List<Slot> moddedSlots = inventorySlots.size() > 45 ? new ArrayList<>(inventorySlots.subList(45, inventorySlots.size())) : new ArrayList<>();
+			inventorySlots.removeAll(moddedSlots);
+			// we move modded slots (e.g. TrashSlot) after ours, to keep our slot number always the same
+			
 			int bottomY = 138-18;
 			
 			for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-				if(row < satchelProps.getLeftPouchSlotCount()) {
-					Slot slot = new Slot(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18);
-					leftPouchSlots.add(slot);
-					addSlotToContainer(slot);
-				}
+				Slot slot = new Slot(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18);
+				leftPouchSlots.add(slot);
+				addSlotToContainer(slot);
+				setEnabled(leftPouchSlots, row, row < satchelProps.getLeftPouchSlotCount());
 			}
 			for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-				if(row < satchelProps.getRightPouchSlotCount()) {
-					Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18);
-					rightPouchSlots.add(slot);
-					addSlotToContainer(slot);
-				}
+				Slot slot = new Slot(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18);
+				rightPouchSlots.add(slot);
+				addSlotToContainer(slot);
+				setEnabled(rightPouchSlots, row, row < satchelProps.getRightPouchSlotCount());
 			}
 			
-			if(satchelProps.hasSatchel()) {
-				IInventory satchelInv = satchelProps.satchel;
-				for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
-					Slot slot = new Slot(satchelInv, i, 8 + i * 18, 66);
-					satchelSlots.add(slot);
-					addSlotToContainer(slot);
-				}
+			IInventory satchelInv = satchelProps.satchel;
+			for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
+				Slot slot = new Slot(satchelInv, i, 8 + i * 18, 66);
+				satchelSlots.add(slot);
+				addSlotToContainer(slot);
+				setEnabled(satchelSlots, i, satchelProps.hasSatchel());
 			}
+			
+			inventorySlots.addAll(moddedSlots);
 		}
 		
         shiftArmorSlots = leftPouchSlots.stream().anyMatch(s -> SatchelsUtils.isPointInRange(s.yDisplayPosition, playerY, playerY + playerH));
@@ -97,6 +100,7 @@ public class ContainerSatchels extends ContainerPlayer {
 				}
 			}
 		}
+		fixSlotNumbers();
 	}
 	
 	public void redoSlots(boolean enableExtra) {
@@ -104,6 +108,30 @@ public class ContainerSatchels extends ContainerPlayer {
 		redoSlots();
 	}
 	
+	public void setEnabled(List<Slot> list, int index, boolean enabled) {
+		Slot slot = list.get(index);
+		
+		Slot newSlot = null;
+		if(!(slot instanceof SlotDisabled) && !enabled) {
+			if(slot.getHasStack()) {
+				if(!satchelProps.player.worldObj.isRemote) {
+				    satchelProps.player.func_146097_a(slot.getStack(), true, false);
+				}
+				slot.putStack(null);
+			}
+			
+			newSlot = new SlotDisabled(slot);
+		} else if((slot instanceof SlotDisabled) && enabled) {
+			newSlot = ((SlotDisabled)slot).original;
+		}
+		
+		if(newSlot != null) {
+			list.set(index, newSlot);
+			inventorySlots.set(slot.slotNumber, newSlot);
+		}
+	}
+	
+	/** MUST be followed by a call to fixSlotNumbers() */
 	private void removeAllExtraSlots() {
 		Set<Slot> extraSlots = Sets.newHashSet(Iterables.concat(leftPouchSlots, rightPouchSlots, satchelSlots));
 		for(int i = 0; i < inventorySlots.size(); i++) {
@@ -113,8 +141,6 @@ public class ContainerSatchels extends ContainerPlayer {
 				inventoryItemStacks.remove(i);
 				originalSlotPositions.remove(slot);
 				i--;
-			} else {
-				slot.slotNumber = i;
 			}
 		}
 		leftPouchSlots.clear();
@@ -122,13 +148,19 @@ public class ContainerSatchels extends ContainerPlayer {
 		satchelSlots.clear();
 	}
 	
+	private void fixSlotNumbers() {
+		for(int i = 0; i < inventorySlots.size(); i++) {
+			((Slot)inventorySlots.get(i)).slotNumber = i;
+		}
+	}
+	
 	public List<Slot> getEnabledLeftPouchSlots() {
-		return leftPouchSlots;
+		return leftPouchSlots.subList(0, satchelProps.getLeftPouchSlotCount());
 	}
 	
 	
 	public List<Slot> getEnabledRightPouchSlots() {
-		return rightPouchSlots;
+		return rightPouchSlots.subList(0, satchelProps.getRightPouchSlotCount());
 	}
 	
 	public int getArmorXOffset() {
