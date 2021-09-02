@@ -14,8 +14,12 @@ public class InventorySimpleNotifying extends InventorySimple {
 	
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
+		boolean changed = false;
+		if(!ItemStack.areItemStacksEqual(getStackInSlot(slot), stack)) {
+			changed = true;
+		}
 		super.setInventorySlotContents(slot, stack);
-		if(callback != null) {
+		if(changed && callback != null) {
 			callback.run();
 		}
 	};
