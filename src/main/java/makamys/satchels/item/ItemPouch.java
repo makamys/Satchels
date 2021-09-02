@@ -59,11 +59,9 @@ public class ItemPouch extends Item {
 	   return slots;
    }
    
-   @Override
-	public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_,
-			int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+   	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 	   Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_POUCH));
-	   return true;
+	   return stack;
 	}
    
    public static class InventoryPouch extends InventorySimple {
