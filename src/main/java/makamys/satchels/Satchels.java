@@ -25,7 +25,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import makamys.mclib.updatechecklibhelper.UpdateCheckLibHelper;
+import makamys.mclib.core.MCLib;
+import makamys.mclib.core.MCLibModules;
 import makamys.satchels.Packets.HandlerOpenContainer;
 import makamys.satchels.Packets.HandlerSyncEquipment;
 import makamys.satchels.Packets.MessageOpenContainer;
@@ -49,13 +50,15 @@ public class Satchels
     
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     
-    private static final UpdateCheckLibHelper UCL_HELPER = new UpdateCheckLibHelper("@UCL_VERSION@", "@UPDATE_URL@");
+    static {
+        MCLib.init();
+    }
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	SatchelsItems.init();
     	ConfigSatchels.init();
-    	UCL_HELPER.preInit();
+    	MCLibModules.updateCheckAPI.submitModTask(MODID, "@UPDATE_URL@");
     }
     
     @EventHandler
