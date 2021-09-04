@@ -36,12 +36,12 @@ import makamys.satchels.proxy.SatchelsProxyCommon;
 
 @Mod(modid = Satchels.MODID, version = Satchels.VERSION, dependencies = "after:Techguns; required-after:CodeChickenCore")
 public class Satchels
-{	
+{   
     public static final String MODID = "satchels";
     public static final String VERSION = "@VERSION@";
 
     @Instance(MODID)
-	public static Satchels instance;
+    public static Satchels instance;
     
     @SidedProxy(clientSide = "makamys.satchels.proxy.SatchelsProxyClient", serverSide = "makamys.satchels.proxy.SatchelsProxyCommon")
     public static SatchelsProxyCommon proxy;
@@ -56,43 +56,43 @@ public class Satchels
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	SatchelsItems.init();
-    	ConfigSatchels.init();
-    	MCLibModules.updateCheckAPI.submitModTask(MODID, "@UPDATE_URL@");
+        SatchelsItems.init();
+        ConfigSatchels.init();
+        MCLibModules.updateCheckAPI.submitModTask(MODID, "@UPDATE_URL@");
     }
     
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	instance = this;
-    	
-    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(SatchelsItems.pouch_upgrade), 1, 1, ConfigSatchels.pouchUpgradeWeight));
-    	
-    	MinecraftForge.EVENT_BUS.register(proxy);
-    	FMLCommonHandler.instance().bus().register(proxy);
-    	NetworkRegistry.INSTANCE.registerGuiHandler(Satchels.instance, new GuiHandler());
-    	proxy.init();
-    	
-		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-		networkWrapper.registerMessage(HandlerOpenContainer.class, MessageOpenContainer.class, 0, Side.SERVER);
-		networkWrapper.registerMessage(HandlerSyncEquipment.class, MessageSyncEquipment.class, 1, Side.CLIENT);
+        instance = this;
+        
+        ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(SatchelsItems.pouch_upgrade), 1, 1, ConfigSatchels.pouchUpgradeWeight));
+        
+        MinecraftForge.EVENT_BUS.register(proxy);
+        FMLCommonHandler.instance().bus().register(proxy);
+        NetworkRegistry.INSTANCE.registerGuiHandler(Satchels.instance, new GuiHandler());
+        proxy.init();
+        
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        networkWrapper.registerMessage(HandlerOpenContainer.class, MessageOpenContainer.class, 0, Side.SERVER);
+        networkWrapper.registerMessage(HandlerSyncEquipment.class, MessageSyncEquipment.class, 1, Side.CLIENT);
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	SatchelsItems.postInit();
-    	proxy.postInit();
+        SatchelsItems.postInit();
+        proxy.postInit();
     }
-	
-	public static void postPlayerConstructor(EntityPlayer player) {
-		player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
-	}
+    
+    public static void postPlayerConstructor(EntityPlayer player) {
+        player.openContainer = player.inventoryContainer = new ContainerSatchels(player); 
+    }
 
-	public static void onGameTypeChanged(WorldSettings.GameType gameType, EntityPlayer player) {
-		if(gameType == GameType.CREATIVE) {
-			((ContainerSatchels)player.inventoryContainer).redoSlots(false);
-		} else {
-			((ContainerSatchels)player.inventoryContainer).redoSlots(true);
-		}
-	}
+    public static void onGameTypeChanged(WorldSettings.GameType gameType, EntityPlayer player) {
+        if(gameType == GameType.CREATIVE) {
+            ((ContainerSatchels)player.inventoryContainer).redoSlots(false);
+        } else {
+            ((ContainerSatchels)player.inventoryContainer).redoSlots(true);
+        }
+    }
 }

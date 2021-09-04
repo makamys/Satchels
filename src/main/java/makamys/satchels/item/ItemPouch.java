@@ -20,71 +20,71 @@ import net.minecraft.world.World;
 import makamys.satchels.Packets.MessageOpenContainer;
 
 public class ItemPouch extends Item {
-	
-	public static final Predicate<ItemStack> acceptedContentsPredicate = (stack) -> stack != null && stack.getItem() instanceof ItemPouchUpgrade;
-	
-	public ItemPouch() {
-		setMaxStackSize(1);
-		setUnlocalizedName(Satchels.MODID + "." + "pouch");
-		setCreativeTab(CreativeTabs.tabTools);
-		setTextureName("pouch");
-	}
-	
+    
+    public static final Predicate<ItemStack> acceptedContentsPredicate = (stack) -> stack != null && stack.getItem() instanceof ItemPouchUpgrade;
+    
+    public ItemPouch() {
+        setMaxStackSize(1);
+        setUnlocalizedName(Satchels.MODID + "." + "pouch");
+        setCreativeTab(CreativeTabs.tabTools);
+        setTextureName("pouch");
+    }
+    
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
-	   super.itemIcon = iconRegister.registerIcon("satchels:pouch");
+       super.itemIcon = iconRegister.registerIcon("satchels:pouch");
    }
    
    public static IInventory getInventory(ItemStack stack, World world) {
-	   if(stack == null || !(stack.getItem() instanceof ItemPouch)) {
-		   return null;
-	   }
-	   return new InventoryPouch(stack, world);
+       if(stack == null || !(stack.getItem() instanceof ItemPouch)) {
+           return null;
+       }
+       return new InventoryPouch(stack, world);
    }
    
    public static int getSlotCount(ItemStack stack) {
-	   if(stack == null || !(stack.getItem() instanceof ItemPouch)) {
-		   return 0;
-	   }
-	   IInventory inventory = getInventory(stack, null);
-	   int slots = EntityPropertiesSatchels.POUCH_INITIAL_SLOTS;
-	   if(inventory != null) {
-		   for(int i = 0; i < inventory.getSizeInventory(); i++) {
-			   ItemStack invStack = inventory.getStackInSlot(i);
-			   if(invStack != null && invStack.getItem() instanceof ItemPouchUpgrade) {
-				   slots++;
-			   }
-		   }
-	   }
-	   return slots;
+       if(stack == null || !(stack.getItem() instanceof ItemPouch)) {
+           return 0;
+       }
+       IInventory inventory = getInventory(stack, null);
+       int slots = EntityPropertiesSatchels.POUCH_INITIAL_SLOTS;
+       if(inventory != null) {
+           for(int i = 0; i < inventory.getSizeInventory(); i++) {
+               ItemStack invStack = inventory.getStackInSlot(i);
+               if(invStack != null && invStack.getItem() instanceof ItemPouchUpgrade) {
+                   slots++;
+               }
+           }
+       }
+       return slots;
    }
    
-   	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-	   Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_POUCH));
-	   return stack;
-	}
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+       Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_POUCH));
+       return stack;
+    }
    
    public static class InventoryPouch extends InventorySimple {
-	   
-	   private ItemStack stack;
-	   private World world;
-	   
-	   public InventoryPouch(ItemStack stack, World world) {
-		   super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName());
-		   this.stack = stack;
-		   this.world = world;
-		   
-		   NBTTagList tag = stack.stackTagCompound != null ? stack.stackTagCompound.getTagList("Inventory", 10) : null;
-		   if(tag != null) {
-			   InventoryUtils.readItemStacksFromTag(items, tag);
-		   }
-	   }
-	   
-		@Override
-		public void closeInventory() {
-			if(world != null && !world.isRemote) {
-				stack.setTagInfo("Inventory", InventoryUtils.writeItemStacksToTag(items));
-			}
-		}
+       
+       private ItemStack stack;
+       private World world;
+       
+       public InventoryPouch(ItemStack stack, World world) {
+           super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName());
+           this.stack = stack;
+           this.world = world;
+           
+           NBTTagList tag = stack.stackTagCompound != null ? stack.stackTagCompound.getTagList("Inventory", 10) : null;
+           if(tag != null) {
+               InventoryUtils.readItemStacksFromTag(items, tag);
+           }
+       }
+       
+        @Override
+        public void closeInventory() {
+            if(world != null && !world.isRemote) {
+                stack.setTagInfo("Inventory", InventoryUtils.writeItemStacksToTag(items));
+            }
+        }
    }
 }

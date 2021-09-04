@@ -10,16 +10,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemPouchUpgrade extends Item {
-	
-	public ItemPouchUpgrade() {
-		setUnlocalizedName(Satchels.MODID + "." + "pouch_upgrade");
-		setCreativeTab(CreativeTabs.tabTools);
-		setTextureName("pouch_upgrade");
-	}
-	
+    
+    public ItemPouchUpgrade() {
+        setUnlocalizedName(Satchels.MODID + "." + "pouch_upgrade");
+        setCreativeTab(CreativeTabs.tabTools);
+        setTextureName("pouch_upgrade");
+    }
+    
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
-	   super.itemIcon = iconRegister.registerIcon("satchels:pouch_upgrade");
+       super.itemIcon = iconRegister.registerIcon("satchels:pouch_upgrade");
    }
    
    @SideOnly(Side.CLIENT)

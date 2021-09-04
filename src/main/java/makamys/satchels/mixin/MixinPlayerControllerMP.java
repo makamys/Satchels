@@ -12,10 +12,10 @@ import net.minecraft.world.WorldSettings;
 
 @Mixin(PlayerControllerMP.class)
 public abstract class MixinPlayerControllerMP {
-	
-	@Inject(method = "setGameType", at = @At("RETURN"))
+    
+    @Inject(method = "setGameType", at = @At("RETURN"))
     private void preSetGameType(WorldSettings.GameType gameType, CallbackInfo ci) {
-		Satchels.onGameTypeChanged(gameType, Minecraft.getMinecraft().thePlayer);
-	}
-	
+        Satchels.onGameTypeChanged(gameType, Minecraft.getMinecraft().thePlayer);
+    }
+    
 }

@@ -35,75 +35,75 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import tconstruct.client.tabs.TabRegistry;
 
 public class SatchelsProxyClient extends SatchelsProxyCommon {
-	
-	KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
-	
-	@Override
-	public void init() {
-		super.init();
-		ClientRegistry.registerKeyBinding(openEquipment);
-	}
-	
-	@Override
-	public void postInit() {
-		super.postInit();
-		if(ConfigSatchels.satchelsTab || Loader.isModLoaded("Techguns")) {
-	    	TConstructTabsShim.postInit();
-	    	if(ConfigSatchels.satchelsTab) {
-	    		TabRegistry.registerTab(new InventoryTabSatchels());
-	    	}
-	    	TechgunsCompat.postInit();
-    	}
-	}
-	
-	@SubscribeEvent
+    
+    KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
+    
+    @Override
+    public void init() {
+        super.init();
+        ClientRegistry.registerKeyBinding(openEquipment);
+    }
+    
+    @Override
+    public void postInit() {
+        super.postInit();
+        if(ConfigSatchels.satchelsTab || Loader.isModLoaded("Techguns")) {
+            TConstructTabsShim.postInit();
+            if(ConfigSatchels.satchelsTab) {
+                TabRegistry.registerTab(new InventoryTabSatchels());
+            }
+            TechgunsCompat.postInit();
+        }
+    }
+    
+    @SubscribeEvent
     public void postInitGui(InitGuiEvent.Post event) {
-    	TechgunsCompat.postInitGui(event);
+        TechgunsCompat.postInitGui(event);
     }
-	
-	@SubscribeEvent
-	public void onGuiOpen(GuiOpenEvent event) {
-    	if(event.gui != null && event.gui.doesGuiPauseGame()) {
-    		ConfigSatchels.reloadIfChanged();
-    	}
-    	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-    	if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
-    			&& !(event.gui instanceof GuiSatchelsInventory) && !player.capabilities.isCreativeMode){
-			event.gui = new GuiSatchelsInventory(player);
-    	}
+    
+    @SubscribeEvent
+    public void onGuiOpen(GuiOpenEvent event) {
+        if(event.gui != null && event.gui.doesGuiPauseGame()) {
+            ConfigSatchels.reloadIfChanged();
+        }
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        if(event.gui != null && event.gui.getClass() == GuiInventory.class && player.inventoryContainer instanceof ContainerSatchels
+                && !(event.gui instanceof GuiSatchelsInventory) && !player.capabilities.isCreativeMode){
+            event.gui = new GuiSatchelsInventory(player);
+        }
     }
-	
-	@SubscribeEvent
-	public void onClientTick(ClientTickEvent event) {
-		if(ConfigSatchels.hotSwap) {
-			ConfigSatchels.reloadIfChanged();
-		}
-    	if(openEquipment.isPressed()) {
-    		Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
-    	}
+    
+    @SubscribeEvent
+    public void onClientTick(ClientTickEvent event) {
+        if(ConfigSatchels.hotSwap) {
+            ConfigSatchels.reloadIfChanged();
+        }
+        if(openEquipment.isPressed()) {
+            Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
+        }
     }
-	
-	@SubscribeEvent
+    
+    @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-    	if(event.itemStack.getItem() instanceof ItemPouch) {
-    		int slots = ItemPouch.getSlotCount(event.itemStack);
-    		event.toolTip.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
-    	} else if(event.itemStack.getItem() instanceof ItemPouchUpgrade) {
-			event.toolTip.add("Adds 1 slot to a pouch");
-    	}
+        if(event.itemStack.getItem() instanceof ItemPouch) {
+            int slots = ItemPouch.getSlotCount(event.itemStack);
+            event.toolTip.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
+        } else if(event.itemStack.getItem() instanceof ItemPouchUpgrade) {
+            event.toolTip.add("Adds 1 slot to a pouch");
+        }
     }
     
     // Adapted from mcft.copy.betterstorage.proxy.ClientProxy#onRenderPlayerSpecialsPre by copygirl
-	@SubscribeEvent
-	public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
-	    if(ModelSatchel.instance == null) {
+    @SubscribeEvent
+    public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
+        if(ModelSatchel.instance == null) {
             ModelSatchel.instance = new ModelSatchel(event.renderer);
         }
-	    if(ModelPouch.instance == null) {
-	        ModelPouch.instance = new ModelPouch(event.renderer);
-	    }
-	    ModelSatchel.instance.preRender(event);
-		ModelPouch.instance.preRender(event);
-	}
-	
+        if(ModelPouch.instance == null) {
+            ModelPouch.instance = new ModelPouch(event.renderer);
+        }
+        ModelSatchel.instance.preRender(event);
+        ModelPouch.instance.preRender(event);
+    }
+    
 }

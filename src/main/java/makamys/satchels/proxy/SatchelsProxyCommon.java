@@ -18,27 +18,27 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
 public class SatchelsProxyCommon {
-	
-	public void init() {
-		
-	}
-	
-	public void postInit() {
-		
-	}
-	
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event) {
-    	Entity entity = event.entity;
-    	if(entity instanceof EntityPlayer) {
-    		entity.registerExtendedProperties("satchels", new EntityPropertiesSatchels());
-    	}
+    
+    public void init() {
+        
     }
-	
-	// Adapted from tconstruct.armor.TinkerArmorEvents#joinWorld
+    
+    public void postInit() {
+        
+    }
+    
+    @SubscribeEvent
+    public void onEntityConstructing(EntityConstructing event) {
+        Entity entity = event.entity;
+        if(entity instanceof EntityPlayer) {
+            entity.registerExtendedProperties("satchels", new EntityPropertiesSatchels());
+        }
+    }
+    
+    // Adapted from tconstruct.armor.TinkerArmorEvents#joinWorld
     @SubscribeEvent
     public void onJoinWorld(EntityJoinWorldEvent event) {
-        if (event.entity instanceof EntityPlayerMP) {	
+        if (event.entity instanceof EntityPlayerMP) {   
             EntityPlayerMP player = (EntityPlayerMP)event.entity;
             
             EntityPropertiesSatchels satchelsProps = EntityPropertiesSatchels.fromPlayer(player);
@@ -53,12 +53,12 @@ public class SatchelsProxyCommon {
     // Adapted from tconstruct.armor.player.TPlayerHandler#playerDrops
     @SubscribeEvent
     public void onPlayerDrops(PlayerDropsEvent event) {
-    	EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
-    	
+        EntityPropertiesSatchels props = EntityPropertiesSatchels.fromPlayer(event.entityPlayer);
+        
         if (event.entityPlayer.capturedDrops != event.drops) {
             event.entityPlayer.capturedDrops.clear();
         }
-    	
+        
         event.entityPlayer.captureDrops = true;
         props.dropItems();
         event.entityPlayer.captureDrops = false;
@@ -67,5 +67,5 @@ public class SatchelsProxyCommon {
             event.drops.addAll(event.entityPlayer.capturedDrops);
         }
     }
-	
+    
 }

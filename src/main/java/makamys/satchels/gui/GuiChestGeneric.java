@@ -55,13 +55,13 @@ public class GuiChestGeneric extends GuiContainer
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, fullRows * 18 + 17);
         int remainder = lowerChestInventory.getSizeInventory() % 9;
         if(remainder > 0) {
-        	this.drawTexturedModalRect(k, l + 17, 0, 17, 7, 18);
-        	for(int x = 7; x < 169; x++) {
-        		// hacky or not? you be the judge.
-        		this.drawTexturedModalRect(k + x, l + 17, 3, 17, 1, 18);
-        	}
-        	this.drawTexturedModalRect(k, l + 17, 0, 17, 7 + remainder * 18, 18);
-        	this.drawTexturedModalRect(k+169, l + 17, 169, 17, 7, 18);
+            this.drawTexturedModalRect(k, l + 17, 0, 17, 7, 18);
+            for(int x = 7; x < 169; x++) {
+                // hacky or not? you be the judge.
+                this.drawTexturedModalRect(k + x, l + 17, 3, 17, 1, 18);
+            }
+            this.drawTexturedModalRect(k, l + 17, 0, 17, 7 + remainder * 18, 18);
+            this.drawTexturedModalRect(k+169, l + 17, 169, 17, 7, 18);
         }
         this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
     }

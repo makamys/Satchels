@@ -18,7 +18,7 @@ public class InventoryTabSatchels extends AbstractTab
     @Override
     public void onTabClicked ()
     {
-    	Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
+        Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
     }
 
     @Override

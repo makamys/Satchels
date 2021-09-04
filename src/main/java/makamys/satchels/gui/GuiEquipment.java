@@ -16,9 +16,9 @@ import tconstruct.client.tabs.TabRegistry;
 
 public class GuiEquipment extends InventoryEffectRenderer
 {
-	protected static final ResourceLocation equipmentTexture = new ResourceLocation("satchels", "textures/gui/container/equipment.png");
-	
-	/** x size of the inventory window in pixels. Defined as  float, passed as int */
+    protected static final ResourceLocation equipmentTexture = new ResourceLocation("satchels", "textures/gui/container/equipment.png");
+    
+    /** x size of the inventory window in pixels. Defined as  float, passed as int */
     private float xSizeFloat;
     /** y size of the inventory window in pixels. Defined as  float, passed as int. */
     private float ySizeFloat;
