@@ -16,6 +16,7 @@ import com.google.common.collect.Sets;
 
 import codechicken.lib.vec.Vector3;
 import makamys.satchels.EntityPropertiesSatchels;
+import makamys.satchels.Satchels;
 import makamys.satchels.SatchelsUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
@@ -48,7 +49,7 @@ public class ContainerSatchels extends ContainerPlayer {
     }
     
     public void redoSlots() {
-        System.out.println("redoSlots " + enableExtra);
+        Satchels.LOGGER.debug("redoSlots " + enableExtra);
         removeAllExtraSlots();
         
         if(enableExtra) {
