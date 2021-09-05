@@ -42,3 +42,10 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 # License
 
 This mod is licensed under the [MIT License](https://github.com/makamys/Satchels/blob/master/LICENSE).
+
+# Contributing
+
+When running in an IDE, add these program arguments
+```
+--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin satchels.mixin.json
+```
