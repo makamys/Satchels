@@ -10,9 +10,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.Arrays;
 import java.util.regex.Pattern;
-
-import com.google.common.collect.Lists;
 
 import codechicken.lib.colour.Colour;
 import codechicken.lib.colour.ColourRGBA;
@@ -109,7 +108,7 @@ public class ConfigSatchels {
         config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
         
         if(Loader.instance().hasReachedState(LoaderState.POSTINITIALIZATION)) {
-            backpackHelper = new BackpackConfigHelper(Lists.newArrayList(config.getStringList("itemBlacklist", "inventory", BackpackConfigHelper.NON_NESTABLE_BACKPACK_BLACKLIST, "Items that aren't allowed in satchels or pouches" + BackpackConfigHelper.CONFIG_DESCRIPTION_SUFFIX)));
+            backpackHelper = new BackpackConfigHelper(Arrays.asList(config.getStringList("itemBlacklist", "inventory", BackpackConfigHelper.NON_NESTABLE_BACKPACK_BLACKLIST, "Items that aren't allowed in satchels or pouches" + BackpackConfigHelper.CONFIG_DESCRIPTION_SUFFIX)));
         }
         
         if (config.hasChanged()) 
