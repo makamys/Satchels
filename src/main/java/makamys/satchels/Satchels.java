@@ -81,6 +81,7 @@ public class Satchels
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         SatchelsItems.postInit();
+        ConfigSatchels.reparse();
         proxy.postInit();
     }
     

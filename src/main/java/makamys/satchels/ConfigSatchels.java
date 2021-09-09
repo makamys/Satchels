@@ -16,6 +16,8 @@ import com.google.common.collect.Lists;
 
 import codechicken.lib.colour.Colour;
 import codechicken.lib.colour.ColourRGBA;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.LoaderState;
 import makamys.mclib.config.item.BackpackConfigHelper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Configuration;
@@ -87,8 +89,6 @@ public class ConfigSatchels {
         hotSwap = config.getBoolean("hotSwap", "_general", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
         satchelsTab = config.getBoolean("satchelsTab", "_general", true, "Add Satchels tab to inventory GUI");
         
-        backpackHelper = new BackpackConfigHelper(Lists.newArrayList(config.getStringList("itemBlacklist", "inventory", BackpackConfigHelper.NON_NESTABLE_BACKPACK_BLACKLIST, "Items that aren't allowed in satchels or pouches" + BackpackConfigHelper.CONFIG_DESCRIPTION_SUFFIX)));
-        
         pouchSlotColor = getColor(config, "pouchSlotColor", "interface colors", "FFB266", "Not implemented yet!");
         pouchBgColor = getColor(config, "pouchBgColor", "interface colors", "FFB266", "");
         satchelSlotColor = getColor(config, "satchelSlotColor", "interface colors", "FFBF99", "Not implemented yet!");
@@ -107,7 +107,11 @@ public class ConfigSatchels {
         compatTechguns = config.getBoolean("compatTechguns", "compatibility", true, "Force Techguns to use vertical tabs (using TConstruct's API) even if TConstruct is not present.");
         
         config.getCategory("_general").setComment("Note: Changes in this file will get applied when the game is paused, or immediately if the hotSwap option is enabled.");
-
+        
+        if(Loader.instance().hasReachedState(LoaderState.POSTINITIALIZATION)) {
+            backpackHelper = new BackpackConfigHelper(Lists.newArrayList(config.getStringList("itemBlacklist", "inventory", BackpackConfigHelper.NON_NESTABLE_BACKPACK_BLACKLIST, "Items that aren't allowed in satchels or pouches" + BackpackConfigHelper.CONFIG_DESCRIPTION_SUFFIX)));
+        }
+        
         if (config.hasChanged()) 
         {
             config.save();
