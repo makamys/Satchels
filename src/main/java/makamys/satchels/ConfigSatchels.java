@@ -12,8 +12,11 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Lists;
+
 import codechicken.lib.colour.Colour;
 import codechicken.lib.colour.ColourRGBA;
+import makamys.mclib.config.item.BackpackConfigHelper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Configuration;
 
@@ -44,6 +47,8 @@ public class ConfigSatchels {
 
     public static String satchelIngredient1;
     public static String satchelIngredient2;
+
+    public static BackpackConfigHelper backpackHelper;
     
     public static void init() {
         configFile = new File(Launch.minecraftHome, "config/satchels.cfg");
@@ -81,6 +86,8 @@ public class ConfigSatchels {
     public static void reparse() {
         hotSwap = config.getBoolean("hotSwap", "_general", false, "Apply changes made in the config file immediately.\nOff by default because it could potentially cause poor performance on certain platforms.\nUseful for tweaking the GUI.");
         satchelsTab = config.getBoolean("satchelsTab", "_general", true, "Add Satchels tab to inventory GUI");
+        
+        backpackHelper = new BackpackConfigHelper(Lists.newArrayList(config.getStringList("itemBlacklist", "inventory", BackpackConfigHelper.NON_NESTABLE_BACKPACK_BLACKLIST, "Items that aren't allowed in satchels or pouches" + BackpackConfigHelper.CONFIG_DESCRIPTION_SUFFIX)));
         
         pouchSlotColor = getColor(config, "pouchSlotColor", "interface colors", "FFB266", "Not implemented yet!");
         pouchBgColor = getColor(config, "pouchBgColor", "interface colors", "FFB266", "");

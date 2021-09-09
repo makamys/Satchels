@@ -2,6 +2,7 @@ package makamys.satchels;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.google.common.primitives.Ints;
 
@@ -30,6 +31,8 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
     private static final int SLOT_SATCHEL = 0;
     private static final int SLOT_LEFT_POUCH = 1;
     private static final int SLOT_RIGHT_POUCH = 2;
+    
+    public static final Predicate<ItemStack> satchelsSlotPredicate = (stack) -> ConfigSatchels.backpackHelper.isAllowed(stack);
     
     public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories());
     
@@ -102,15 +105,22 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
     }
     
     public void updateInventories() {
-        ((ContainerSatchels)player.inventoryContainer).redoSlots();
-        for(int i = getLeftPouchSlotCount(); i < leftPouch.getSizeInventory(); i++) {
-            dropStack(leftPouch, i);
+        ContainerSatchels container = ((ContainerSatchels)player.inventoryContainer);
+        container.redoSlots();
+        for(int i = 0; i < leftPouch.getSizeInventory(); i++) {
+            if(i >= getLeftPouchSlotCount() || !satchelsSlotPredicate.test(leftPouch.getStackInSlot(i))) {
+                dropStack(leftPouch, i);
+            }
         }
-        for(int i = getRightPouchSlotCount(); i < rightPouch.getSizeInventory(); i++) {
-            dropStack(rightPouch, i);
+        for(int i = 0; i < rightPouch.getSizeInventory(); i++) {
+            if(i >= getRightPouchSlotCount() || !satchelsSlotPredicate.test(rightPouch.getStackInSlot(i))) {
+                dropStack(rightPouch, i);
+            }
         }
-        for(int i = getSatchelSlotCount(); i < satchel.getSizeInventory(); i++) {
-            dropStack(satchel, i);
+        for(int i = 0; i < satchel.getSizeInventory(); i++) {
+            if(i >= getSatchelSlotCount() || !satchelsSlotPredicate.test(satchel.getStackInSlot(i))) {
+                dropStack(satchel, i);
+            }
         }
     }
     
