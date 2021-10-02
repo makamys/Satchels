@@ -176,7 +176,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
         return stack.stackSize != originalSize;
     }
     
-    private InventoryRange getEnabledInventoryRange() {
+    public InventoryRange getEnabledInventoryRange() {
         InventoryRange range = new InventoryRange(aggregate);
         List<Integer> slots = new ArrayList<>();
         if(hasSatchel()) {

@@ -5,10 +5,12 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import invtweaks.InvTweaksConst;
 import makamys.satchels.ConfigSatchels;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
@@ -24,6 +26,8 @@ import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,6 +84,15 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
         }
         if(openEquipment.isPressed()) {
             Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_EQUIPMENT));
+        }
+        if(event.phase == TickEvent.Phase.END) {
+            GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+            if(gui instanceof GuiSatchelsInventory) {
+                gui.buttonList.removeIf(bObj -> {
+                    GuiButton b = (GuiButton)bObj;
+                    return b.id > InvTweaksConst.JIMEOWAN_ID && b.id < InvTweaksConst.JIMEOWAN_ID + 4;
+                });
+            }
         }
     }
     
