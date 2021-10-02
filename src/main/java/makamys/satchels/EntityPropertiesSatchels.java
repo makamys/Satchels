@@ -1,6 +1,7 @@
 package makamys.satchels;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -196,6 +197,13 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
         }
         range.slots = Ints.toArray(slots);
         return range;
+    }
+
+    public void copyFrom(EntityPropertiesSatchels from) {
+        SatchelsUtils.copyInventory(from.equipment, equipment);
+        SatchelsUtils.copyInventory(from.satchel, satchel);
+        SatchelsUtils.copyInventory(from.leftPouch, leftPouch);
+        SatchelsUtils.copyInventory(from.rightPouch, rightPouch);
     }
 
 }

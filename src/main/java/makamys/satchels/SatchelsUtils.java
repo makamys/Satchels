@@ -24,6 +24,12 @@ public class SatchelsUtils {
         }
     }
     
+    public static void copyInventory(IInventory src, IInventory dest) {
+        for(int i = 0; i < src.getSizeInventory(); i++) {
+            dest.setInventorySlotContents(i, ItemStack.copyItemStack(src.getStackInSlot(i)));
+        }
+    }
+    
     public static Vector3 vec3FromEntityEye(Entity entity) {
         return new Vector3(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
     }

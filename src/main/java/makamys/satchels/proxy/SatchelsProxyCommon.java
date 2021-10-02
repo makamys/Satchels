@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class SatchelsProxyCommon {
     
@@ -65,6 +66,13 @@ public class SatchelsProxyCommon {
         
         if (event.entityPlayer.capturedDrops != event.drops) {
             event.drops.addAll(event.entityPlayer.capturedDrops);
+        }
+    }
+    
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        if(event.wasDeath) {
+            EntityPropertiesSatchels.fromPlayer(event.entityPlayer).copyFrom(EntityPropertiesSatchels.fromPlayer(event.original));
         }
     }
     
