@@ -15,20 +15,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-import codechicken.lib.vec.Vector3;
-import invtweaks.api.container.ChestContainer;
-import invtweaks.api.container.ContainerSection;
-import invtweaks.api.container.ContainerSectionCallback;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.Satchels;
 import makamys.satchels.SatchelsUtils;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-@ChestContainer
-public class ContainerSatchels extends ContainerPlayer {
+public class ContainerSatchels extends ContainerPlayerExtended {
     
     public List<Slot> leftPouchSlots = new ArrayList<>();
     public List<Slot> rightPouchSlots = new ArrayList<>();
@@ -173,24 +167,10 @@ public class ContainerSatchels extends ContainerPlayer {
         return shiftArmorSlots ? 2 : 0;
     }
     
-
-    @ContainerSectionCallback
-    public Map<ContainerSection, List<Slot>> getContainerSectionMap(){
-        Map<ContainerSection, List<Slot>> slotRefs = new HashMap<>();
-
-        List<Slot> enabledExtraSlots = StreamSupport.stream(Iterables.concat(satchelSlots, leftPouchSlots, rightPouchSlots).spliterator(), false)
+    public List<Slot> getExtraSlots(){
+        return StreamSupport.stream(Iterables.concat(satchelSlots, leftPouchSlots, rightPouchSlots).spliterator(), false)
                 .filter(s -> !(s instanceof SlotDisabled))
                 .collect(Collectors.toList());
-        
-        slotRefs.put(ContainerSection.CRAFTING_OUT, inventorySlots.subList(0, 1));
-        slotRefs.put(ContainerSection.CRAFTING_IN, inventorySlots.subList(1, 5));
-        slotRefs.put(ContainerSection.ARMOR, inventorySlots.subList(5, 9));
-        slotRefs.put(ContainerSection.INVENTORY, inventorySlots.subList(9, 45));
-        slotRefs.put(ContainerSection.INVENTORY_NOT_HOTBAR, inventorySlots.subList(9, 36));
-        slotRefs.put(ContainerSection.INVENTORY_HOTBAR, inventorySlots.subList(36, 45));
-        slotRefs.put(ContainerSection.CHEST, enabledExtraSlots);
-        
-        return slotRefs;
     }
 
 }

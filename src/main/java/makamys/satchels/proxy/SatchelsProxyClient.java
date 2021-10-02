@@ -10,7 +10,6 @@ import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import invtweaks.InvTweaksConst;
 import makamys.satchels.ConfigSatchels;
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
@@ -22,12 +21,14 @@ import makamys.satchels.compat.TConstructTabsShim;
 import makamys.satchels.compat.TechgunsCompat;
 import makamys.satchels.gui.GuiSatchelsInventory;
 import makamys.satchels.gui.InventoryTabSatchels;
+import makamys.satchels.inventory.ContainerPlayerExtended;
 import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,7 +88,8 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
         }
         if(event.phase == TickEvent.Phase.END) {
             GuiScreen gui = Minecraft.getMinecraft().currentScreen;
-            if(gui instanceof GuiSatchelsInventory) {
+            if(gui instanceof GuiContainer && ((GuiContainer)gui).inventorySlots instanceof ContainerPlayerExtended) {
+                // Remove InventoryTweaks chest sorting buttons
                 gui.buttonList.removeIf(bObj -> {
                     final int JIMEOWAN_ID = 54696386;
                     GuiButton b = (GuiButton)bObj;
