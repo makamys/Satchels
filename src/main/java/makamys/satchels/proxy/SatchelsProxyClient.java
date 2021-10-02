@@ -89,8 +89,9 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
             GuiScreen gui = Minecraft.getMinecraft().currentScreen;
             if(gui instanceof GuiSatchelsInventory) {
                 gui.buttonList.removeIf(bObj -> {
+                    final int JIMEOWAN_ID = 54696386;
                     GuiButton b = (GuiButton)bObj;
-                    return b.id > InvTweaksConst.JIMEOWAN_ID && b.id < InvTweaksConst.JIMEOWAN_ID + 4;
+                    return b.id > JIMEOWAN_ID && b.id < JIMEOWAN_ID + 4;
                 });
             }
         }

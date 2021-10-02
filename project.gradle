@@ -3,14 +3,3 @@ jar.manifest.attributes (
 )
 
 apply from: "makalibs.gradle"
-
-repositories {
-	maven {
-		name = "gt"
-		url = "https://gregtech.mechaenetia.com/"
-	}
-}
-
-dependencies {
-    compile "inventorytweaks:InventoryTweaks:1.59-dev:deobf"
-}
