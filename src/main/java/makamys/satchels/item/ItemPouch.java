@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import makamys.satchels.Packets.MessageOpenContainer;
@@ -93,7 +94,7 @@ public class ItemPouch extends ItemEquippable {
     @Override
     public void getTooltips(List<String> linesNormal, List<String> linesDetails, ItemTooltipEvent event) {
         int slots = ItemPouch.getSlotCount(event.itemStack);
-        linesNormal.add(I18n.format("tooltip.satchels.pouch.slotCount", slots));
+        linesNormal.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + I18n.format("tooltip.satchels.pouch.slotCount", slots));
         
         super.getTooltips(linesNormal, linesDetails, event);
     }
