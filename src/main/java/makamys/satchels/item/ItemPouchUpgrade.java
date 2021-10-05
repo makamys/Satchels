@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.Satchels;
 import makamys.satchels.gui.TooltippedItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -37,6 +38,6 @@ public class ItemPouchUpgrade extends Item implements TooltippedItem {
 
     @Override
     public void getTooltips(List<String> linesNormal, List<String> linesDetails, ItemTooltipEvent event) {
-        linesDetails.add("Adds 1 slot to a pouch");
+        linesDetails.add(I18n.format("tooltip.satchels.pouchUpgrade"));
     }
 }

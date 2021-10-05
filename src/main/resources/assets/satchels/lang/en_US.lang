@@ -1,5 +1,10 @@
 container.equipment.satchel=Satchel
 container.equipment.pouches=Pouches
+container.pouch.upgrades_suffix= Upgrades
 item.satchels.satchel.name=Satchel
 item.satchels.pouch.name=Pouch
 item.satchels.pouch_upgrade.name=Pouch Expansion
+tooltip.satchels.holdCtrl=§8§o<Hold Ctrl>
+tooltip.satchels.pouch.slotCount=%d slots
+tooltip.satchels.pouchUpgrade=Adds 1 slot to a pouch
+tooltip.satchels.equipHint=Equip in the equipment screen (press §b%s§7)

@@ -11,12 +11,12 @@ import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
 import makamys.satchels.Satchels;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import makamys.satchels.Packets.MessageOpenContainer;
@@ -72,7 +72,7 @@ public class ItemPouch extends ItemEquippable {
        private World world;
        
        public InventoryPouch(ItemStack stack, World world) {
-           super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName());
+           super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName() + I18n.format("container.pouch.upgrades_suffix"));
            this.stack = stack;
            this.world = world;
            
@@ -93,7 +93,7 @@ public class ItemPouch extends ItemEquippable {
     @Override
     public void getTooltips(List<String> linesNormal, List<String> linesDetails, ItemTooltipEvent event) {
         int slots = ItemPouch.getSlotCount(event.itemStack);
-        linesNormal.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
+        linesNormal.add(I18n.format("tooltip.satchels.pouch.slotCount", slots));
         
         super.getTooltips(linesNormal, linesDetails, event);
     }

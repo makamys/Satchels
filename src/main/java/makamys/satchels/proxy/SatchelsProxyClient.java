@@ -28,9 +28,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
@@ -108,7 +108,7 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
             if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
                 event.toolTip.addAll(linesDetails);
             } else {
-                event.toolTip.add(EnumChatFormatting.DARK_GRAY + "" + EnumChatFormatting.ITALIC + "<Hold Ctrl>");
+                event.toolTip.add(I18n.format("tooltip.satchels.holdCtrl"));
             }
         }
     }
