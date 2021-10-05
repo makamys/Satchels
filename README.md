@@ -13,13 +13,13 @@ This mod adds **pouches** and **satchels**, which act as wearable inventory upgr
 
 A pouch adds 3 slots to your inventory, and can be worn on the left or the right side. You only need some leather and some string to craft it.
 
-Its capacity can be increased with **pouch upgrades**, which can only be found inside dungeon chests. Each upgrade will add an additional slot to the pouch's capacity, with the maximum being 8 slots. To apply a pouch upgrade, right click the ground with a pouch to open its upgrade inventory where you can insert it.
+Its capacity can be increased with **pouch expansions**, which can only be found inside dungeon chests. Each expansion will add an additional slot to the pouch's capacity, with the maximum being 8 slots. To apply a pouch upgrade, right click a pouch to open its upgrade inventory where you can insert it.
 
 You can wear up to 2 pouches at the same time.
 
 ## Satchel
 
-A satchel adds an entire row (9 slots) of storage to your inventory. But its utility is matched by its cost: crafting it requires a full diamond block. You can only wear 1 satchel at a time.
+A satchel adds an entire row (9 slots) of storage to your inventory. But its utility is matched by its cost: crafting it requires a full diamond block and some slime by default. You can only wear 1 satchel at a time.
 
 ## Models
 
@@ -37,7 +37,7 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 
 # Incompatibilities
 
-* [Aether Legacy](https://www.curseforge.com/minecraft/mc-mods/the-aether): accessories button doesn't show up in inventory. [This is a bug on their side.](https://github.com/gildedgames/aether-issues/issues/742) Until it's fixed, use the keybind to open the accessories GUI.
+* [Aether Legacy](https://www.curseforge.com/minecraft/mc-mods/the-aether): accessories button doesn't show up in inventory. [This is a bug on their side.](https://github.com/gildedgames/aether-issues/issues/742) Until it's fixed, use the keybind to open the equipment GUI.
 
 # License
 
