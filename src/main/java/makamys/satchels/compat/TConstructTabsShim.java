@@ -8,6 +8,7 @@ import tconstruct.client.tabs.TabRegistry;
 
 public class TConstructTabsShim {
     
+    /** Ensures TConstruct tab API is set up. */
     public static void postInit() {
         if(!Loader.isModLoaded("TConstruct") && TabRegistry.getTabList().isEmpty()) {
             TabRegistry.registerTab(new InventoryTabVanilla());

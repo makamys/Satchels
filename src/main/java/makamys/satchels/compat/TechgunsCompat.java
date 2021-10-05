@@ -17,6 +17,7 @@ public class TechgunsCompat {
     private static Class<?> tgGuiTabButtonClass;
     private static boolean doCompat;
     
+    /** Ensures Techguns is using TConstruct tabs. */
     public static void postInit() {
         doCompat = ConfigSatchels.compatTechguns && Loader.isModLoaded("Techguns") && !Loader.isModLoaded("TConstruct");
         if(doCompat) {
