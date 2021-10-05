@@ -52,7 +52,7 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     @Override
     public void postInit() {
         super.postInit();
-        if(ConfigSatchels.satchelsTab || Loader.isModLoaded("Techguns")) {
+        if(ConfigSatchels.satchelsTab || (ConfigSatchels.compatTechguns && Loader.isModLoaded("Techguns"))) {
             TConstructTabsShim.postInit();
             if(ConfigSatchels.satchelsTab) {
                 TabRegistry.registerTab(new InventoryTabSatchels());
