@@ -1,5 +1,8 @@
 package makamys.satchels.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -7,11 +10,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.ConfigSatchels;
-import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.GuiHandler;
 import makamys.satchels.Packets.MessageOpenContainer;
 import makamys.satchels.client.model.ModelPouch;
@@ -21,10 +20,9 @@ import makamys.satchels.compat.TConstructTabsShim;
 import makamys.satchels.compat.TechgunsCompat;
 import makamys.satchels.gui.GuiSatchelsInventory;
 import makamys.satchels.gui.InventoryTabSatchels;
+import makamys.satchels.gui.TooltippedItem;
 import makamys.satchels.inventory.ContainerPlayerExtended;
 import makamys.satchels.inventory.ContainerSatchels;
-import makamys.satchels.item.ItemPouch;
-import makamys.satchels.item.ItemPouchUpgrade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -41,7 +39,7 @@ import tconstruct.client.tabs.TabRegistry;
 
 public class SatchelsProxyClient extends SatchelsProxyCommon {
     
-    KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
+    public KeyBinding openEquipment = new KeyBinding("Open Equipment", Keyboard.KEY_P, "Satchels");
     
     @Override
     public void init() {
@@ -101,11 +99,17 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
     
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-        if(event.itemStack.getItem() instanceof ItemPouch) {
-            int slots = ItemPouch.getSlotCount(event.itemStack);
-            event.toolTip.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
-        } else if(event.itemStack.getItem() instanceof ItemPouchUpgrade) {
-            event.toolTip.add("Adds 1 slot to a pouch");
+        if(event.itemStack.getItem() instanceof TooltippedItem) {
+            List<String> linesNormal = new ArrayList<>();
+            List<String> linesDetails = new ArrayList<>();
+            ((TooltippedItem)event.itemStack.getItem()).getTooltips(linesNormal, linesDetails, event);
+            
+            event.toolTip.addAll(linesNormal);
+            if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+                event.toolTip.addAll(linesDetails);
+            } else {
+                event.toolTip.add(EnumChatFormatting.DARK_GRAY + "" + EnumChatFormatting.ITALIC + "<Hold Ctrl>");
+            }
         }
     }
     

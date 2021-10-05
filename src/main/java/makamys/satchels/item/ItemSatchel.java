@@ -5,9 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.Satchels;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
-public class ItemSatchel extends Item {
+public class ItemSatchel extends ItemEquippable {
     
     public ItemSatchel() {
         setMaxStackSize(1);

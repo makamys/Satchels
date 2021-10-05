@@ -1,5 +1,6 @@
 package makamys.satchels.item;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import codechicken.lib.inventory.InventorySimple;
@@ -13,13 +14,14 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import makamys.satchels.Packets.MessageOpenContainer;
 
-public class ItemPouch extends Item {
+public class ItemPouch extends ItemEquippable {
     
     public static final Predicate<ItemStack> acceptedContentsPredicate = (stack) -> stack != null && stack.getItem() instanceof ItemPouchUpgrade;
     
@@ -87,4 +89,12 @@ public class ItemPouch extends Item {
             }
         }
    }
+
+    @Override
+    public void getTooltips(List<String> linesNormal, List<String> linesDetails, ItemTooltipEvent event) {
+        int slots = ItemPouch.getSlotCount(event.itemStack);
+        linesNormal.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + slots + " slots");
+        
+        super.getTooltips(linesNormal, linesDetails, event);
+    }
 }
