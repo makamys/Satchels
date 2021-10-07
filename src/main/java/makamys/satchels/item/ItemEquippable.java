@@ -18,9 +18,7 @@ public class ItemEquippable extends Item implements TooltippedItem {
     @Override
     public void getTooltips(List<String> linesNormal, List<String> linesDetails, ItemTooltipEvent event) {
         if(!ConfigSatchels.satchelsTab && (event.itemStack.getItem() instanceof ItemPouch || event.itemStack.getItem() instanceof ItemSatchel)) {
-            if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-                linesDetails.add(I18n.format("tooltip.satchels.equipHint", GameSettings.getKeyDisplayString(((SatchelsProxyClient)Satchels.proxy).openEquipment.getKeyCode())));
-            }
+            linesDetails.add(I18n.format("tooltip.satchels.equipHint", GameSettings.getKeyDisplayString(((SatchelsProxyClient)Satchels.proxy).openEquipment.getKeyCode())));
         }
     }
 

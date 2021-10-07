@@ -105,10 +105,12 @@ public class SatchelsProxyClient extends SatchelsProxyCommon {
             ((TooltippedItem)event.itemStack.getItem()).getTooltips(linesNormal, linesDetails, event);
             
             event.toolTip.addAll(linesNormal);
-            if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-                event.toolTip.addAll(linesDetails);
-            } else {
-                event.toolTip.add(I18n.format("tooltip.satchels.holdCtrl"));
+            if(!linesDetails.isEmpty()) {
+                if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+                    event.toolTip.addAll(linesDetails);
+                } else {
+                    event.toolTip.add(I18n.format("tooltip.satchels.holdCtrl"));
+                }
             }
         }
     }
