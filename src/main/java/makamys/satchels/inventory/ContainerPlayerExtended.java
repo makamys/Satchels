@@ -13,7 +13,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.Slot;
 
-@ChestContainer
+@ChestContainer(rowSize = 1)
 public abstract class ContainerPlayerExtended extends ContainerPlayer {
     
     // TODO implement false
