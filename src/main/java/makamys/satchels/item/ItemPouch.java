@@ -73,7 +73,7 @@ public class ItemPouch extends ItemEquippable {
        private World world;
        
        public InventoryPouch(ItemStack stack, World world) {
-           super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName() + I18n.format("container.pouch.upgrades_suffix"));
+           super(EntityPropertiesSatchels.POUCH_MAX_SLOTS - EntityPropertiesSatchels.POUCH_INITIAL_SLOTS, stack.getDisplayName());
            this.stack = stack;
            this.world = world;
            
