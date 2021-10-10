@@ -38,6 +38,7 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 # Incompatibilities
 
 * [Aether Legacy](https://www.curseforge.com/minecraft/mc-mods/the-aether): accessories button doesn't show up in inventory. [This is a bug on their side.](https://github.com/gildedgames/aether-issues/issues/742) Until it's fixed, use the keybind to open the equipment GUI.
+* Factorization: crashes on startup. Fixed by [Mixingasm](https://github.com/makamys/Mixingasm).
 
 # License
 
