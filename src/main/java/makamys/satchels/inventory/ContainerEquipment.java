@@ -1,14 +1,11 @@
 package makamys.satchels.inventory;
 
-import java.util.function.Predicate;
-
 import makamys.satchels.EntityPropertiesSatchels;
 import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemSatchel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerEquipment extends ContainerPlayerExtended {
     
@@ -27,11 +24,8 @@ public class ContainerEquipment extends ContainerPlayerExtended {
         
         EntityPropertiesSatchels satchelProps = EntityPropertiesSatchels.fromPlayer(p_i1819_3_);
         
-        Predicate<ItemStack> satchelPredicate = (stack) -> stack.getItem() instanceof ItemSatchel;
-        Predicate<ItemStack> pouchPredicate = (stack) -> stack.getItem() instanceof ItemPouch;
-        
-        addSlotToContainer(satchelSlot = new SlotCustom(satchelProps.equipment, 0, 115, 22, satchelPredicate, 1).setBackgroundIconR(ItemSatchel.emptyIcon));
-        addSlotToContainer(leftPouchSlot = new SlotCustom(satchelProps.equipment, 1, 101, 58, pouchPredicate, 1).setBackgroundIconR(ItemPouch.emptyIcon));
-        addSlotToContainer(rightPouchSlot = new SlotCustom(satchelProps.equipment, 2, 131, 58, pouchPredicate, 1).setBackgroundIconR(ItemPouch.emptyIcon));
+        addSlotToContainer(satchelSlot = new SlotCustom(satchelProps.equipment, 0, 115, 22).setBackgroundIconR(ItemSatchel.emptyIcon));
+        addSlotToContainer(leftPouchSlot = new SlotCustom(satchelProps.equipment, 1, 101, 58).setBackgroundIconR(ItemPouch.emptyIcon));
+        addSlotToContainer(rightPouchSlot = new SlotCustom(satchelProps.equipment, 2, 131, 58).setBackgroundIconR(ItemPouch.emptyIcon));
     }
 }

@@ -27,17 +27,16 @@ public class GuiChestGeneric extends GuiContainer
     private int inventoryRows;
     int rowSize;
     
-    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
-        this(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, 9);
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_) {
+        this(p_i1083_1_, p_i1083_2_, 9);
     }
     
-    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, int rowSize)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, rowSize) {
+        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, rowSize) {
             @Override
-            protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY,
-                    Predicate<ItemStack> acceptPredicate, int maxStackSize) {
-                return new SlotCustom(inventory, slotIndex, displayX, displayY, acceptPredicate, maxStackSize)
+            protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY) {
+                return new SlotCustom(inventory, slotIndex, displayX, displayY)
                     .setBackgroundIconR(ItemPouchUpgrade.backgroundIcon);
             }
         });

@@ -14,11 +14,11 @@ public class ContainerChestGeneric extends Container
     private IInventory chestInventory;
     private int rowSize;
 
-    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
-        this(p_i1806_1_, p_i1806_2_, acceptPredicate, maxStackSize, 9);
+    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_) {
+        this(p_i1806_1_, p_i1806_2_, 9);
     }
     
-    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
+    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, int rowSize)
     {
         this.chestInventory = p_i1806_2_;
         this.rowSize = rowSize = Math.min(rowSize, p_i1806_2_.getSizeInventory());
@@ -39,7 +39,7 @@ public class ContainerChestGeneric extends Container
             for (k = 0; k < rowSize; ++k)
             {
                 if(k + j * rowSize < chestInventory.getSizeInventory()) {
-                    this.addSlotToContainer(constructSlot(p_i1806_2_, k + j * rowSize, slotStartXOff + 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
+                    this.addSlotToContainer(constructSlot(p_i1806_2_, k + j * rowSize, slotStartXOff + 8 + k * 18, 18 + j * 18));
                 }
             }
         }
@@ -58,8 +58,8 @@ public class ContainerChestGeneric extends Container
         }
     }
     
-    protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
-        return new SlotCustom(inventory, slotIndex, displayX, displayY, acceptPredicate, maxStackSize);
+    protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY) {
+        return new SlotCustom(inventory, slotIndex, displayX, displayY);
     }
 
     public boolean canInteractWith(EntityPlayer p_75145_1_)

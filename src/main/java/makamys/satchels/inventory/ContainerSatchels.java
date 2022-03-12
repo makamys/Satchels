@@ -59,13 +59,13 @@ public class ContainerSatchels extends ContainerPlayerExtended {
             int bottomY = 138-18;
             
             for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-                Slot slot = new SlotCustom(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18, EntityPropertiesSatchels.satchelsSlotPredicate, 64);
+                Slot slot = new SlotCustom(satchelProps.leftPouch, row, -16+2+4, bottomY - row * 18);
                 leftPouchSlots.add(slot);
                 addSlotToContainer(slot);
                 setEnabled(leftPouchSlots, row, row < satchelProps.getLeftPouchSlotCount());
             }
             for(int row = 0; row < EntityPropertiesSatchels.POUCH_MAX_SLOTS; row++) {
-                Slot slot = new SlotCustom(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18, EntityPropertiesSatchels.satchelsSlotPredicate, 64);
+                Slot slot = new SlotCustom(satchelProps.rightPouch, row, 8 + 9 * 18 + 6-2-4, bottomY - row * 18);
                 rightPouchSlots.add(slot);
                 addSlotToContainer(slot);
                 setEnabled(rightPouchSlots, row, row < satchelProps.getRightPouchSlotCount());
@@ -73,7 +73,7 @@ public class ContainerSatchels extends ContainerPlayerExtended {
             
             IInventory satchelInv = satchelProps.satchel;
             for(int i = 0; i < EntityPropertiesSatchels.SATCHEL_MAX_SLOTS; i++) {
-                Slot slot = new SlotCustom(satchelInv, i, 8 + i * 18, 66, EntityPropertiesSatchels.satchelsSlotPredicate, 64);
+                Slot slot = new SlotCustom(satchelInv, i, 8 + i * 18, 66);
                 satchelSlots.add(slot);
                 addSlotToContainer(slot);
                 setEnabled(satchelSlots, i, satchelProps.hasSatchel());
