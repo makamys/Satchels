@@ -24,7 +24,7 @@ public class GuiSatchelsInventory extends GuiInventory {
     
     ContainerSatchels satchelsSlots;
     
-    private int originalYSize;
+    private int originalXSize, originalYSize;
     Map<GuiButton, Pair<Integer, Integer>> originalButtonPositions = new HashMap<>();
     
     public static final int playerX = 25,
@@ -38,8 +38,11 @@ public class GuiSatchelsInventory extends GuiInventory {
     public GuiSatchelsInventory(EntityPlayer p_i1094_1_) {
         super(p_i1094_1_);
         this.satchelsSlots = (ContainerSatchels)p_i1094_1_.inventoryContainer;
-        this.xSize += 2*16;
+        
+        originalXSize = this.xSize;
         originalYSize = this.ySize;
+        
+        this.xSize += 2*16;
     }
     
     @Override
@@ -70,26 +73,26 @@ public class GuiSatchelsInventory extends GuiInventory {
         
         int playerXOff = satchelsSlots.getArmorXOffset();
         
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, playerY);
+        this.drawTexturedModalRect(k, l, 0, 0, originalXSize, playerY);
         
         this.drawTexturedModalRect(k, l + playerY, 0, playerY, 7, playerH);
         this.drawTexturedModalRect(k + 7, l + playerY, 3, playerY, playerXOff, playerH);
         this.drawTexturedModalRect(k + 7 + playerXOff, l + playerY, 7, playerY, 18, playerH);
         this.drawTexturedModalRect(k + playerX + playerXOff, l + playerY, playerX, playerY, playerW / 2, playerH);
         this.drawTexturedModalRect(k + playerX + playerXOff + playerW / 2, l + playerY, playerX + playerW / 2 + playerXOff, playerY, playerW - playerW / 2 - playerXOff, playerH);
-        this.drawTexturedModalRect(k + playerX + playerW, l + playerY, playerX + playerW, playerY, this.xSize - (playerX + playerW), playerH);
+        this.drawTexturedModalRect(k + playerX + playerW, l + playerY, playerX + playerW, playerY, originalXSize - (playerX + playerW), playerH);
         
-        this.drawTexturedModalRect(k, l + playerY + playerH, 0, playerY + playerH, this.xSize, 2);
+        this.drawTexturedModalRect(k, l + playerY + playerH, 0, playerY + playerH, originalXSize, 2);
         
         if(hasSatchel) {
             GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
             ConfigSatchels.satchelBgColor.glColour();
-            this.drawTexturedModalRect(k, l+80+1, 0, 80+1, this.xSize, 18+2);
+            this.drawTexturedModalRect(k, l+80+1, 0, 80+1, originalXSize, 18+2);
             GL11.glPopAttrib();
         }
         
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.drawTexturedModalRect(k, l + 80 + (hasSatchel ? 18 + 3 : 0), 0, 80 + (hasSatchel ? 3 : 0), this.xSize, this.ySize - 80 - (hasSatchel ? 16 + 3 : 0));
+        this.drawTexturedModalRect(k, l + 80 + (hasSatchel ? 18 + 3 : 0), 0, 80 + (hasSatchel ? 3 : 0), originalXSize, this.ySize - 80 - (hasSatchel ? 16 + 3 : 0));
         
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
         ConfigSatchels.pouchBgColor.glColour();
