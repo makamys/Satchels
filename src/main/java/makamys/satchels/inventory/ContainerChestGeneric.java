@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 public class ContainerChestGeneric extends Container
 {
     private IInventory chestInventory;
+    private int rowSize;
 
     public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
         this(p_i1806_1_, p_i1806_2_, acceptPredicate, maxStackSize, 9);
@@ -19,6 +20,10 @@ public class ContainerChestGeneric extends Container
     public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
     {
         this.chestInventory = p_i1806_2_;
+        this.rowSize = rowSize = Math.min(rowSize, p_i1806_2_.getSizeInventory());
+        if(p_i1806_2_.getSizeInventory() % rowSize != 0) {
+            throw new IllegalArgumentException("Non-rectangular inventory. " + p_i1806_2_.getSizeInventory() + " slots, " + rowSize + " columns.");
+        }
         
         int numRows = (int)Math.ceil(p_i1806_2_.getSizeInventory() / (float)rowSize);
         p_i1806_2_.openInventory();
@@ -108,5 +113,9 @@ public class ContainerChestGeneric extends Container
     public IInventory getLowerChestInventory()
     {
         return this.chestInventory;
+    }
+    
+    public int getRowSize() {
+        return this.rowSize;
     }
 }

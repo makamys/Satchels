@@ -30,13 +30,14 @@ public class GuiChestGeneric extends GuiContainer
     public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
     {
         super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, rowSize));
+        this.rowSize = rowSize = ((ContainerChestGeneric)this.inventorySlots).getRowSize();
+        
         this.upperChestInventory = p_i1083_1_;
         this.lowerChestInventory = p_i1083_2_;
         this.allowUserInput = false;
         short short1 = 222;
         int i = short1 - 108;
         this.inventoryRows = (int)Math.ceil(p_i1083_2_.getSizeInventory() / (float)rowSize);
-        this.rowSize = rowSize;
         this.ySize = i + this.inventoryRows * 18;
     }
 
