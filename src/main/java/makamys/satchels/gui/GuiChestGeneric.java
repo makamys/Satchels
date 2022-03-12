@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.inventory.ContainerChestGeneric;
 import makamys.satchels.inventory.SlotCustom;
+import makamys.satchels.item.ItemPouch;
 import makamys.satchels.item.ItemPouchUpgrade;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -33,13 +34,7 @@ public class GuiChestGeneric extends GuiContainer
     
     public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, int rowSize)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, rowSize) {
-            @Override
-            protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY) {
-                return new SlotCustom(inventory, slotIndex, displayX, displayY)
-                    .setBackgroundIconR(ItemPouchUpgrade.backgroundIcon);
-            }
-        });
+        super(ItemPouch.constructUpgradesContainer(p_i1083_1_, p_i1083_2_));
         this.rowSize = rowSize = ((ContainerChestGeneric)this.inventorySlots).getRowSize();
         
         this.upperChestInventory = p_i1083_1_;

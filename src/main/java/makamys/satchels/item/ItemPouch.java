@@ -14,7 +14,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
@@ -22,6 +24,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import makamys.satchels.Packets.MessageOpenContainer;
+import makamys.satchels.inventory.ContainerChestGeneric;
+import makamys.satchels.inventory.SlotCustom;
+import makamys.satchels.inventory.SlotDisabled;
 
 public class ItemPouch extends ItemEquippable {
     
@@ -117,5 +122,26 @@ public class ItemPouch extends ItemEquippable {
         linesDetails.add(I18n.format("tooltip.satchels.pouch.sneakUseHint"));
         
         super.getTooltips(linesNormal, linesDetails, event);
+    }
+    
+    public static ContainerChestGeneric constructUpgradesContainer(IInventory inv1, IInventory inv2) {
+        ContainerChestGeneric container = new ContainerChestGeneric(inv1, inv2) {
+            @Override
+            protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY) {
+                return new SlotCustom(inventory, slotIndex, displayX, displayY)
+                    .setBackgroundIconR(ItemPouchUpgrade.backgroundIcon);
+            }
+        };
+        
+        EntityPlayer player = ((InventoryPlayer)inv1).player;
+        
+        for(int i = 0; i < container.inventorySlots.size(); i++) {
+            Slot slot = (Slot)container.inventorySlots.get(i);
+            if(slot.inventory == player.inventory && slot.getSlotIndex() == player.inventory.currentItem) {
+                container.inventorySlots.set(i, new SlotDisabled((Slot)container.inventorySlots.get(i), true));
+            }
+        }
+        
+        return container;
     }
 }

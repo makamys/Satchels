@@ -13,7 +13,11 @@ public class SlotDisabled extends Slot {
     public Slot original;
     
     public SlotDisabled(Slot original) {
-        super(EMPTY_INVENTORY, 0, -1000, -1000);
+        this(original, false);
+    }
+    
+    public SlotDisabled(Slot original, boolean copy) {
+        super(!copy ? EMPTY_INVENTORY : original.inventory, !copy ? 0 : original.getSlotIndex(), !copy ? -1000 : original.xDisplayPosition, !copy ? -1000 : original.yDisplayPosition);
         this.original = original;
         if(original != null) {
             this.slotNumber = original.slotNumber;
