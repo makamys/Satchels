@@ -2,6 +2,7 @@ package makamys.satchels.inventory;
 
 import java.util.function.Predicate;
 
+import codechicken.lib.inventory.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -86,7 +87,7 @@ public class ContainerChestGeneric extends Container
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, this.chestInventory.getSizeInventory(), false))
+            else if (!insertIntoChest(itemstack1))
             {
                 return null;
             }
@@ -102,6 +103,13 @@ public class ContainerChestGeneric extends Container
         }
 
         return itemstack;
+    }
+    
+    private boolean insertIntoChest(ItemStack stack) {
+        int originalSize = stack.stackSize;
+        int left = InventoryUtils.insertItem(chestInventory, stack, false);
+        stack.stackSize = left;
+        return left != originalSize;
     }
 
     /**

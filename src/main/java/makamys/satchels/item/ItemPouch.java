@@ -97,6 +97,16 @@ public class ItemPouch extends ItemEquippable {
                 stack.setTagInfo("Inventory", InventoryUtils.writeItemStacksToTag(items));
             }
         }
+        
+        @Override
+        public int getInventoryStackLimit() {
+            return 1;
+        }
+        
+        @Override
+        public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+            return itemstack != null && itemstack.getItem() instanceof ItemPouchUpgrade;
+        }
    }
 
     @Override
