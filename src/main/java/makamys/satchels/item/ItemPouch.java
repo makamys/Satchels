@@ -63,8 +63,12 @@ public class ItemPouch extends ItemEquippable {
    }
    
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-       Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_POUCH));
-       return stack;
+       if(player.isSneaking()) {
+           Satchels.networkWrapper.sendToServer(new MessageOpenContainer(GuiHandler.ID_POUCH));
+           return stack;
+       } else {
+           return super.onItemRightClick(stack, world, player);
+       }
     }
    
    public static class InventoryPouch extends InventorySimple {

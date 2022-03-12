@@ -15,6 +15,7 @@ import makamys.satchels.inventory.ContainerSatchels;
 import makamys.satchels.inventory.InventoryAggregate;
 import makamys.satchels.inventory.InventorySimpleNotifying;
 import makamys.satchels.item.ItemPouch;
+import makamys.satchels.item.ItemSatchel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -35,7 +36,12 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
     
     public static final Predicate<ItemStack> satchelsSlotPredicate = (stack) -> ConfigSatchels.backpackHelper.isAllowed(stack);
     
-    public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories());
+    public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories()) {
+        public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+            return  (i == SLOT_SATCHEL && itemstack.getItem() instanceof ItemSatchel) ||
+                    ((i == SLOT_LEFT_POUCH || i == SLOT_RIGHT_POUCH) && itemstack.getItem() instanceof ItemPouch);
+        };
+    };
     
     public InventorySimple satchel = new InventorySimple(SATCHEL_MAX_SLOTS, "container.satchel");
     public InventorySimple leftPouch = new InventorySimple(POUCH_MAX_SLOTS, "container.leftPouch");
@@ -98,6 +104,11 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
         for(int i = 0; i < inv.getSizeInventory(); i++) {
             dropStack(inv, i);
         }
+    }
+    
+    public ItemStack equip(ItemStack stack) {
+        stack.stackSize = InventoryUtils.insertItem(equipment, stack, false);
+        return stack;
     }
 
     @Override
