@@ -5,5 +5,6 @@ item.satchels.pouch.name=Pouch
 item.satchels.pouch_upgrade.name=Pouch Expansion
 tooltip.satchels.holdCtrl=§8§o<Hold Ctrl>
 tooltip.satchels.pouch.slotCount=%d slots
+tooltip.satchels.pouch.sneakUseHint=Use while sneaking to open upgrade inventory
 tooltip.satchels.pouchUpgrade=Adds 1 slot to a pouch
 tooltip.satchels.equipHint=Equip in the equipment screen (press §b%s§7)

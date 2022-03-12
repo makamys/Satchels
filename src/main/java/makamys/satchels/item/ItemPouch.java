@@ -100,6 +100,8 @@ public class ItemPouch extends ItemEquippable {
         int slots = ItemPouch.getSlotCount(event.itemStack);
         linesNormal.add((slots > EntityPropertiesSatchels.POUCH_INITIAL_SLOTS ? "" + EnumChatFormatting.YELLOW : "") + I18n.format("tooltip.satchels.pouch.slotCount", slots));
         
+        linesDetails.add(I18n.format("tooltip.satchels.pouch.sneakUseHint"));
+        
         super.getTooltips(linesNormal, linesDetails, event);
     }
 }
