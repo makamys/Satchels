@@ -12,11 +12,15 @@ public class ContainerChestGeneric extends Container
 {
     private IInventory chestInventory;
 
-    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize)
+    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
+        this(p_i1806_1_, p_i1806_2_, acceptPredicate, maxStackSize, 9);
+    }
+    
+    public ContainerChestGeneric(IInventory p_i1806_1_, IInventory p_i1806_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
     {
         this.chestInventory = p_i1806_2_;
         
-        int numRows = (int)Math.ceil(p_i1806_2_.getSizeInventory() / 9.0);
+        int numRows = (int)Math.ceil(p_i1806_2_.getSizeInventory() / (float)rowSize);
         p_i1806_2_.openInventory();
         int i = (numRows - 4) * 18;
         int j;
@@ -24,10 +28,10 @@ public class ContainerChestGeneric extends Container
         
         for (j = 0; j < numRows; ++j)
         {
-            for (k = 0; k < 9; ++k)
+            for (k = 0; k < rowSize; ++k)
             {
-                if(k + j * 9 < chestInventory.getSizeInventory()) {
-                    this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * 9, 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
+                if(k + j * rowSize < chestInventory.getSizeInventory()) {
+                    this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * rowSize, 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
                 }
             }
         }

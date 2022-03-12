@@ -21,16 +21,22 @@ public class GuiChestGeneric extends GuiContainer
     private IInventory lowerChestInventory;
     /** window height is calculated with these values; the more rows, the heigher */
     private int inventoryRows;
-
-    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize)
+    int rowSize;
+    
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
+        this(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, 9);
+    }
+    
+    public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize));
+        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, rowSize));
         this.upperChestInventory = p_i1083_1_;
         this.lowerChestInventory = p_i1083_2_;
         this.allowUserInput = false;
         short short1 = 222;
         int i = short1 - 108;
-        this.inventoryRows = (int)Math.ceil(p_i1083_2_.getSizeInventory() / 9.0);
+        this.inventoryRows = (int)Math.ceil(p_i1083_2_.getSizeInventory() / (float)rowSize);
+        this.rowSize = rowSize;
         this.ySize = i + this.inventoryRows * 18;
     }
 
@@ -50,18 +56,15 @@ public class GuiChestGeneric extends GuiContainer
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         
-        int fullRows = lowerChestInventory.getSizeInventory() / 9;
-        
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, fullRows * 18 + 17);
-        int remainder = lowerChestInventory.getSizeInventory() % 9;
-        if(remainder > 0) {
-            this.drawTexturedModalRect(k, l + 17, 0, 17, 7, 18);
+        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 17);
+        for(int row = 0; row < Math.ceil(lowerChestInventory.getSizeInventory() / (float)rowSize); row++) {
+            this.drawTexturedModalRect(k, l + 17 + row * 18, 0, 17, 7, 18);
+            this.drawTexturedModalRect(k + 169, l + 17 + row * 18, 169, 17, 7, 18);
             for(int x = 7; x < 169; x++) {
-                // hacky or not? you be the judge.
-                this.drawTexturedModalRect(k + x, l + 17, 3, 17, 1, 18);
+                this.drawTexturedModalRect(k + x, l + 17 + row * 18, 3, 17, 1, 18);
             }
-            this.drawTexturedModalRect(k, l + 17, 0, 17, 7 + remainder * 18, 18);
-            this.drawTexturedModalRect(k+169, l + 17, 169, 17, 7, 18);
+            
+            this.drawTexturedModalRect(k + 7, l + 17 + row * 18, 7, 17, rowSize * 18, 18);
         }
         this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
     }
