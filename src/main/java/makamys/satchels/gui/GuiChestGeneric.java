@@ -58,6 +58,9 @@ public class GuiChestGeneric extends GuiContainer
         int l = (this.height - this.ySize) / 2;
         
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 17);
+        
+        int slotStartX = this.inventorySlots.getSlot(0).xDisplayPosition;
+        
         for(int row = 0; row < Math.ceil(lowerChestInventory.getSizeInventory() / (float)rowSize); row++) {
             this.drawTexturedModalRect(k, l + 17 + row * 18, 0, 17, 7, 18);
             this.drawTexturedModalRect(k + 169, l + 17 + row * 18, 169, 17, 7, 18);
@@ -65,7 +68,7 @@ public class GuiChestGeneric extends GuiContainer
                 this.drawTexturedModalRect(k + x, l + 17 + row * 18, 3, 17, 1, 18);
             }
             
-            this.drawTexturedModalRect(k + 7, l + 17 + row * 18, 7, 17, rowSize * 18, 18);
+            this.drawTexturedModalRect(k + slotStartX - 1, l + 17 + row * 18, 7, 17, rowSize * 18, 18);
         }
         this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
     }

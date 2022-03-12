@@ -31,12 +31,14 @@ public class ContainerChestGeneric extends Container
         int j;
         int k; 
         
+        int slotStartXOff = ((9 - rowSize) * 18) / 2; 
+        
         for (j = 0; j < numRows; ++j)
         {
             for (k = 0; k < rowSize; ++k)
             {
                 if(k + j * rowSize < chestInventory.getSizeInventory()) {
-                    this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * rowSize, 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
+                    this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * rowSize, slotStartXOff + 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
                 }
             }
         }
