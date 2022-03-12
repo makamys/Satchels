@@ -36,7 +36,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
     
     public static final Predicate<ItemStack> satchelsSlotPredicate = (stack) -> ConfigSatchels.backpackHelper.isAllowed(stack);
     
-    public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, () -> updateInventories()) {
+    public InventorySimpleNotifying equipment = new InventorySimpleNotifying(3, (stack) -> updateInventories(stack)) {
         public boolean isItemValidForSlot(int i, ItemStack itemstack) {
             return  (i == SLOT_SATCHEL && itemstack.getItem() instanceof ItemSatchel) ||
                     ((i == SLOT_LEFT_POUCH || i == SLOT_RIGHT_POUCH) && itemstack.getItem() instanceof ItemPouch);
@@ -92,7 +92,7 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
                 SatchelsUtils.clearInventory(rightPouch);
                 InventoryUtils.readItemStacksFromTag(rightPouch.items, satchelsTag.getTagList("RightPouch", 10));
             }
-            updateInventories();
+            updateInventories(null);
         }
     }
     
@@ -116,7 +116,11 @@ public class EntityPropertiesSatchels implements IExtendedEntityProperties {
         player = (EntityPlayer)entity;
     }
     
-    public void updateInventories() {
+    public void updateInventories(ItemStack stack) {
+        if(stack != null) {
+            player.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "satchels:item.armor.equip_leather", 1f, 1f);
+        }
+        
         ContainerSatchels container = ((ContainerSatchels)player.inventoryContainer);
         container.redoSlots();
         for(int i = 0; i < leftPouch.getSizeInventory(); i++) {

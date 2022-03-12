@@ -1,13 +1,15 @@
 package makamys.satchels.inventory;
 
+import java.util.function.Consumer;
+
 import codechicken.lib.inventory.InventorySimple;
 import net.minecraft.item.ItemStack;
 
 public class InventorySimpleNotifying extends InventorySimple {
 
-    public Runnable callback;
+    public Consumer<ItemStack> callback;
     
-    public InventorySimpleNotifying(int size, Runnable callback) {
+    public InventorySimpleNotifying(int size, Consumer<ItemStack> callback) {
         super(size);
         this.callback = callback;
     }
@@ -20,7 +22,7 @@ public class InventorySimpleNotifying extends InventorySimple {
         }
         super.setInventorySlotContents(slot, stack);
         if(changed && callback != null) {
-            callback.run();
+            callback.accept(stack);
         }
     };
 
