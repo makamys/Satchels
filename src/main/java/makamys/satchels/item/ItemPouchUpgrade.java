@@ -12,9 +12,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 public class ItemPouchUpgrade extends Item implements TooltippedItem {
+    
+    public static IIcon backgroundIcon;
     
     public ItemPouchUpgrade() {
         setUnlocalizedName(Satchels.MODID + "." + "pouch_upgrade");
@@ -25,6 +28,7 @@ public class ItemPouchUpgrade extends Item implements TooltippedItem {
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
        super.itemIcon = iconRegister.registerIcon("satchels:pouch_upgrade");
+       backgroundIcon = iconRegister.registerIcon("satchels:pouch_upgrade_bg");
    }
    
    @SideOnly(Side.CLIENT)

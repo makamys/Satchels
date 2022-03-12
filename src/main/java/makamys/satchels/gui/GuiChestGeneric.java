@@ -3,9 +3,12 @@ package makamys.satchels.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.inventory.ContainerChestGeneric;
+import makamys.satchels.inventory.SlotCustom;
+import makamys.satchels.item.ItemPouchUpgrade;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -29,7 +32,14 @@ public class GuiChestGeneric extends GuiContainer
     
     public GuiChestGeneric(IInventory p_i1083_1_, IInventory p_i1083_2_, Predicate<ItemStack> acceptPredicate, int maxStackSize, int rowSize)
     {
-        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, rowSize));
+        super(new ContainerChestGeneric(p_i1083_1_, p_i1083_2_, acceptPredicate, maxStackSize, rowSize) {
+            @Override
+            protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY,
+                    Predicate<ItemStack> acceptPredicate, int maxStackSize) {
+                return new SlotCustom(inventory, slotIndex, displayX, displayY, acceptPredicate, maxStackSize)
+                    .setBackgroundIconR(ItemPouchUpgrade.backgroundIcon);
+            }
+        });
         this.rowSize = rowSize = ((ContainerChestGeneric)this.inventorySlots).getRowSize();
         
         this.upperChestInventory = p_i1083_1_;

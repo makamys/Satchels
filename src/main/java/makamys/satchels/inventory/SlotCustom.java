@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
 public class SlotCustom extends Slot {
 
@@ -26,6 +27,11 @@ public class SlotCustom extends Slot {
     @Override
     public int getSlotStackLimit() {
         return limit != -1 ? limit : super.getSlotStackLimit();
+    }
+    
+    public SlotCustom setBackgroundIconR(IIcon icon) {
+        super.setBackgroundIcon(icon);
+        return this;
     }
     
 }

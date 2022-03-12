@@ -38,7 +38,7 @@ public class ContainerChestGeneric extends Container
             for (k = 0; k < rowSize; ++k)
             {
                 if(k + j * rowSize < chestInventory.getSizeInventory()) {
-                    this.addSlotToContainer(new SlotCustom(p_i1806_2_, k + j * rowSize, slotStartXOff + 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
+                    this.addSlotToContainer(constructSlot(p_i1806_2_, k + j * rowSize, slotStartXOff + 8 + k * 18, 18 + j * 18, acceptPredicate, maxStackSize));
                 }
             }
         }
@@ -55,6 +55,10 @@ public class ContainerChestGeneric extends Container
         {
             this.addSlotToContainer(new Slot(p_i1806_1_, j, 8 + j * 18, 161 + i));
         }
+    }
+    
+    protected Slot constructSlot(IInventory inventory, int slotIndex, int displayX, int displayY, Predicate<ItemStack> acceptPredicate, int maxStackSize) {
+        return new SlotCustom(inventory, slotIndex, displayX, displayY, acceptPredicate, maxStackSize);
     }
 
     public boolean canInteractWith(EntityPlayer p_75145_1_)
