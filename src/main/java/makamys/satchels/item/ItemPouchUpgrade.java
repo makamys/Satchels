@@ -28,7 +28,7 @@ public class ItemPouchUpgrade extends Item implements TooltippedItem {
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
        super.itemIcon = iconRegister.registerIcon("satchels:pouch_upgrade");
-       backgroundIcon = iconRegister.registerIcon("satchels:pouch_upgrade_bg");
+       backgroundIcon = iconRegister.registerIcon("satchels:empty_pouch_upgrade_slot");
    }
    
    @SideOnly(Side.CLIENT)
