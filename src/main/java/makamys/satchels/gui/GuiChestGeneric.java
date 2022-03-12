@@ -19,7 +19,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChestGeneric extends GuiContainer
 {
-    private static final ResourceLocation field_147017_u = new ResourceLocation("textures/gui/container/generic_54.png");
+    protected static final ResourceLocation chestGenericTexture = new ResourceLocation("satchels", "textures/gui/container/chest_generic.png");
+    
     private IInventory upperChestInventory;
     private IInventory lowerChestInventory;
     /** window height is calculated with these values; the more rows, the heigher */
@@ -63,7 +64,7 @@ public class GuiChestGeneric extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(field_147017_u);
+        this.mc.getTextureManager().bindTexture(chestGenericTexture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         
@@ -72,14 +73,10 @@ public class GuiChestGeneric extends GuiContainer
         int slotStartX = this.inventorySlots.getSlot(0).xDisplayPosition;
         
         for(int row = 0; row < Math.ceil(lowerChestInventory.getSizeInventory() / (float)rowSize); row++) {
-            this.drawTexturedModalRect(k, l + 17 + row * 18, 0, 17, 7, 18);
-            this.drawTexturedModalRect(k + 169, l + 17 + row * 18, 169, 17, 7, 18);
-            for(int x = 7; x < 169; x++) {
-                this.drawTexturedModalRect(k + x, l + 17 + row * 18, 3, 17, 1, 18);
-            }
+            this.drawTexturedModalRect(k, l + 17 + row * 18, 0, 133, this.xSize, 18);
             
-            this.drawTexturedModalRect(k + slotStartX - 1, l + 17 + row * 18, 7, 17, rowSize * 18, 18);
+            this.drawTexturedModalRect(k + slotStartX - 1, l + 17 + row * 18, 7, 19, rowSize * 18, 18);
         }
-        this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
+        this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 37, this.xSize, 96);
     }
 }
