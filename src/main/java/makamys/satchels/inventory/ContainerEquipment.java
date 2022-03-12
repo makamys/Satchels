@@ -30,8 +30,8 @@ public class ContainerEquipment extends ContainerPlayerExtended {
         Predicate<ItemStack> satchelPredicate = (stack) -> stack.getItem() instanceof ItemSatchel;
         Predicate<ItemStack> pouchPredicate = (stack) -> stack.getItem() instanceof ItemPouch;
         
-        addSlotToContainer(satchelSlot = new SlotCustom(satchelProps.equipment, 0, 115, 22, satchelPredicate, 1));
-        addSlotToContainer(leftPouchSlot = new SlotCustom(satchelProps.equipment, 1, 101, 58, pouchPredicate, 1));
-        addSlotToContainer(rightPouchSlot = new SlotCustom(satchelProps.equipment, 2, 131, 58, pouchPredicate, 1));
+        addSlotToContainer(satchelSlot = new SlotCustom(satchelProps.equipment, 0, 115, 22, satchelPredicate, 1).setBackgroundIconR(ItemSatchel.emptyIcon));
+        addSlotToContainer(leftPouchSlot = new SlotCustom(satchelProps.equipment, 1, 101, 58, pouchPredicate, 1).setBackgroundIconR(ItemPouch.emptyIcon));
+        addSlotToContainer(rightPouchSlot = new SlotCustom(satchelProps.equipment, 2, 131, 58, pouchPredicate, 1).setBackgroundIconR(ItemPouch.emptyIcon));
     }
 }

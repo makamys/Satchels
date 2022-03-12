@@ -5,8 +5,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import makamys.satchels.Satchels;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.IIcon;
 
 public class ItemSatchel extends ItemEquippable {
+    
+    public static IIcon emptyIcon;
     
     public ItemSatchel() {
         setMaxStackSize(1);
@@ -18,6 +21,7 @@ public class ItemSatchel extends ItemEquippable {
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
        super.itemIcon = iconRegister.registerIcon("satchels:satchel");
+       emptyIcon = iconRegister.registerIcon("satchels:empty_equipment_slot_satchel");
    }
     
 }

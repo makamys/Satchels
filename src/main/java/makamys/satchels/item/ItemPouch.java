@@ -18,6 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import makamys.satchels.Packets.MessageOpenContainer;
@@ -25,6 +26,8 @@ import makamys.satchels.Packets.MessageOpenContainer;
 public class ItemPouch extends ItemEquippable {
     
     public static final Predicate<ItemStack> acceptedContentsPredicate = (stack) -> stack != null && stack.getItem() instanceof ItemPouchUpgrade;
+    
+    public static IIcon emptyIcon;
     
     public ItemPouch() {
         setMaxStackSize(1);
@@ -36,6 +39,7 @@ public class ItemPouch extends ItemEquippable {
    @SideOnly(Side.CLIENT)
    public void registerIcons(IIconRegister iconRegister) {
        super.itemIcon = iconRegister.registerIcon("satchels:pouch");
+       emptyIcon = iconRegister.registerIcon("satchels:empty_equipment_slot_pouch");
    }
    
    public static IInventory getInventory(ItemStack stack, World world) {
