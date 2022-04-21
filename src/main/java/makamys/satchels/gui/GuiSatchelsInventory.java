@@ -54,7 +54,7 @@ public class GuiSatchelsInventory extends GuiInventory {
     }
     
     private void redoGui() {
-        this.ySize = originalYSize + (satchelsSlots.satchelProps.hasSatchel() ? 16 : 0);
+        this.ySize = originalYSize + (satchelsSlots.getSatchelProps().hasSatchel() ? 16 : 0);
     }
     
     @Override
@@ -64,7 +64,7 @@ public class GuiSatchelsInventory extends GuiInventory {
     
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-        boolean hasSatchel = satchelsSlots.satchelProps.hasSatchel();
+        boolean hasSatchel = satchelsSlots.getSatchelProps().hasSatchel();
         
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_147001_a);

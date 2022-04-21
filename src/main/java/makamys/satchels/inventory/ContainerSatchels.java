@@ -30,7 +30,7 @@ public class ContainerSatchels extends ContainerPlayerExtended {
     
     public boolean dirty;
     
-    public EntityPropertiesSatchels satchelProps;
+    private EntityPlayer player;
     
     Map<Slot, Pair<Integer, Integer>> originalSlotPositions;
     
@@ -41,7 +41,7 @@ public class ContainerSatchels extends ContainerPlayerExtended {
     public ContainerSatchels(EntityPlayer player) {
         super(player.inventory, !player.worldObj.isRemote, player);
         
-        satchelProps = EntityPropertiesSatchels.fromPlayer(player);
+        this.player = player;
         
         originalSlotPositions = new HashMap<>();
         redoSlots(false);
@@ -50,6 +50,8 @@ public class ContainerSatchels extends ContainerPlayerExtended {
     public void redoSlots() {
         Satchels.LOGGER.debug("redoSlots " + enableExtra);
         removeAllExtraSlots();
+        
+        EntityPropertiesSatchels satchelProps = getSatchelProps();
         
         if(enableExtra) {
             List<Slot> moddedSlots = inventorySlots.size() > 45 ? new ArrayList<>(inventorySlots.subList(45, inventorySlots.size())) : new ArrayList<>();
@@ -114,8 +116,8 @@ public class ContainerSatchels extends ContainerPlayerExtended {
         Slot newSlot = null;
         if(!(slot instanceof SlotDisabled) && !enabled) {
             if(slot.getHasStack()) {
-                if(!satchelProps.player.worldObj.isRemote) {
-                    satchelProps.player.func_146097_a(slot.getStack(), true, false);
+                if(!player.worldObj.isRemote) {
+                    player.func_146097_a(slot.getStack(), true, false);
                 }
                 slot.putStack(null);
             }
@@ -155,12 +157,12 @@ public class ContainerSatchels extends ContainerPlayerExtended {
     }
     
     public List<Slot> getEnabledLeftPouchSlots() {
-        return leftPouchSlots.subList(0, satchelProps.getLeftPouchSlotCount());
+        return leftPouchSlots.subList(0, getSatchelProps().getLeftPouchSlotCount());
     }
     
     
     public List<Slot> getEnabledRightPouchSlots() {
-        return rightPouchSlots.subList(0, satchelProps.getRightPouchSlotCount());
+        return rightPouchSlots.subList(0, getSatchelProps().getRightPouchSlotCount());
     }
     
     public int getArmorXOffset() {
@@ -171,6 +173,10 @@ public class ContainerSatchels extends ContainerPlayerExtended {
         return StreamSupport.stream(Iterables.concat(satchelSlots, leftPouchSlots, rightPouchSlots).spliterator(), false)
                 .filter(s -> !(s instanceof SlotDisabled))
                 .collect(Collectors.toList());
+    }
+    
+    public EntityPropertiesSatchels getSatchelProps() {
+        return EntityPropertiesSatchels.fromPlayer(player);
     }
 
 }
