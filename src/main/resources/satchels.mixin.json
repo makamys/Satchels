@@ -7,7 +7,7 @@
     "mixins": [
     	"MixinEntityPlayer",
     	"MixinInventoryPlayer",
-    	"MixinEntityPlayerMP",
+    	"MixinItemInWorldManager",
     	"MixinPlayerControllerMP"
     ]
 }
