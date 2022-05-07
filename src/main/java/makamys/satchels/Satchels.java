@@ -1,19 +1,13 @@
 package makamys.satchels;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.WorldSettings;
-import net.minecraft.world.WorldSettings.GameType;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -90,7 +84,7 @@ public class Satchels
     }
 
     public static void onGameTypeChanged(WorldSettings.GameType gameType, EntityPlayer player) {
-        if(gameType == GameType.CREATIVE) {
+        if(gameType.isCreative()) {
             ((ContainerSatchels)player.inventoryContainer).redoSlots(false);
         } else {
             ((ContainerSatchels)player.inventoryContainer).redoSlots(true);
