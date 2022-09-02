@@ -42,6 +42,10 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 * When [DropOff](https://www.curseforge.com/minecraft/mc-mods/dropoff)'s button is enabled, the slots in the inventory are at the wrong position. As a workaround, set `B:"Show inventory button"=false` in its config (the hotkey can still be used).
 * Various coremods (for example, Factorization) will crash during startup due to an incompatibility with Mixin. This is fixed by [Mixingasm](https://github.com/makamys/Mixingasm).
 
+# Alternatives
+
+* [Scout](https://github.com/Cynosphere-mc/Scout): A mod for Fabric 1.18+ implementing a similar idea
+
 # License
 
 This mod is licensed under the [MIT License](https://github.com/makamys/Satchels/blob/master/LICENSE).
