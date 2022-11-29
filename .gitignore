@@ -13,18 +13,23 @@ run/
 .settings
 .classpath
 .project
+.metadata
 eclipse
+*.launch
 
+# idea
 .idea/
 *.iml
 *.ipr
 *.iws
 
 # vscode
-
 .settings/
 .vscode/
 bin/
 .classpath
 
-libs/
+# other
+bin/
+jars/
+/.nb-gradle/
