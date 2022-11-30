@@ -38,6 +38,7 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 
 # Incompatibilities
 
+* NotEnoughItems: when a potion effect is active, the [inventory tabs will show up at the wrong position](https://github.com/makamys/Satchels/issues/6) due to a buggy interaction between NEI and TConstruct's tab API which Satchels uses. Enable `fixPotionRenderOffset` in [Hodgepodge](https://github.com/GTNewHorizons/Hodgepodge) to fix this.
 * [Aether Legacy](https://www.curseforge.com/minecraft/mc-mods/the-aether): accessories button doesn't show up in inventory. [This is a bug on their side.](https://github.com/gildedgames/aether-issues/issues/742) Until it's fixed, use the keybind to open the equipment GUI.
 * When [DropOff](https://www.curseforge.com/minecraft/mc-mods/dropoff)'s button is enabled, the slots in the inventory are at the wrong position. As a workaround, set `B:"Show inventory button"=false` in its config (the hotkey can still be used).
 * Various coremods (for example, Factorization) will crash during startup due to an incompatibility with Mixin. This is fixed by [Mixingasm](https://github.com/makamys/Mixingasm).
