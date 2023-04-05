@@ -45,7 +45,7 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 
 # Alternatives
 
-* [Scout](https://github.com/Cynosphere-mc/Scout): A mod for Fabric 1.18+ implementing a similar idea
+* ~~[Scout](https://github.com/Cynosphere-mc/Scout): A mod for Fabric/Quilt 1.18+ implementing a similar idea~~ †
 
 # License
 
