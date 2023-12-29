@@ -46,7 +46,8 @@ If you want more inventory expansion options in your earlygame, check out [D-Mod
 # Alternatives
 
 * ~~[Scout](https://github.com/Cynosphere-mc/Scout)~~ <sup>[extinct]</sup>: A mod for Fabric/Quilt 1.18+ implementing a similar idea
-    * [Refabricated fork](https://github.com/SirOMGitsYOU/Scout-Refabricated) (1.19.4+)
+    * Scout Reloaded <sup>[[GitHub](https://github.com/UntitledModGroup/Scout-Mod) | [Modrinth](https://modrinth.com/mod/scoutreloaded)]</sup>
+    * Scout: Refabricated <sup>[[GitHub](https://github.com/SirOMGitsYOU/Scout-Refabricated) | [CurseForge](https://legacy.curseforge.com/minecraft/mc-mods/scout-refabricated) | [Modrinth](https://modrinth.com/mod/scout-refabricated)]</sup>
 
 # License
 
