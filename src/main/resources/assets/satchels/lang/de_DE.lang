@@ -1,0 +1,10 @@
+container.equipment.satchel=Schultertasche
+container.equipment.pouches=Tasche
+item.satchels.satchel.name=Schultertasche
+item.satchels.pouch.name=Tasche
+item.satchels.pouch_upgrade.name=Taschen-Erweiterung
+tooltip.satchels.holdCtrl=§8§o<Strg gedrückt halten>
+tooltip.satchels.pouch.slotCount=%d Slots
+tooltip.satchels.pouch.sneakUseHint=Rechtsklicke während du schleichst, um Upgrade-Inventar zu öffnen
+tooltip.satchels.pouchUpgrade=Fügt der Tasche 1 Slot hinzu
+tooltip.satchels.equipHint=Im Ausrüstungs-Menü ausrüsten (drücke §b%s§7)
